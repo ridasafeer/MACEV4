@@ -56,20 +56,49 @@ static void MX_GPIO_Init(void);
 //static void MX_TIM2_Init(void);
 //static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-static void MX_TIM2_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _Bool Channel_3, _Bool Channel_4);
-static void MX_TIM1_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _Bool Channel_3, _Bool Channel_4);
-static void Timer_Init(uint8_t timer, uint16_t period, _Bool doTriggerISR, _Bool Channel_1, _Bool Channel_2, _Bool Channel_3, _Bool Channel_4);
+static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
+static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
+static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
 uint32_t Calculate_prescaler(uint16_t period);
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle);
 uint16_t Calculate_DutyCycle(uint8_t duty_cycle);
 static void PWM_Stop(uint8_t timer,uint8_t channel);
 static void Timer_Stop(uint8_t timer);
 
-
+//Macro definitions
+#define Timer_Init(...) var_Timer_Init((Timer_Init_args){__VA_ARGS__});
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+//Setting up the default variables
+typedef struct
+{
+	uint8_t timer;
+	uint16_t period;
+	uint8_t doTriggerISR;
+	uint8_t Channel_1;
+	uint8_t Channel_2;
+	uint8_t Channel_3;
+	uint8_t Channel_4;
+}Timer_Init_args;
+
+
+//Wrapper function that return default variables
+static void var_Timer_Init(Timer_Init_args in)
+{
+	uint8_t timer_out = in.timer;
+	uint16_t period_out = in.period;
+	uint8_t doTriggerISR_out = in.doTriggerISR ? in.doTriggerISR :2;
+	uint8_t Channel_1_out = in.Channel_1 ? in.Channel_1 :2;
+	uint8_t Channel_2_out = in.Channel_2 ? in.Channel_2 :2;
+	uint8_t Channel_3_out = in.Channel_3 ? in.Channel_3 :2;
+	uint8_t Channel_4_out = in.Channel_4 ? in.Channel_4 :2;
+	Timer_Init_base(timer_out,period_out,doTriggerISR_out,Channel_1_out,Channel_2_out,Channel_3_out,Channel_4_out);
+}
+
+
 int _write(int file, char *ptr, int len) //printf to SWV ITM
 {
 	int i = 0;
@@ -85,13 +114,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
     if (htim == &htim1)
     {
        /*Timer 1*/
-
+    	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 
     }
     else if(htim == &htim2)
     {
         /*Timer 2*/
-    	HAL_GPIO_TogglePin(EXT_LED_GPIO_Port, EXT_LED_Pin);
+    	HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     }
     else
     {
@@ -131,16 +160,17 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
 
-  //MX_TIM1_Init();
-  /* USER CODE BEGIN 2 */
-  Timer_Init(2, 2000, 1, 1, 1, 1, 1);
-  PWM_Init(2,1,10);
-  PWM_Init(2,2,40);
-  PWM_Init(2,3,70);
-  PWM_Init(2,4,98);
 
-  HAL_Delay(10000);
-  Timer_Init(2, 1000, 0, 1, 1, 1, 1);
+  /* USER CODE BEGIN 2 */
+  Timer_Init(1, 500);
+  Timer_Init(2, 1000);
+  PWM_Init(2,1,50);
+  PWM_Init(2,2,75);
+  PWM_Init(1,1,50);
+  PWM_Init(1,2,75);
+
+  //HAL_Delay(10000);
+  //Timer_Init(2, 1000, 1, 1, 1, 1, 1);
 
 
   /* USER CODE END 2 */
@@ -197,10 +227,10 @@ void SystemClock_Config(void)
 
 /**
   * @brief TIM1 Initialization Function
-  * @param None
+  * @param Prescaler, Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init,
   * @retval None
   */
-static void MX_TIM1_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _Bool Channel_3, _Bool Channel_4)
+static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
 {
 
   /* USER CODE BEGIN TIM1_Init 0 */
@@ -283,20 +313,20 @@ static void MX_TIM1_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _
   }
   /* USER CODE BEGIN TIM1_Init 2 */
 
-
-  if (Channel_1)
+  //Channel configuration
+  if (Channel_1==2)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2)
+  if (Channel_2==2)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3)
+  if (Channel_3==2)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4)
+  if (Channel_4==2)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -308,10 +338,10 @@ static void MX_TIM1_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _
 
 /**
   * @brief TIM2 Initialization Function
-  * @param None
+  * @param Prescaler, Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init,
   * @retval None
   */
-static void MX_TIM2_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _Bool Channel_3, _Bool Channel_4)
+static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
 {
 
   /* USER CODE BEGIN TIM2_Init 0 */
@@ -371,19 +401,20 @@ static void MX_TIM2_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _
   }*/
   /* USER CODE BEGIN TIM2_Init 2 */
 
-  if (Channel_1)
+  //Channel configuration
+  if (Channel_1==2)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2)
+  if (Channel_2==2)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3)
+  if (Channel_3==2)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4)
+  if (Channel_4==2)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -399,55 +430,73 @@ static void MX_TIM2_Init(uint32_t prescaler, _Bool Channel_1, _Bool Channel_2, _
   */
 static void MX_GPIO_Init(void)
 {
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-    HAL_GPIO_WritePin(EXT_LED_GPIO_Port, EXT_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, LD1_Pin|LD3_Pin, GPIO_PIN_RESET);
 
-    /*Configure GPIO pins : LD1_Pin LD3_Pin */
-    GPIO_InitStruct.Pin = EXT_LED_Pin;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(EXT_LED_GPIO_Port, &GPIO_InitStruct);
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(EXT_LED_GPIO_Port, EXT_LED_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : LD1_Pin LD3_Pin */
+  GPIO_InitStruct.Pin = LD1_Pin|LD3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : EXT_LED_Pin */
+  GPIO_InitStruct.Pin = EXT_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(EXT_LED_GPIO_Port, &GPIO_InitStruct);
 
 }
 
 /* USER CODE BEGIN 4 */
 /**
-  * @brief Initialize timer 1 or 2
-  * @param Timer number, period (milliseconds)
+  * @brief Initialize timer n on channel m for s milli seconds with ISR
+  * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init
   * @retval None
   */
-static void Timer_Init(uint8_t timer, uint16_t period,_Bool doTriggerISR, _Bool Channel_1, _Bool Channel_2 , _Bool Channel_3, _Bool Channel_4)
+static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
 {
-	uint32_t prescaler = Calculate_prescaler(period); //max period value is 2^16-1
-
-	switch (timer)
+	if (period > 0 && period <65536)
 	{
-		case (1):
-			MX_TIM1_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-			if(doTriggerISR)
-			{
-				HAL_TIM_Base_Start_IT(&htim1);
-			}
-			break;
-		case (2):
-			MX_TIM2_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-			if(doTriggerISR)
-					{
-						HAL_TIM_Base_Start_IT(&htim2);
-					}
-			break;
-		default:
-			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
-			break;
+		uint32_t prescaler = Calculate_prescaler(period); //max period value is 2^16-1
 
+		switch (timer)
+		{
+			case (1):
+				MX_TIM1_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
+				if(doTriggerISR==2)
+				{
+					HAL_TIM_Base_Start_IT(&htim1);
+				}
+				break;
+			case (2):
+				MX_TIM2_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
+				if(doTriggerISR==2)
+						{
+							HAL_TIM_Base_Start_IT(&htim2);
+						}
+				break;
+			default:
+				printf("Invalid Timer argument. Should be either '1' or '2'.\n");
+
+		}
+	}
+
+	else
+	{
+		printf("Invalid Period argument. Should be >0 and <65536");
 	}
 }
 
@@ -474,9 +523,10 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 	TIM_HandleTypeDef* desired_timer;
 	uint32_t desired_channel;
 
+	//Calculate the pulse
 	uint16_t ticks_percycle = Calculate_DutyCycle(duty_cycle);
 
-	//Initiate the PWM and desired duty cycle
+	//Find desired timer
 	switch(timer)
 	{
 		case(1):
@@ -489,6 +539,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
+	//Find desired channel
 	switch(channel)
 	{
 		case(1):
@@ -507,15 +558,20 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 			printf("Invalid Channel argument. Should be an integer within range [1,4].\n");
 	}
 
-
+	//Initiate the PWM and desired duty cycle
     HAL_TIM_PWM_Start(desired_timer, desired_channel);
     __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
 }
 
+/**
+  * @brief Calculate the duty cycle in ticks
+  * @param duty cycle
+  * @retval Ticks per cycle
+  */
 uint16_t Calculate_DutyCycle(uint8_t duty_cycle)
 {
 	uint16_t ticks_percycle;
-	//CHECK TO MAKE SURE DUTY CYCLE IS WITHING [0,100]
+	//CHECK TO MAKE SURE DUTY CYCLE IS WITHIN [0,100]
 	if (duty_cycle>=0 && duty_cycle <=100)
 	{
 		ticks_percycle = (duty_cycle*COUNTER_PERIOD)/100;
@@ -529,10 +585,17 @@ uint16_t Calculate_DutyCycle(uint8_t duty_cycle)
 	return ticks_percycle;
 }
 
+/**
+  * @brief Stop PWM signal from timer n on channel m
+  * @param Timer, channel
+  * @retval None
+  */
 static void PWM_Stop(uint8_t timer, uint8_t channel)
 {
 	TIM_HandleTypeDef* desired_timer;
 	uint32_t desired_channel;
+
+	//Find timer
 	switch(timer)
 	{
 		case(1):
@@ -545,6 +608,7 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
+	//Find channel
 	switch(channel)
 	{
 		case(1):
@@ -562,12 +626,21 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 		default:
 			printf("Invalid Channel argument. Should be an integer within range [1,4].\n");
 	}
+
+	//Stop PWM signal
 	HAL_TIM_PWM_Stop(desired_timer, desired_channel);
 }
+
+/**
+  * @brief Stop timer n
+  * @param Timer
+  * @retval None
+  */
 static void Timer_Stop(uint8_t timer)
 {
 	TIM_HandleTypeDef* desired_timer;
 
+	//Find timer
 	switch(timer)
 	{
 		case(1):
@@ -580,6 +653,7 @@ static void Timer_Stop(uint8_t timer)
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
+	//Stop timer
 	HAL_TIM_Base_Stop(desired_timer);
 }
 /* USER CODE END 4 */

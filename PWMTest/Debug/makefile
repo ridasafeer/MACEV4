@@ -54,8 +54,8 @@ all: main-build
 main-build: PWMTest.elf secondary-outputs
 
 # Tool invocations
-PWMTest.elf: $(OBJS) $(USER_OBJS) C:\Users\alec\OneDrive\ -\ McMaster\ University\STM32\ Development\MACFE\PWMTest\STM32F767ZITX_FLASH.ld
-	arm-none-eabi-gcc -o "PWMTest.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\alec\OneDrive - McMaster University\STM32 Development\MACFE\PWMTest\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PWMTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+PWMTest.elf: $(OBJS) $(USER_OBJS) C:\Users\doria\STM32CubeIDE\workspace_1.5.0\PWMTest\STM32F767ZITX_FLASH.ld
+	arm-none-eabi-gcc -o "PWMTest.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\doria\STM32CubeIDE\workspace_1.5.0\PWMTest\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PWMTest.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
