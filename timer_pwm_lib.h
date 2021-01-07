@@ -42,17 +42,17 @@ TIM_HandleTypeDef htim2;
 const uint16_t COUNTER_PERIOD = 20000 - 1; //Global Maximum number that the stm32 will count to before resetting
 
 /* Private function prototypes -----------------------------------------------*/
-static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
-static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
-static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4);
-uint32_t Calculate_prescaler(uint16_t period);
+static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
+static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
+uint32_t Calculate_Prescaler(uint16_t period);
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle);
 uint16_t Calculate_DutyCycle(uint8_t duty_cycle);
 static void PWM_Stop(uint8_t timer,uint8_t channel);
 static void Timer_Stop(uint8_t timer);
 
 //Macro definitions
-#define Timer_Init(...) var_Timer_Init((Timer_Init_args){__VA_ARGS__});
+#define Timer_Init(...) Var_Timer_Init((Timer_Init_args){__VA_ARGS__});
 
 /* Private user code ---------------------------------------------------------*/
 
@@ -84,11 +84,11 @@ typedef struct
 {
 	uint8_t timer;
 	uint16_t period;
-	uint8_t doTriggerISR;
-	uint8_t Channel_1;
-	uint8_t Channel_2;
-	uint8_t Channel_3;
-	uint8_t Channel_4;
+	uint8_t do_trigger_ISR;
+	uint8_t channel_1;
+	uint8_t channel_2;
+	uint8_t channel_3;
+	uint8_t channel_4;
 }
 
 Timer_Init_args;
@@ -99,16 +99,16 @@ Timer_Init_args;
   * @param Timer_Init_args
   * @retval None
   */
-static void var_Timer_Init(Timer_Init_args in)
+static void Var_Timer_Init(Timer_Init_args in)
 {
 	uint8_t timer_out = in.timer;
 	uint16_t period_out = in.period;
-	uint8_t doTriggerISR_out = in.doTriggerISR ? in.doTriggerISR :1;
-	uint8_t Channel_1_out = in.Channel_1 ? in.Channel_1 :1;
-	uint8_t Channel_2_out = in.Channel_2 ? in.Channel_2 :1;
-	uint8_t Channel_3_out = in.Channel_3 ? in.Channel_3 :1;
-	uint8_t Channel_4_out = in.Channel_4 ? in.Channel_4 :1;
-	Timer_Init_base(timer_out,period_out,doTriggerISR_out,Channel_1_out,Channel_2_out,Channel_3_out,Channel_4_out);
+	uint8_t do_trigger_ISR_out = in.do_trigger_ISR ? in.do_trigger_ISR :1;
+	uint8_t channel_1_out = in.channel_1 ? in.channel_1 :1;
+	uint8_t channel_2_out = in.channel_2 ? in.channel_2 :1;
+	uint8_t channel_3_out = in.channel_3 ? in.channel_3 :1;
+	uint8_t channel_4_out = in.channel_4 ? in.channel_4 :1;
+	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out);
 }
 
 /**
@@ -131,7 +131,7 @@ int _write(int file, char *ptr, int len) //printf to SWV ITM
   * @param Prescaler, Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init,
   * @retval None
   */
-static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
+static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
 {
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
@@ -193,19 +193,19 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   }
 
   //Channel configuration
-  if (Channel_1==1)
+  if (channel_1==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2==1)
+  if (channel_2==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3==1)
+  if (channel_3==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4==1)
+  if (channel_4==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -219,7 +219,7 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   * @param Prescaler, Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init,
   * @retval None
   */
-static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
+static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
 {
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
@@ -257,19 +257,19 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
 
   //Channel configuration
-  if (Channel_1==1)
+  if (channel_1==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2==1)
+  if (channel_2==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3==1)
+  if (channel_3==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4==1)
+  if (channel_4==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -284,24 +284,24 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init
   * @retval None
   */
-static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR, uint8_t Channel_1, uint8_t Channel_2, uint8_t Channel_3, uint8_t Channel_4)
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
 {
 	if (period > 0 && period <65536)
 	{
-		uint32_t prescaler = Calculate_prescaler(period); //max period value is 2^16-1
+		uint32_t prescaler = Calculate_Prescaler(period); //max period value is 2^16-1
 
 		switch (timer)
 		{
 			case (1):
-				MX_TIM1_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-				if(doTriggerISR==1)
+				MX_TIM1_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
+				if(do_trigger_ISR==1)
 				{
 					HAL_TIM_Base_Start_IT(&htim1);
 				}
 				break;
 			case (2):
-				MX_TIM2_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-				if(doTriggerISR==1)
+				MX_TIM2_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
+				if(do_trigger_ISR==1)
 						{
 							HAL_TIM_Base_Start_IT(&htim2);
 						}
@@ -323,7 +323,7 @@ static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR
   * @param period
   * @retval prescaler
   */
-uint32_t Calculate_prescaler(uint16_t period)
+uint32_t Calculate_Prescaler(uint16_t period)
 {
 	uint32_t prescaler = ((HAL_RCC_GetSysClockFreq()*(float)period)/(COUNTER_PERIOD+1))-1;
 	prescaler /= 1000;
