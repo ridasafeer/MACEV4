@@ -64,13 +64,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
     if (htim == &htim1)
     {
        //Timer 1
-    	HAL_GPIO_TogglePin(ISR_1_GPIO_Port, ISR_1_Pin);
 
     }
     else if(htim == &htim2)
     {
         //Timer 2
-    	HAL_GPIO_TogglePin(ISR_2_GPIO_Port, ISR_2_Pin);
     }
     else
     {
@@ -105,11 +103,11 @@ static void var_Timer_Init(Timer_Init_args in)
 {
 	uint8_t timer_out = in.timer;
 	uint16_t period_out = in.period;
-	uint8_t doTriggerISR_out = in.doTriggerISR ? in.doTriggerISR :2;
-	uint8_t Channel_1_out = in.Channel_1 ? in.Channel_1 :2;
-	uint8_t Channel_2_out = in.Channel_2 ? in.Channel_2 :2;
-	uint8_t Channel_3_out = in.Channel_3 ? in.Channel_3 :2;
-	uint8_t Channel_4_out = in.Channel_4 ? in.Channel_4 :2;
+	uint8_t doTriggerISR_out = in.doTriggerISR ? in.doTriggerISR :1;
+	uint8_t Channel_1_out = in.Channel_1 ? in.Channel_1 :1;
+	uint8_t Channel_2_out = in.Channel_2 ? in.Channel_2 :1;
+	uint8_t Channel_3_out = in.Channel_3 ? in.Channel_3 :1;
+	uint8_t Channel_4_out = in.Channel_4 ? in.Channel_4 :1;
 	Timer_Init_base(timer_out,period_out,doTriggerISR_out,Channel_1_out,Channel_2_out,Channel_3_out,Channel_4_out);
 }
 
@@ -195,19 +193,19 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   }
 
   //Channel configuration
-  if (Channel_1==2)
+  if (Channel_1==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2==2)
+  if (Channel_2==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3==2)
+  if (Channel_3==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4==2)
+  if (Channel_4==1)
   {
   	  HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -259,19 +257,19 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t Channel_1, uint8_t Channel_
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
 
   //Channel configuration
-  if (Channel_1==2)
+  if (Channel_1==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1);
   }
-  if (Channel_2==2)
+  if (Channel_2==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2);
   }
-  if (Channel_3==2)
+  if (Channel_3==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3);
   }
-  if (Channel_4==2)
+  if (Channel_4==1)
   {
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4);
   }
@@ -296,14 +294,14 @@ static void Timer_Init_base(uint8_t timer, uint16_t period, uint8_t doTriggerISR
 		{
 			case (1):
 				MX_TIM1_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-				if(doTriggerISR==2)
+				if(doTriggerISR==1)
 				{
 					HAL_TIM_Base_Start_IT(&htim1);
 				}
 				break;
 			case (2):
 				MX_TIM2_Init(prescaler,Channel_1,Channel_2,Channel_3,Channel_4);
-				if(doTriggerISR==2)
+				if(doTriggerISR==1)
 						{
 							HAL_TIM_Base_Start_IT(&htim2);
 						}
