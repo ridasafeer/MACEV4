@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  17 .debug_line   00007a50  00000000  00000000  00055fea  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000f5530  00000000  00000000  0005da3a  2**0
+ 18 .debug_str    000f556b  00000000  00000000  0005da3a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00152f6a  2**0
+ 19 .comment      0000007b  00000000  00000000  00152fa5  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000327c  00000000  00000000  00152fe8  2**2
+ 20 .debug_frame  0000327c  00000000  00000000  00153020  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1664,10 +1664,10 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 	uint32_t desired_channel;
 
 	//Calculate the pulse
-	uint16_t ticks_percycle = Calculate_Duty_Cycle(duty_cycle);
+	uint16_t ticks_on_per_cycle = Calculate_Ticks_On_Per_Cycle(duty_cycle);
  8000d96:	797b      	ldrb	r3, [r7, #5]
  8000d98:	4618      	mov	r0, r3
- 8000d9a:	f000 f86d 	bl	8000e78 <Calculate_Duty_Cycle>
+ 8000d9a:	f000 f86d 	bl	8000e78 <Calculate_Ticks_On_Per_Cycle>
  8000d9e:	4603      	mov	r3, r0
  8000da0:	81fb      	strh	r3, [r7, #14]
 
@@ -1747,7 +1747,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000dfe:	6939      	ldr	r1, [r7, #16]
  8000e00:	6978      	ldr	r0, [r7, #20]
  8000e02:	f001 fa6b 	bl	80022dc <HAL_TIM_PWM_Start>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e06:	693b      	ldr	r3, [r7, #16]
  8000e08:	2b00      	cmp	r3, #0
  8000e0a:	d104      	bne.n	8000e16 <PWM_Init+0x92>
@@ -1757,7 +1757,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e12:	635a      	str	r2, [r3, #52]	; 0x34
 }
  8000e14:	e023      	b.n	8000e5e <PWM_Init+0xda>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e16:	693b      	ldr	r3, [r7, #16]
  8000e18:	2b04      	cmp	r3, #4
  8000e1a:	d104      	bne.n	8000e26 <PWM_Init+0xa2>
@@ -1767,7 +1767,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e22:	639a      	str	r2, [r3, #56]	; 0x38
 }
  8000e24:	e01b      	b.n	8000e5e <PWM_Init+0xda>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e26:	693b      	ldr	r3, [r7, #16]
  8000e28:	2b08      	cmp	r3, #8
  8000e2a:	d104      	bne.n	8000e36 <PWM_Init+0xb2>
@@ -1777,7 +1777,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e32:	63da      	str	r2, [r3, #60]	; 0x3c
 }
  8000e34:	e013      	b.n	8000e5e <PWM_Init+0xda>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e36:	693b      	ldr	r3, [r7, #16]
  8000e38:	2b0c      	cmp	r3, #12
  8000e3a:	d104      	bne.n	8000e46 <PWM_Init+0xc2>
@@ -1787,7 +1787,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e42:	641a      	str	r2, [r3, #64]	; 0x40
 }
  8000e44:	e00b      	b.n	8000e5e <PWM_Init+0xda>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e46:	693b      	ldr	r3, [r7, #16]
  8000e48:	2b10      	cmp	r3, #16
  8000e4a:	d104      	bne.n	8000e56 <PWM_Init+0xd2>
@@ -1797,7 +1797,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e52:	659a      	str	r2, [r3, #88]	; 0x58
 }
  8000e54:	e003      	b.n	8000e5e <PWM_Init+0xda>
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
  8000e56:	697b      	ldr	r3, [r7, #20]
  8000e58:	681b      	ldr	r3, [r3, #0]
  8000e5a:	89fa      	ldrh	r2, [r7, #14]
@@ -1813,48 +1813,48 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
  8000e70:	080042d4 	.word	0x080042d4
  8000e74:	08004340 	.word	0x08004340
 
-08000e78 <Calculate_Duty_Cycle>:
+08000e78 <Calculate_Ticks_On_Per_Cycle>:
   * @brief Calculate the duty cycle in ticks
   * @param duty cycle
   * @retval Ticks per cycle
   */
-uint16_t Calculate_Duty_Cycle(uint8_t duty_cycle)
+uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle)
 {
  8000e78:	b580      	push	{r7, lr}
  8000e7a:	b084      	sub	sp, #16
  8000e7c:	af00      	add	r7, sp, #0
  8000e7e:	4603      	mov	r3, r0
  8000e80:	71fb      	strb	r3, [r7, #7]
-	uint16_t ticks_percycle;
+	uint16_t ticks_on_per_cycle;
 	//CHECK TO MAKE SURE DUTY CYCLE IS WITHIN [0,100]
 	if (duty_cycle>=0 && duty_cycle <=100)
  8000e82:	79fb      	ldrb	r3, [r7, #7]
  8000e84:	2b64      	cmp	r3, #100	; 0x64
- 8000e86:	d80c      	bhi.n	8000ea2 <Calculate_Duty_Cycle+0x2a>
+ 8000e86:	d80c      	bhi.n	8000ea2 <Calculate_Ticks_On_Per_Cycle+0x2a>
 	{
-		ticks_percycle = (duty_cycle*COUNTER_PERIOD)/100;
+		ticks_on_per_cycle = (duty_cycle*COUNTER_PERIOD)/100;
  8000e88:	79fb      	ldrb	r3, [r7, #7]
  8000e8a:	f644 621f 	movw	r2, #19999	; 0x4e1f
  8000e8e:	fb02 f303 	mul.w	r3, r2, r3
- 8000e92:	4a09      	ldr	r2, [pc, #36]	; (8000eb8 <Calculate_Duty_Cycle+0x40>)
+ 8000e92:	4a09      	ldr	r2, [pc, #36]	; (8000eb8 <Calculate_Ticks_On_Per_Cycle+0x40>)
  8000e94:	fb82 1203 	smull	r1, r2, r2, r3
  8000e98:	1152      	asrs	r2, r2, #5
  8000e9a:	17db      	asrs	r3, r3, #31
  8000e9c:	1ad3      	subs	r3, r2, r3
  8000e9e:	81fb      	strh	r3, [r7, #14]
- 8000ea0:	e004      	b.n	8000eac <Calculate_Duty_Cycle+0x34>
+ 8000ea0:	e004      	b.n	8000eac <Calculate_Ticks_On_Per_Cycle+0x34>
 	}
 
 	else
 	{
-		ticks_percycle = 0; //Default value
+		ticks_on_per_cycle = 0; //Default value
  8000ea2:	2300      	movs	r3, #0
  8000ea4:	81fb      	strh	r3, [r7, #14]
 		printf("Invalid Duty Cycle argument. Should be within range [0,100].\n");
- 8000ea6:	4805      	ldr	r0, [pc, #20]	; (8000ebc <Calculate_Duty_Cycle+0x44>)
+ 8000ea6:	4805      	ldr	r0, [pc, #20]	; (8000ebc <Calculate_Ticks_On_Per_Cycle+0x44>)
  8000ea8:	f002 fb04 	bl	80034b4 <puts>
 	}
-	return ticks_percycle;
+	return ticks_on_per_cycle;
  8000eac:	89fb      	ldrh	r3, [r7, #14]
 }
  8000eae:	4618      	mov	r0, r3
@@ -2373,26 +2373,15 @@ void TIM2_IRQHandler(void)
  8001100:	200000d8 	.word	0x200000d8
 
 08001104 <_read>:
-	_kill(status, -1);
-	while (1) {}		/* Make sure we hang here */
-}
-
-__attribute__((weak)) int _read(int file, char *ptr, int len)
-{
  8001104:	b580      	push	{r7, lr}
  8001106:	b086      	sub	sp, #24
  8001108:	af00      	add	r7, sp, #0
  800110a:	60f8      	str	r0, [r7, #12]
  800110c:	60b9      	str	r1, [r7, #8]
  800110e:	607a      	str	r2, [r7, #4]
-	int DataIdx;
-
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
  8001110:	2300      	movs	r3, #0
  8001112:	617b      	str	r3, [r7, #20]
  8001114:	e00a      	b.n	800112c <_read+0x28>
-	{
-		*ptr++ = __io_getchar();
  8001116:	f3af 8000 	nop.w
  800111a:	4601      	mov	r1, r0
  800111c:	68bb      	ldr	r3, [r7, #8]
@@ -2400,7 +2389,6 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  8001120:	60ba      	str	r2, [r7, #8]
  8001122:	b2ca      	uxtb	r2, r1
  8001124:	701a      	strb	r2, [r3, #0]
-	for (DataIdx = 0; DataIdx < len; DataIdx++)
  8001126:	697b      	ldr	r3, [r7, #20]
  8001128:	3301      	adds	r3, #1
  800112a:	617b      	str	r3, [r7, #20]
@@ -2408,30 +2396,18 @@ __attribute__((weak)) int _read(int file, char *ptr, int len)
  800112e:	687b      	ldr	r3, [r7, #4]
  8001130:	429a      	cmp	r2, r3
  8001132:	dbf0      	blt.n	8001116 <_read+0x12>
-	}
-
-return len;
  8001134:	687b      	ldr	r3, [r7, #4]
-}
  8001136:	4618      	mov	r0, r3
  8001138:	3718      	adds	r7, #24
  800113a:	46bd      	mov	sp, r7
  800113c:	bd80      	pop	{r7, pc}
 
 0800113e <_close>:
-	}
-	return len;
-}
-
-int _close(int file)
-{
  800113e:	b480      	push	{r7}
  8001140:	b083      	sub	sp, #12
  8001142:	af00      	add	r7, sp, #0
  8001144:	6078      	str	r0, [r7, #4]
-	return -1;
  8001146:	f04f 33ff 	mov.w	r3, #4294967295
-}
  800114a:	4618      	mov	r0, r3
  800114c:	370c      	adds	r7, #12
  800114e:	46bd      	mov	sp, r7
@@ -2439,22 +2415,15 @@ int _close(int file)
  8001154:	4770      	bx	lr
 
 08001156 <_fstat>:
-
-
-int _fstat(int file, struct stat *st)
-{
  8001156:	b480      	push	{r7}
  8001158:	b083      	sub	sp, #12
  800115a:	af00      	add	r7, sp, #0
  800115c:	6078      	str	r0, [r7, #4]
  800115e:	6039      	str	r1, [r7, #0]
-	st->st_mode = S_IFCHR;
  8001160:	683b      	ldr	r3, [r7, #0]
  8001162:	f44f 5200 	mov.w	r2, #8192	; 0x2000
  8001166:	605a      	str	r2, [r3, #4]
-	return 0;
  8001168:	2300      	movs	r3, #0
-}
  800116a:	4618      	mov	r0, r3
  800116c:	370c      	adds	r7, #12
  800116e:	46bd      	mov	sp, r7
@@ -2462,16 +2431,11 @@ int _fstat(int file, struct stat *st)
  8001174:	4770      	bx	lr
 
 08001176 <_isatty>:
-
-int _isatty(int file)
-{
  8001176:	b480      	push	{r7}
  8001178:	b083      	sub	sp, #12
  800117a:	af00      	add	r7, sp, #0
  800117c:	6078      	str	r0, [r7, #4]
-	return 1;
  800117e:	2301      	movs	r3, #1
-}
  8001180:	4618      	mov	r0, r3
  8001182:	370c      	adds	r7, #12
  8001184:	46bd      	mov	sp, r7
@@ -2479,18 +2443,13 @@ int _isatty(int file)
  800118a:	4770      	bx	lr
 
 0800118c <_lseek>:
-
-int _lseek(int file, int ptr, int dir)
-{
  800118c:	b480      	push	{r7}
  800118e:	b085      	sub	sp, #20
  8001190:	af00      	add	r7, sp, #0
  8001192:	60f8      	str	r0, [r7, #12]
  8001194:	60b9      	str	r1, [r7, #8]
  8001196:	607a      	str	r2, [r7, #4]
-	return 0;
  8001198:	2300      	movs	r3, #0
-}
  800119a:	4618      	mov	r0, r3
  800119c:	3714      	adds	r7, #20
  800119e:	46bd      	mov	sp, r7
@@ -2499,44 +2458,23 @@ int _lseek(int file, int ptr, int dir)
 	...
 
 080011a8 <_sbrk>:
- *
- * @param incr Memory size
- * @return Pointer to allocated memory
- */
-void *_sbrk(ptrdiff_t incr)
-{
  80011a8:	b580      	push	{r7, lr}
  80011aa:	b086      	sub	sp, #24
  80011ac:	af00      	add	r7, sp, #0
  80011ae:	6078      	str	r0, [r7, #4]
-  extern uint8_t _end; /* Symbol defined in the linker script */
-  extern uint8_t _estack; /* Symbol defined in the linker script */
-  extern uint32_t _Min_Stack_Size; /* Symbol defined in the linker script */
-  const uint32_t stack_limit = (uint32_t)&_estack - (uint32_t)&_Min_Stack_Size;
  80011b0:	4a14      	ldr	r2, [pc, #80]	; (8001204 <_sbrk+0x5c>)
  80011b2:	4b15      	ldr	r3, [pc, #84]	; (8001208 <_sbrk+0x60>)
  80011b4:	1ad3      	subs	r3, r2, r3
  80011b6:	617b      	str	r3, [r7, #20]
-  const uint8_t *max_heap = (uint8_t *)stack_limit;
  80011b8:	697b      	ldr	r3, [r7, #20]
  80011ba:	613b      	str	r3, [r7, #16]
-  uint8_t *prev_heap_end;
-
-  /* Initialize heap end at first call */
-  if (NULL == __sbrk_heap_end)
  80011bc:	4b13      	ldr	r3, [pc, #76]	; (800120c <_sbrk+0x64>)
  80011be:	681b      	ldr	r3, [r3, #0]
  80011c0:	2b00      	cmp	r3, #0
  80011c2:	d102      	bne.n	80011ca <_sbrk+0x22>
-  {
-    __sbrk_heap_end = &_end;
  80011c4:	4b11      	ldr	r3, [pc, #68]	; (800120c <_sbrk+0x64>)
  80011c6:	4a12      	ldr	r2, [pc, #72]	; (8001210 <_sbrk+0x68>)
  80011c8:	601a      	str	r2, [r3, #0]
-  }
-
-  /* Protect heap from growing into the reserved MSP stack */
-  if (__sbrk_heap_end + incr > max_heap)
  80011ca:	4b10      	ldr	r3, [pc, #64]	; (800120c <_sbrk+0x64>)
  80011cc:	681a      	ldr	r2, [r3, #0]
  80011ce:	687b      	ldr	r3, [r7, #4]
@@ -2544,32 +2482,22 @@ void *_sbrk(ptrdiff_t incr)
  80011d2:	693a      	ldr	r2, [r7, #16]
  80011d4:	429a      	cmp	r2, r3
  80011d6:	d207      	bcs.n	80011e8 <_sbrk+0x40>
-  {
-    errno = ENOMEM;
  80011d8:	f002 f8c6 	bl	8003368 <__errno>
  80011dc:	4602      	mov	r2, r0
  80011de:	230c      	movs	r3, #12
  80011e0:	6013      	str	r3, [r2, #0]
-    return (void *)-1;
  80011e2:	f04f 33ff 	mov.w	r3, #4294967295
  80011e6:	e009      	b.n	80011fc <_sbrk+0x54>
-  }
-
-  prev_heap_end = __sbrk_heap_end;
  80011e8:	4b08      	ldr	r3, [pc, #32]	; (800120c <_sbrk+0x64>)
  80011ea:	681b      	ldr	r3, [r3, #0]
  80011ec:	60fb      	str	r3, [r7, #12]
-  __sbrk_heap_end += incr;
  80011ee:	4b07      	ldr	r3, [pc, #28]	; (800120c <_sbrk+0x64>)
  80011f0:	681a      	ldr	r2, [r3, #0]
  80011f2:	687b      	ldr	r3, [r7, #4]
  80011f4:	4413      	add	r3, r2
  80011f6:	4a05      	ldr	r2, [pc, #20]	; (800120c <_sbrk+0x64>)
  80011f8:	6013      	str	r3, [r2, #0]
-
-  return (void *)prev_heap_end;
  80011fa:	68fb      	ldr	r3, [r7, #12]
-}
  80011fc:	4618      	mov	r0, r3
  80011fe:	3718      	adds	r7, #24
  8001200:	46bd      	mov	sp, r7
@@ -2615,99 +2543,45 @@ void SystemInit(void)
  800123c:	e000ed00 	.word	0xe000ed00
 
 08001240 <Reset_Handler>:
-
-    .section  .text.Reset_Handler
-  .weak  Reset_Handler
-  .type  Reset_Handler, %function
-Reset_Handler:  
-  ldr   sp, =_estack      /* set stack pointer */
  8001240:	f8df d034 	ldr.w	sp, [pc, #52]	; 8001278 <LoopFillZerobss+0x14>
-
-/* Copy the data segment initializers from flash to SRAM */  
-  movs  r1, #0
  8001244:	2100      	movs	r1, #0
-  b  LoopCopyDataInit
  8001246:	e003      	b.n	8001250 <LoopCopyDataInit>
 
 08001248 <CopyDataInit>:
-
-CopyDataInit:
-  ldr  r3, =_sidata
  8001248:	4b0c      	ldr	r3, [pc, #48]	; (800127c <LoopFillZerobss+0x18>)
-  ldr  r3, [r3, r1]
  800124a:	585b      	ldr	r3, [r3, r1]
-  str  r3, [r0, r1]
  800124c:	5043      	str	r3, [r0, r1]
-  adds  r1, r1, #4
  800124e:	3104      	adds	r1, #4
 
 08001250 <LoopCopyDataInit>:
-    
-LoopCopyDataInit:
-  ldr  r0, =_sdata
  8001250:	480b      	ldr	r0, [pc, #44]	; (8001280 <LoopFillZerobss+0x1c>)
-  ldr  r3, =_edata
  8001252:	4b0c      	ldr	r3, [pc, #48]	; (8001284 <LoopFillZerobss+0x20>)
-  adds  r2, r0, r1
  8001254:	1842      	adds	r2, r0, r1
-  cmp  r2, r3
  8001256:	429a      	cmp	r2, r3
-  bcc  CopyDataInit
  8001258:	d3f6      	bcc.n	8001248 <CopyDataInit>
-  ldr  r2, =_sbss
  800125a:	4a0b      	ldr	r2, [pc, #44]	; (8001288 <LoopFillZerobss+0x24>)
-  b  LoopFillZerobss
  800125c:	e002      	b.n	8001264 <LoopFillZerobss>
 
 0800125e <FillZerobss>:
-/* Zero fill the bss segment. */  
-FillZerobss:
-  movs  r3, #0
  800125e:	2300      	movs	r3, #0
-  str  r3, [r2], #4
  8001260:	f842 3b04 	str.w	r3, [r2], #4
 
 08001264 <LoopFillZerobss>:
-    
-LoopFillZerobss:
-  ldr  r3, = _ebss
  8001264:	4b09      	ldr	r3, [pc, #36]	; (800128c <LoopFillZerobss+0x28>)
-  cmp  r2, r3
  8001266:	429a      	cmp	r2, r3
-  bcc  FillZerobss
  8001268:	d3f9      	bcc.n	800125e <FillZerobss>
-
-/* Call the clock system initialization function.*/
-  bl  SystemInit   
  800126a:	f7ff ffd3 	bl	8001214 <SystemInit>
-/* Call static constructors */
-    bl __libc_init_array
  800126e:	f002 f881 	bl	8003374 <__libc_init_array>
-/* Call the application's entry point.*/
-  bl  main
  8001272:	f7ff fa5f 	bl	8000734 <main>
-  bx  lr    
  8001276:	4770      	bx	lr
-  ldr   sp, =_estack      /* set stack pointer */
  8001278:	20080000 	.word	0x20080000
-  ldr  r3, =_sidata
  800127c:	0800447c 	.word	0x0800447c
-  ldr  r0, =_sdata
  8001280:	20000000 	.word	0x20000000
-  ldr  r3, =_edata
  8001284:	20000070 	.word	0x20000070
-  ldr  r2, =_sbss
  8001288:	20000070 	.word	0x20000070
-  ldr  r3, = _ebss
  800128c:	20000120 	.word	0x20000120
 
 08001290 <ADC_IRQHandler>:
- * @retval None       
-*/
-    .section  .text.Default_Handler,"ax",%progbits
-Default_Handler:
-Infinite_Loop:
-  b  Infinite_Loop
  8001290:	e7fe      	b.n	8001290 <ADC_IRQHandler>
 
 08001292 <HAL_Init>:

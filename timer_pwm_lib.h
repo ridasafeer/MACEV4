@@ -47,7 +47,7 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
 static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
 uint32_t Calculate_Prescaler(uint16_t period);
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle);
-uint16_t Calculate_Duty_Cycle(uint8_t duty_cycle);
+uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle);
 static void PWM_Stop(uint8_t timer,uint8_t channel);
 static void Timer_Stop(uint8_t timer);
 
@@ -342,7 +342,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 	uint32_t desired_channel;
 
 	//Calculate the pulse
-	uint16_t ticks_percycle = Calculate_Duty_Cycle(duty_cycle);
+	uint16_t ticks_on_per_cycle = Calculate_Ticks_On_Per_Cycle(duty_cycle);
 
 	//Find desired timer
 	switch(timer)
@@ -378,7 +378,7 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 
 	//Initiate the PWM and desired duty cycle
     HAL_TIM_PWM_Start(desired_timer, desired_channel);
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_percycle);
+    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
 }
 
 /**
@@ -386,21 +386,21 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
   * @param duty cycle
   * @retval Ticks per cycle
   */
-uint16_t Calculate_Duty_Cycle(uint8_t duty_cycle)
+uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle)
 {
-	uint16_t ticks_percycle;
+	uint16_t ticks_on_per_cycle;
 	//CHECK TO MAKE SURE DUTY CYCLE IS WITHIN [0,100]
 	if (duty_cycle>=0 && duty_cycle <=100)
 	{
-		ticks_percycle = (duty_cycle*COUNTER_PERIOD)/100;
+		ticks_on_per_cycle = (duty_cycle*COUNTER_PERIOD)/100;
 	}
 
 	else
 	{
-		ticks_percycle = 0; //Default value
+		ticks_on_per_cycle = 0; //Default value
 		printf("Invalid Duty Cycle argument. Should be within range [0,100].\n");
 	}
-	return ticks_percycle;
+	return ticks_on_per_cycle;
 }
 
 /**
