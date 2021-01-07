@@ -1,3 +1,15 @@
+/*
+ * timer_pwm_lib_backup_code.c
+ *
+ *  Created on: Jan. 7, 2021
+ *  Author: Samuel Parent and Dorian Knight
+ *
+ *  Description: Code regeneration after pin configuration on the .ioc file is cautioned.
+ *  This will rewrite the MX_TIM1_Init and MX_TIM2_Init functions, redeclare them, and cause errors.
+ *  If code regeneration is required, this code may be of use.
+ *
+ */
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
