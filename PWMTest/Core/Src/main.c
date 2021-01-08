@@ -110,24 +110,36 @@ int _write(int file, char *ptr, int len) //printf to SWV ITM
 }
 
 //ISR on timer overflow
+uint16_t timer_1_repetition_counter = 0;
+uint16_t timer_2_repetition_counter = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by timer overflow
 {
-    if (htim == &htim1)
-    {
-       /*Timer 1*/
-    	HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+	uint16_t TIMER_1_PERIOD_MULTIPLYER = 1000; //Timer period X TIMER_1_PERIOD_MULTIPLYER = period for timer 1 ISR
+	uint16_t TIMER_2_PERIOD_MULTIPLYER = 1000; //Timer period X TIMER_2_PERIOD_MULTIPLYER = period for timer 2 ISR
 
+    if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLYER)
+    {
+       //ISR for Timer 1
+       timer_1_repetition_counter = 0;
+       HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+
+    }
+    else if(htim == &htim1)
+    {
+    	timer_1_repetition_counter++;
+    }
+
+    if(htim == &htim2 && timer_2_repetition_counter == TIMER_2_PERIOD_MULTIPLYER)
+    {
+        //ISR for Timer 2
+        timer_2_repetition_counter = 0;
+        HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
     }
     else if(htim == &htim2)
     {
-        /*Timer 2*/
-    	HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+    	timer_2_repetition_counter++;
     }
-    else
-    {
-    	//very unlikely to see this error message
-        printf("Error triggering correct ISR by timer overflow. Check HAL_TIM_PeriodElapsedCallback() function.\n");
-    }
+
 }
 
 /* USER CODE END 0 */
