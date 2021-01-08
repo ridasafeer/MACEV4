@@ -195,8 +195,8 @@ int main(void)
    * - After period is elapsed for each timer, two on-board LEDs should toggle On/Off (caused by the ISR)
    * - HAL_TIM_PeriodElapsedCallback(...) controls the ISR
    */
-  Timer_Init(1, 100,.ISR_period = 1000);
-  Timer_Init(2, 250,.ISR_period = 1000);
+  Timer_Init(1, 1000,.ISR_period = 1000);
+  Timer_Init(2, 500,.ISR_period = 1000);
 
   PWM_Init(2,1,20);
   PWM_Init(2,2,40);
@@ -208,36 +208,7 @@ int main(void)
   PWM_Init(1,3,60);
   PWM_Init(1,4,80);
 
-  HAL_Delay(10000);
-    Timer_Init(1, 1000,.ISR_period = 1000);
-    PWM_Init(1,1,20);
-    PWM_Init(1,2,40);
-    PWM_Init(1,3,60);
-    PWM_Init(1,4,80);
-    HAL_Delay(5000);
-    Timer_Init(2, 100,.ISR_period = 1000);
-    Timer_Init(1, 100,.ISR_period = 1000);
-    PWM_Init(2,1,20);
-      PWM_Init(2,2,40);
-      PWM_Init(2,3,60);
-      PWM_Init(2,4,80);
 
-      PWM_Init(1,1,20);
-      PWM_Init(1,2,40);
-      PWM_Init(1,3,60);
-      PWM_Init(1,4,80);
-    HAL_Delay(4000);
-    PWM_Stop(1,1);
-    PWM_Stop(1,2);
-    PWM_Stop(1,3);
-    PWM_Stop(1,4);
-    PWM_Stop(2,1);
-    PWM_Stop(2,2);
-    PWM_Stop(2,3);
-    PWM_Stop(2,4);
-    HAL_Delay(10000);
-    Timer_Stop(1);
-    Timer_Stop(2);
 
   /* USER CODE END 2 */
 
