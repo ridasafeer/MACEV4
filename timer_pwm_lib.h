@@ -59,13 +59,13 @@ static void Timer_Stop(uint8_t timer);
 /*ISR on Timer overflow function*/
 
 /*
-uint16_t timer_1_repetition_counter = 0;
-uint16_t timer_2_repetition_counter = 0;
+uint16_t timer_1_repetition_counter = 1;
+uint16_t timer_2_repetition_counter = 1;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by timer overflow
 {
 	//Change values below to desired multiplier
-	uint16_t TIMER_1_PERIOD_MULTIPLIER = 0; //Timer period X TIMER_1_PERIOD_MULTIPLIER = period for timer 1 ISR
-	uint16_t TIMER_2_PERIOD_MULTIPLIER = 0; //Timer period X TIMER_2_PERIOD_MULTIPLIER = period for timer 2 ISR
+	uint16_t TIMER_1_PERIOD_MULTIPLIER = 0; //(Timer period) * (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
+	uint16_t TIMER_2_PERIOD_MULTIPLIER = 0; //(Timer period) * (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
 
 
     if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER)
@@ -76,7 +76,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
        HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
 
        //User code ends
-	   timer_1_repetition_counter = 0;
+	   timer_1_repetition_counter = 1;
     }
     else if(htim == &htim1)
     {
@@ -91,7 +91,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
        HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
 
        //User code ends
-	   timer_2_repetition_counter = 0;
+	   timer_2_repetition_counter = 1;
     }
     else if(htim == &htim2)
     {
