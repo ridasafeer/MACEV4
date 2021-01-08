@@ -28,7 +28,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+//#include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -44,8 +44,9 @@ const uint16_t COUNTER_PERIOD = 20000 - 1; //Global Maximum number that the stm3
 /* Private function prototypes -----------------------------------------------*/
 static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
 static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
-static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4, uint16_t ISR_period);
 uint32_t Calculate_Prescaler(uint16_t period);
+static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uint16_t ISR_period);
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle);
 uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle);
 static void PWM_Stop(uint8_t timer,uint8_t channel);
@@ -58,14 +59,19 @@ static void Timer_Stop(uint8_t timer);
 
 /*ISR on Timer overflow function*/
 
+
+
+// ISR on timer overflow
+uint16_t timer_1_repetition_counter = 0;
+uint16_t timer_2_repetition_counter = 0;
+
+//Values below are calculated in the Calculate_Timer_Period_Multiplier
+uint16_t TIMER_1_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
+uint16_t TIMER_2_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
 /*
-uint16_t timer_1_repetition_counter = 1;
-uint16_t timer_2_repetition_counter = 1;
+ * Copy this code into your code!!
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by timer overflow
 {
-	//Change values below to desired multiplier
-	uint16_t TIMER_1_PERIOD_MULTIPLIER = 0; //(Timer period) * (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
-	uint16_t TIMER_2_PERIOD_MULTIPLIER = 0; //(Timer period) * (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
 
 
     if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER)
@@ -112,6 +118,7 @@ typedef struct
 	uint8_t channel_2;
 	uint8_t channel_3;
 	uint8_t channel_4;
+	uint16_t ISR_period;
 }
 
 Timer_Init_args;
@@ -131,7 +138,8 @@ static void Var_Timer_Init(Timer_Init_args in)
 	uint8_t channel_2_out = in.channel_2 ? in.channel_2 :1;
 	uint8_t channel_3_out = in.channel_3 ? in.channel_3 :1;
 	uint8_t channel_4_out = in.channel_4 ? in.channel_4 :1;
-	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out);
+	uint16_t ISR_period_out = in.ISR_period ? in.ISR_period :in.period;
+	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out,ISR_period_out);
 }
 
 /**
@@ -304,18 +312,20 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
 
 /**
   * @brief Initialize timer n on channel m for s milli seconds with ISR
-  * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init
+  * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), Channel 1 init, Channel 2 init, Channel 3 init, Channel 4 init, ISR_period (milliseconds)
   * @retval None
   */
-static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4, uint16_t ISR_period)
 {
 	if (period > 0 && period <65536)
 	{
 		uint32_t prescaler = Calculate_Prescaler(period); //max period value is 2^16-1
+		Calculate_Timer_Period_Multiplier(timer, period, ISR_period); //This allows you to slow down the ISR_period in relation to the timer period
 
 		switch (timer)
 		{
 			case (1):
+				timer_1_repetition_counter = 0; //Because the timer is being reinitialized the timer count must be reset
 				MX_TIM1_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
 				if(do_trigger_ISR==1)
 				{
@@ -323,6 +333,7 @@ static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_I
 				}
 				break;
 			case (2):
+				timer_2_repetition_counter = 0;
 				MX_TIM2_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
 				if(do_trigger_ISR==1)
 						{
@@ -351,6 +362,40 @@ uint32_t Calculate_Prescaler(uint16_t period)
 	uint32_t prescaler = ((HAL_RCC_GetSysClockFreq()*(float)period)/(COUNTER_PERIOD+1))-1;
 	prescaler /= 1000;
 	return prescaler;
+}
+
+
+/**
+  * @brief Calculate the value stored in TIMER_1_PERIOD_MULTIPLIER for the ISR
+  * @param timer number, period and ISR_period
+  * @retval None
+  * @note: copy this into the user code 4 section
+  */
+static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uint16_t ISR_period)
+{
+	if (ISR_period < period) //the ISR only runs once the timer overflows, it's impossible to have an ISR_Period that is less than the timer period
+	{
+		ISR_period = period;
+		printf("Invalid ISR_period, the ISR only runs once the timer overflows thus the ISR_period must be the same if not greater than the timer period");
+	}
+
+	else if(ISR_period % period != 0) //ISR_period must be a multiple of timer period
+	{
+		ISR_period = period;
+		printf("The ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period");
+	}
+
+
+	switch (timer)
+	{
+		case(1):
+			TIMER_1_PERIOD_MULTIPLIER = ISR_period/period;
+			break;
+		case(2):
+			TIMER_2_PERIOD_MULTIPLIER = ISR_period/period;
+			break;
+	}
+
 }
 
 /**

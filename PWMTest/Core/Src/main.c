@@ -58,8 +58,9 @@ static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
 static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
-static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4);
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4, uint16_t ISR_period);
 uint32_t Calculate_Prescaler(uint16_t period);
+static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uint16_t ISR_period);
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle);
 uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle);
 static void PWM_Stop(uint8_t timer,uint8_t channel);
@@ -82,6 +83,7 @@ typedef struct
 	uint8_t channel_2;
 	uint8_t channel_3;
 	uint8_t channel_4;
+	uint16_t ISR_period;
 }Timer_Init_args;
 
 
@@ -95,7 +97,8 @@ static void var_Timer_Init(Timer_Init_args in)
 	uint8_t channel_2_out = in.channel_2 ? in.channel_2 :1;
 	uint8_t channel_3_out = in.channel_3 ? in.channel_3 :1;
 	uint8_t channel_4_out = in.channel_4 ? in.channel_4 :1;
-	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out);
+	uint16_t ISR_period_out = in.ISR_period ? in.ISR_period :in.period;
+	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out,ISR_period_out);
 }
 
 
@@ -110,13 +113,14 @@ int _write(int file, char *ptr, int len) //printf to SWV ITM
 }
 
 //ISR on timer overflow
-uint16_t timer_1_repetition_counter = 1;
-uint16_t timer_2_repetition_counter = 1;
+uint16_t timer_1_repetition_counter = 0;
+uint16_t timer_2_repetition_counter = 0;
+
+//Values below are calculated in the Calculate_Timer_Period_Multiplier
+uint16_t TIMER_1_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
+uint16_t TIMER_2_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by timer overflow
 {
-	//Change values below to desired multiplier
-	uint16_t TIMER_1_PERIOD_MULTIPLIER = 0; //(Timer period) x (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
-	uint16_t TIMER_2_PERIOD_MULTIPLIER = 0; //(Timer period) x (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
 
 
     if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER)
@@ -191,8 +195,8 @@ int main(void)
    * - After period is elapsed for each timer, two on-board LEDs should toggle On/Off (caused by the ISR)
    * - HAL_TIM_PeriodElapsedCallback(...) controls the ISR
    */
-  Timer_Init(1, 500);
-  Timer_Init(2, 1000);
+  Timer_Init(1, 100,.ISR_period = 1000);
+  Timer_Init(2, 250,.ISR_period = 1000);
 
   PWM_Init(2,1,20);
   PWM_Init(2,2,40);
@@ -203,6 +207,38 @@ int main(void)
   PWM_Init(1,2,40);
   PWM_Init(1,3,60);
   PWM_Init(1,4,80);
+
+  HAL_Delay(10000);
+    Timer_Init(1, 1000,.ISR_period = 1000);
+    PWM_Init(1,1,20);
+    PWM_Init(1,2,40);
+    PWM_Init(1,3,60);
+    PWM_Init(1,4,80);
+    HAL_Delay(5000);
+    Timer_Init(2, 100,.ISR_period = 1000);
+    Timer_Init(1, 100,.ISR_period = 1000);
+    PWM_Init(2,1,20);
+      PWM_Init(2,2,40);
+      PWM_Init(2,3,60);
+      PWM_Init(2,4,80);
+
+      PWM_Init(1,1,20);
+      PWM_Init(1,2,40);
+      PWM_Init(1,3,60);
+      PWM_Init(1,4,80);
+    HAL_Delay(4000);
+    PWM_Stop(1,1);
+    PWM_Stop(1,2);
+    PWM_Stop(1,3);
+    PWM_Stop(1,4);
+    PWM_Stop(2,1);
+    PWM_Stop(2,2);
+    PWM_Stop(2,3);
+    PWM_Stop(2,4);
+    HAL_Delay(10000);
+    Timer_Stop(1);
+    Timer_Stop(2);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -493,18 +529,21 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 /**
   * @brief Initialize timer n on channel m for s milli seconds with ISR
-  * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), channel 1 init, channel 2 init, channel 3 init, channel 4 init
+  * @param Timer number, period (milliseconds), Trigger the Interrupt Service Routine(2=True 1=False), channel 1 init, channel 2 init, channel 3 init, channel 4 init, ISR_period (milliseconds)
   * @retval None
   */
-static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
+static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4, uint16_t ISR_period)
 {
 	if (period > 0 && period <65536)
 	{
 		uint32_t prescaler = Calculate_Prescaler(period); //max period value is 2^16-1
+		Calculate_Timer_Period_Multiplier(timer, period, ISR_period); //This allows you to slow down the ISR_period in relation to the timer period
+
 
 		switch (timer)
 		{
 			case (1):
+				timer_1_repetition_counter = 0; //Because the timer is being reinitialized the timer count must be reset
 				MX_TIM1_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
 				if(do_trigger_ISR==1)
 				{
@@ -512,6 +551,7 @@ static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_I
 				}
 				break;
 			case (2):
+				timer_2_repetition_counter = 0;
 				MX_TIM2_Init(prescaler,channel_1,channel_2,channel_3,channel_4);
 				if(do_trigger_ISR==1)
 						{
@@ -540,6 +580,38 @@ uint32_t Calculate_Prescaler(uint16_t period)
 	uint32_t prescaler = ((HAL_RCC_GetSysClockFreq()*(float)period)/(COUNTER_PERIOD+1))-1;
 	prescaler /= 1000;
 	return prescaler;
+}
+
+/**
+  * @brief Calculate the value stored in TIMER_1_PERIOD_MULTIPLIER for the ISR
+  * @param timer number, period and ISR_period
+  * @retval None
+  */
+static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uint16_t ISR_period)
+{
+	if (ISR_period < period) //the ISR only runs once the timer overflows, it's impossible to have an ISR_Period that is less than the timer period
+	{
+		ISR_period = period;
+		printf("Invalid ISR_period, the ISR only runs once the timer overflows thus the ISR_period must be the same if not greater than the timer period");
+	}
+
+	else if(ISR_period % period != 0) //ISR_period must be a multiple of timer period
+	{
+		ISR_period = period;
+		printf("The ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period");
+	}
+
+
+	switch (timer)
+	{
+		case(1):
+			TIMER_1_PERIOD_MULTIPLIER = ISR_period/period;
+			break;
+		case(2):
+			TIMER_2_PERIOD_MULTIPLIER = ISR_period/period;
+			break;
+	}
+
 }
 
 /**
