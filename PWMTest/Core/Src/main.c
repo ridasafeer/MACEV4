@@ -123,7 +123,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
 {
 
 
-    if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER)
+    if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER-1)
     {
        //ISR for Timer 1
        //User code here
@@ -131,14 +131,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
        HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
 
        //User code ends
-	   timer_1_repetition_counter = 1;
+	   timer_1_repetition_counter = 0;
     }
     else if(htim == &htim1)
     {
     	timer_1_repetition_counter++;
     }
 
-    if(htim == &htim2 && timer_2_repetition_counter == TIMER_2_PERIOD_MULTIPLIER)
+    if(htim == &htim2 && timer_2_repetition_counter == TIMER_2_PERIOD_MULTIPLIER-1)
     {
         //ISR for Timer 2
        //User code here
@@ -146,7 +146,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by t
        HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
 
        //User code ends
-	   timer_2_repetition_counter = 1;
+	   timer_2_repetition_counter = 0;
     }
     else if(htim == &htim2)
     {
@@ -195,8 +195,8 @@ int main(void)
    * - After period is elapsed for each timer, two on-board LEDs should toggle On/Off (caused by the ISR)
    * - HAL_TIM_PeriodElapsedCallback(...) controls the ISR
    */
-  Timer_Init(1, 1000,.ISR_period = 1000);
-  Timer_Init(2, 500,.ISR_period = 1000);
+  Timer_Init(1, 1000);
+  Timer_Init(2, 500);
 
   PWM_Init(2,1,20);
   PWM_Init(2,2,40);
@@ -207,6 +207,9 @@ int main(void)
   PWM_Init(1,2,40);
   PWM_Init(1,3,60);
   PWM_Init(1,4,80);
+
+
+
 
 
 
@@ -537,7 +540,7 @@ static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_I
 
 	else
 	{
-		printf("Invalid Period argument. Should be >0 and <65536");
+		printf("Invalid Period argument. Should be in range of (0, 65536) \n");
 	}
 }
 
@@ -563,13 +566,13 @@ static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uin
 	if (ISR_period < period) //the ISR only runs once the timer overflows, it's impossible to have an ISR_Period that is less than the timer period
 	{
 		ISR_period = period;
-		printf("Invalid ISR_period, the ISR only runs once the timer overflows thus the ISR_period must be the same if not greater than the timer period");
+		printf("Invalid ISR_period, the ISR only runs once the timer overflows thus the ISR_period must be the same if not greater than the timer period\n");
 	}
 
 	else if(ISR_period % period != 0) //ISR_period must be a multiple of timer period
 	{
 		ISR_period = period;
-		printf("The ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period");
+		printf("The ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period\n");
 	}
 
 
@@ -727,7 +730,7 @@ static void Timer_Stop(uint8_t timer)
 	}
 
 	//Stop timer
-	HAL_TIM_Base_Stop(desired_timer);
+	HAL_TIM_Base_DeInit(desired_timer);
 }
 /* USER CODE END 4 */
 
