@@ -147,15 +147,15 @@ static void Var_Timer_Init(Timer_Init_args in)
   * @param file, ptr, len
   * @retval len
   */
-int _write(int file, char *ptr, int len) //printf to SWV ITM
-{
-	int i = 0;
-	for(i = 0 ; i<len ; i++)
-	{
-		ITM_SendChar((*ptr++));
-	}
-	return len;
-}
+//int _write(int file, char *ptr, int len) //printf to SWV ITM
+//{
+//	int i = 0;
+//	for(i = 0 ; i<len ; i++)
+//	{
+//		ITM_SendChar((*ptr++));
+//	}
+//	return len;
+//}
 
 /**
   * @brief TIM1 Initialization Function
@@ -382,7 +382,7 @@ static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uin
 	else if(ISR_period % period != 0) //ISR_period must be a multiple of timer period
 	{
 		ISR_period = period;
-		printf("The ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period\n");
+		printf("Invalid ISR_period, the ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period\n");
 	}
 
 
@@ -481,6 +481,9 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 	TIM_HandleTypeDef* desired_timer;
 	uint32_t desired_channel;
 
+	//Error flag
+	_Bool all_clear = 1;
+
 	//Find timer
 	switch(timer)
 	{
@@ -491,6 +494,7 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 			desired_timer = &htim2;
 			break;
 		default:
+			all_clear = 0;
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
@@ -510,11 +514,16 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 			desired_channel = TIM_CHANNEL_4;
 			break;
 		default:
+			all_clear = 0;
 			printf("Invalid Channel argument. Should be an integer within range [1,4].\n");
 	}
 
-	//Stop PWM signal
-	HAL_TIM_PWM_Stop(desired_timer, desired_channel);
+	if (all_clear)
+	{
+		//Stop PWM signal
+		HAL_TIM_PWM_Stop(desired_timer, desired_channel);
+	}
+
 }
 
 /**
@@ -526,6 +535,9 @@ static void Timer_Stop(uint8_t timer)
 {
 	TIM_HandleTypeDef* desired_timer;
 
+	//Error flag
+	_Bool all_clear = 1;
+
 	//Find timer
 	switch(timer)
 	{
@@ -536,11 +548,15 @@ static void Timer_Stop(uint8_t timer)
 			desired_timer = &htim2;
 			break;
 		default:
+			all_clear = 0;
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
-	//Stop timer
-	HAL_TIM_Base_DeInit(desired_timer);
+	if(all_clear)
+	{
+		//Stop timer
+		HAL_TIM_Base_DeInit(desired_timer);
+	}
 }
 
 

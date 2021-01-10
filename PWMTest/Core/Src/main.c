@@ -209,10 +209,6 @@ int main(void)
   PWM_Init(1,4,80);
 
 
-
-
-
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -671,6 +667,9 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 	TIM_HandleTypeDef* desired_timer;
 	uint32_t desired_channel;
 
+	//Error flag
+	_Bool all_clear = 1;
+
 	//Find timer
 	switch(timer)
 	{
@@ -681,6 +680,7 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 			desired_timer = &htim2;
 			break;
 		default:
+			all_clear = 0;
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
@@ -700,11 +700,15 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 			desired_channel = TIM_CHANNEL_4;
 			break;
 		default:
+			all_clear = 0;
 			printf("Invalid channel argument. Should be an integer within range [1,4].\n");
 	}
 
-	//Stop PWM signal
-	HAL_TIM_PWM_Stop(desired_timer, desired_channel);
+	if (all_clear)
+	{
+		//Stop PWM signal
+		HAL_TIM_PWM_Stop(desired_timer, desired_channel);
+	}
 }
 
 /**
@@ -715,6 +719,9 @@ static void PWM_Stop(uint8_t timer, uint8_t channel)
 static void Timer_Stop(uint8_t timer)
 {
 	TIM_HandleTypeDef* desired_timer;
+
+	//Error flag
+	_Bool all_clear = 1;
 
 	//Find timer
 	switch(timer)
@@ -729,8 +736,11 @@ static void Timer_Stop(uint8_t timer)
 			printf("Invalid Timer argument. Should be either '1' or '2'.\n");
 	}
 
-	//Stop timer
-	HAL_TIM_Base_DeInit(desired_timer);
+	if(all_clear)
+	{
+		//Stop timer
+		HAL_TIM_Base_DeInit(desired_timer);
+	}
 }
 /* USER CODE END 4 */
 
