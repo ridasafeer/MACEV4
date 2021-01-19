@@ -317,7 +317,8 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
   */
 static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_ISR, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4, uint16_t ISR_period)
 {
-	if (period > 0 && period <65536)
+	//Checks to see that all arguments passed to the function are valid (*note that -1 evaluates to 255)
+	if ((timer >= 1 && timer <= 2) && (period > 0 && period < 65536) && (do_trigger_ISR == 255 || do_trigger_ISR == 1 || do_trigger_ISR == 0) && (channel_1 == 255 || channel_1 == 1 || channel_1 == 0) && (channel_2 == 255 || channel_2 == 1 || channel_2 == 0) && (channel_3 == 255 || channel_3 == 1 || channel_3 == 0) && (channel_4 == 255 || channel_4 == 1 || channel_4 == 0) && ISR_period % period == 0)
 	{
 		uint32_t prescaler = Calculate_Prescaler(period); //max period value is 2^16-1
 		Calculate_Timer_Period_Multiplier(timer, period, ISR_period); //This allows you to slow down the ISR_period in relation to the timer period
@@ -341,14 +342,31 @@ static void Timer_Init_Base(uint8_t timer, uint16_t period, uint8_t do_trigger_I
 						}
 				break;
 			default:
-				printf("'Timer_Init(%d, %d, ...)' - Invalid Timer argument. Should be either '1' or '2'.\n", timer, period);
+				printf("'Timer_Init(%d, %d, ...)' - This is the default message for timer switch, check timer_pwm_lib.h\n", timer, period);
 
 		}
 	}
 
-	else
+	//Argument specific error statements
+	if (!(timer >= 1 && timer <= 2))
 	{
-		printf("'Timer_Init(%d, %d, ...)' - Invalid Period argument. Should be in range of (0, 65536) \n", timer, period);
+		printf("'Timer_Init(%d, %d, ...)' - Invalid timer argument. Should be either '1' or '2'.\n", timer, period);
+	}
+	if (!(period > 0 && period < 65536))
+	{
+		printf("'Timer_Init(%d, %d, ...)' - Invalid period argument. Should be an int in range of (0,65536).\n", timer, period);
+	}
+	if (!(do_trigger_ISR == 255 || do_trigger_ISR == 1 || do_trigger_ISR == 0))
+	{
+		printf("'Timer_Init(%d, %d, ...)' - Invalid do_trigger_ISR argument. Should be either '-1' or '1'.\n", timer, period);
+	}
+	if (!(ISR_period % period == 0))
+	{
+		printf("'Timer_Init(%d, %d, ...)' - Invalid ISR_period argument. Should be a multiple of the timer period.\n", timer, period);
+	}
+	if (!((channel_1 == 255 || channel_1 == 1 || channel_1 == 0) && (channel_2 == 255 || channel_2 == 1 || channel_2 == 0) && (channel_3 == 255 || channel_3 == 1 || channel_3 == 0) && (channel_4 == 255 || channel_4 == 1 || channel_4 == 0)))
+	{
+		printf("'Timer_Init(%d, %d, ...)' - Invalid channel_x argument. Should be either '-1' or '1'.\n", timer, period);
 	}
 }
 
@@ -373,19 +391,6 @@ uint32_t Calculate_Prescaler(uint16_t period)
   */
 static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uint16_t ISR_period)
 {
-	if (ISR_period < period) //the ISR only runs once the timer overflows, it's impossible to have an ISR_Period that is less than the timer period
-	{
-		ISR_period = period;
-		printf("'Timer_Init(%d, %d, %d, ...)' - Invalid ISR_period, the ISR only runs on timer overflow, thus the ISR_period must be greater than or equal to the timer period\n", timer, period, ISR_period);
-	}
-
-	else if(ISR_period % period != 0) //ISR_period must be a multiple of timer period
-	{
-		ISR_period = period;
-		printf("'Timer_Init(%d, %d, %d, ...)' - Invalid ISR_period, the ISR_period must be a multiple of timer period since the overflow runs upon one completion of the timer period\n", timer, period, ISR_period);
-	}
-
-
 	switch (timer)
 	{
 		case(1):
@@ -405,48 +410,63 @@ static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uin
   */
 static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 {
-
-	TIM_HandleTypeDef* desired_timer;
-	uint32_t desired_channel;
-
-	//Calculate the pulse
-	uint16_t ticks_on_per_cycle = Calculate_Ticks_On_Per_Cycle(duty_cycle);
-
-	//Find desired timer
-	switch(timer)
+	if (timer >= 1 && timer <= 2 && channel >= 1 && channel <= 4 && duty_cycle >= 0 && duty_cycle <= 100)
 	{
-		case(1):
-			desired_timer = &htim1;
-			break;
-		case(2):
-			desired_timer = &htim2;
-			break;
-		default:
-			printf("'PWM_Init(%d, %d, %d)' - Invalid Timer argument. Should be either '1' or '2'.\n", timer, channel, duty_cycle);
+		TIM_HandleTypeDef* desired_timer;
+		uint32_t desired_channel;
+
+		//Calculate the pulse
+		uint16_t ticks_on_per_cycle = Calculate_Ticks_On_Per_Cycle(duty_cycle);
+
+		//Find desired timer
+		switch(timer)
+		{
+			case(1):
+				desired_timer = &htim1;
+				break;
+			case(2):
+				desired_timer = &htim2;
+				break;
+			default:
+				printf("'PWM_Init(%d, %d, %d)' - This is the default message for timer switch, check timer_pwm_lib.h.\n", timer, channel, duty_cycle);
+		}
+
+		//Find desired channel
+		switch(channel)
+		{
+			case(1):
+				desired_channel = TIM_CHANNEL_1;
+				break;
+			case(2):
+				desired_channel = TIM_CHANNEL_2;
+				break;
+			case(3):
+				desired_channel = TIM_CHANNEL_3;
+				break;
+			case(4):
+				desired_channel = TIM_CHANNEL_4;
+				break;
+			default:
+				printf("'PWM_Init(%d, %d, %d)' - This is the default message for channel switch, check timer_pwm_lib.h.\n", timer, channel, duty_cycle);
+		}
+
+		//Initiate the PWM and desired duty cycle
+		HAL_TIM_PWM_Start(desired_timer, desired_channel);
+		__HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
 	}
 
-	//Find desired channel
-	switch(channel)
+	if (!(timer >= 1 && timer <= 2))
+		{
+			printf("'PWM_Init(%d, %d, %d)' - Invalid timer argument. Should be either '1' or '2'.\n", timer, channel, duty_cycle);
+		}
+	if (!(channel >= 1 && channel <= 4))
 	{
-		case(1):
-			desired_channel = TIM_CHANNEL_1;
-			break;
-		case(2):
-			desired_channel = TIM_CHANNEL_2;
-			break;
-		case(3):
-			desired_channel = TIM_CHANNEL_3;
-			break;
-		case(4):
-			desired_channel = TIM_CHANNEL_4;
-			break;
-		default:
-			printf("'PWM_Init(%d, %d, %d)' - Invalid Channel argument. Should be an integer within range [1,4].\n", timer, channel, duty_cycle);
+		printf("'PWM_Init(%d, %d, %d)' - Invalid Channel argument. Should be an integer within range [1,4].\n", timer, channel, duty_cycle);
 	}
-
-	//Initiate the PWM and desired duty cycle
-    HAL_TIM_PWM_Start(desired_timer, desired_channel);
-    __HAL_TIM_SET_COMPARE(desired_timer, desired_channel, ticks_on_per_cycle);
+	if (!(duty_cycle >= 0 && duty_cycle <= 100))
+	{
+		printf("'PWM_Init(.duty_cycle = %d)' - Invalid Duty Cycle argument. Should be within range [0,100].\n", duty_cycle);
+	}
 }
 
 /**
@@ -457,17 +477,9 @@ static void PWM_Init(uint8_t timer, uint8_t channel, uint8_t duty_cycle)
 uint16_t Calculate_Ticks_On_Per_Cycle(uint8_t duty_cycle)
 {
 	uint16_t ticks_on_per_cycle;
-	//CHECK TO MAKE SURE DUTY CYCLE IS WITHIN [0,100]
-	if (duty_cycle>=0 && duty_cycle <=100)
-	{
-		ticks_on_per_cycle = (duty_cycle*COUNTER_PERIOD)/100;
-	}
 
-	else
-	{
-		ticks_on_per_cycle = 0; //Default value
-		printf("'PWM_Init(.duty_cycle = %d)' - Invalid Duty Cycle argument. Should be within range [0,100].\n", duty_cycle);
-	}
+	ticks_on_per_cycle = (duty_cycle*COUNTER_PERIOD)/100;
+
 	return ticks_on_per_cycle;
 }
 
