@@ -1,0 +1,8 @@
+main.c:85:5:main	24	static
+main.c:134:6:sendData	40	dynamic
+main.c:149:6:getData	8	static
+main.c:159:6:SystemClock_Config	232	static
+main.c:207:13:MX_UART4_Init	8	static
+main.c:242:13:MX_USART2_UART_Init	24	static
+main.c:282:13:MX_GPIO_Init	56	static
+main.c:390:6:Error_Handler	4	static
