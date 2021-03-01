@@ -8,34 +8,11 @@
 #ifndef INC_TIMER_PWM_LIB_H_
 #define INC_TIMER_PWM_LIB_H_
 
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-/* Includes ------------------------------------------------------------------*/
-//#include "main.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 
 /* Private variables ---------------------------------------------------------*/
-
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 
@@ -56,57 +33,13 @@ static void Timer_Stop(uint8_t timer);
 #define Timer_Init(...) Var_Timer_Init((Timer_Init_args){__VA_ARGS__});
 
 /* Private user code ---------------------------------------------------------*/
-
-/*ISR on Timer overflow function*/
-
-
-
-// ISR on timer overflow
+// Used for ISR on timer overflow function
 uint16_t timer_1_repetition_counter = 0;
 uint16_t timer_2_repetition_counter = 0;
 
 //Values below are calculated in the Calculate_Timer_Period_Multiplier
 uint16_t TIMER_1_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_1_PERIOD_MULTIPLIER) = period for timer 1 ISR
 uint16_t TIMER_2_PERIOD_MULTIPLIER; //(Timer period) x (TIMER_2_PERIOD_MULTIPLIER) = period for timer 2 ISR
-/*
- * Copy this code into your code!!
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) //ISR triggered by timer overflow
-{
-
-
-    if (htim == &htim1 && timer_1_repetition_counter == TIMER_1_PERIOD_MULTIPLIER-1)
-    {
-       //ISR for Timer 1
-       //User code here
-
-       HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
-
-       //User code ends
-	   timer_1_repetition_counter = 0;
-    }
-    else if(htim == &htim1)
-    {
-    	timer_1_repetition_counter++;
-    }
-
-    if(htim == &htim2 && timer_2_repetition_counter == TIMER_2_PERIOD_MULTIPLIER-1)
-    {
-        //ISR for Timer 2
-       //User code here
-
-       HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
-
-       //User code ends
-	   timer_2_repetition_counter = 0;
-    }
-    else if(htim == &htim2)
-    {
-    	timer_2_repetition_counter++;
-    }
-
-}
-*/
-
 
 //Setting up the default variables
 typedef struct
@@ -119,10 +52,7 @@ typedef struct
 	uint8_t channel_3;
 	uint8_t channel_4;
 	uint16_t ISR_period;
-}
-
-Timer_Init_args;
-
+} Timer_Init_args;
 
 /**
   * @brief set up default values for Timer_Init function
@@ -141,21 +71,6 @@ static void Var_Timer_Init(Timer_Init_args in)
 	uint16_t ISR_period_out = in.ISR_period ? in.ISR_period :in.period;
 	Timer_Init_Base(timer_out,period_out,do_trigger_ISR_out,channel_1_out,channel_2_out,channel_3_out,channel_4_out,ISR_period_out);
 }
-
-/**
-  * @brief printf to SWV ITM Data Console
-  * @param file, ptr, len
-  * @retval len
-  */
-//int _write(int file, char *ptr, int len) //printf to SWV ITM
-//{
-//	int i = 0;
-//	for(i = 0 ; i<len ; i++)
-//	{
-//		ITM_SendChar((*ptr++));
-//	}
-//	return len;
-//}
 
 /**
   * @brief TIM1 Initialization Function
@@ -206,7 +121,6 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-
   sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE;
   sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE;
   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
@@ -242,7 +156,6 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
   }
 
   HAL_TIM_MspPostInit(&htim1);
-
 }
 
 /**
@@ -252,7 +165,6 @@ static void MX_TIM1_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
   */
 static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_2, uint8_t channel_3, uint8_t channel_4)
 {
-
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
   TIM_OC_InitTypeDef sConfigOC = {0};
@@ -305,10 +217,8 @@ static void MX_TIM2_Init(uint32_t prescaler, uint8_t channel_1, uint8_t channel_
 	  HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_4);
   }
 
-
   HAL_TIM_MspPostInit(&htim2);
 }
-
 
 /**
   * @brief Initialize timer n on channel m for s milli seconds with ISR
@@ -382,7 +292,6 @@ uint32_t Calculate_Prescaler(uint16_t period)
 	return prescaler;
 }
 
-
 /**
   * @brief Calculate the value stored in TIMER_1_PERIOD_MULTIPLIER for the ISR
   * @param timer number, period and ISR_period
@@ -400,7 +309,6 @@ static void Calculate_Timer_Period_Multiplier(uint8_t timer,uint16_t period, uin
 			TIMER_2_PERIOD_MULTIPLIER = ISR_period/period;
 			break;
 	}
-
 }
 
 /**
@@ -570,26 +478,5 @@ static void Timer_Stop(uint8_t timer)
 		HAL_TIM_Base_DeInit(desired_timer);
 	}
 }
-
-
-#ifdef  USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
-}
-#endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
 
 #endif /* INC_TIMER_PWM_LIB_H_ */
