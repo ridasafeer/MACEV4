@@ -19,7 +19,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include <string.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -42,8 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 
-UART_HandleTypeDef huart4;
-UART_HandleTypeDef huart2;
+USART_HandleTypeDef husart2;
 
 /* USER CODE BEGIN PV */
 
@@ -52,36 +50,24 @@ UART_HandleTypeDef huart2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_UART_Init(int n, int t, int p);
-static void MX_UART4_Init(void);
-void sendData(uint8_t data[]);
+static void MX_USART2_Init(int n, int t, int p);
 void getData(void);
-//int _write(int file, char *ptr, int len);
+void sendData(uint8_t* data);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//int _write(int file, char *ptr, int len) //printf to SWV ITM
-//{​
-//    int i = 0;
-//    for(i = 0 ; i<len ; i++)
-//    {​
-//        ITM_SendChar((*ptr++));
-//    }​
-//    return len;
-//}
+uint8_t dataloc[5] = "~";
+uint8_t i = 0;
+char datasen[1] = "~";
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
-
-uint8_t dataloc[22] = "";
-uint8_t i = 0;
-
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -106,8 +92,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init(8,115200,0);
-  MX_UART4_Init();
+  MX_USART2_Init(8,115200,0);
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -119,37 +104,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
 	  uint8_t testdata[11] = "TEST TEST\n~";
-//	  sendData(&testdata[0]);
 	  HAL_Delay(500);
 	  getData();
 
 
   }
   /* USER CODE END 3 */
-}
-char datasen[1] = "";
-
-void sendData(uint8_t* data){
-	HAL_UART_Transmit(&huart2,"sendData", sizeof("sendData"), 500);
-	uint8_t i = 0;
-	uint8_t size = 0;
-	uint8_t v[1] = {"~"};
-	while (data[size] != v[0]){size++;}
-	uint8_t datasend [size];
-	while (data[i] != v[0]){
-		datasend[i] = data[i];
-		i++;}
-
-	HAL_UART_Transmit(&huart2,datasend, sizeof(datasend), 500);
-
-}
-
-void getData(void){
-	HAL_UART_Transmit(&huart2,"getData", sizeof("getData"), 500);
-	HAL_UART_Receive(&huart2, dataloc, sizeof(dataloc), 3000);
-	sendData(&dataloc[0]);
 }
 
 /**
@@ -190,9 +153,8 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_UART4;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2;
   PeriphClkInitStruct.Usart2ClockSelection = RCC_USART2CLKSOURCE_PCLK1;
-  PeriphClkInitStruct.Uart4ClockSelection = RCC_UART4CLKSOURCE_PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -200,71 +162,33 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief UART4 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_UART4_Init(void)
-{
-
-  /* USER CODE BEGIN UART4_Init 0 */
-
-  /* USER CODE END UART4_Init 0 */
-
-  /* USER CODE BEGIN UART4_Init 1 */
-
-  /* USER CODE END UART4_Init 1 */
-  huart4.Instance = UART4;
-  huart4.Init.BaudRate = 115200;
-  huart4.Init.WordLength = UART_WORDLENGTH_8B;
-  huart4.Init.StopBits = UART_STOPBITS_1;
-  huart4.Init.Parity = UART_PARITY_NONE;
-  huart4.Init.Mode = UART_MODE_TX_RX;
-  huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart4.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart4.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart4.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN UART4_Init 2 */
-
-  /* USER CODE END UART4_Init 2 */
-
-}
-
-/**
   * @brief USART2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(int n, int t, int p)
+static void MX_USART2_Init(int n, int t, int p)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-	  if(n == 7){huart2.Init.WordLength = UART_WORDLENGTH_7B;} // these there if-else statments are to
-	  else if (n == 8){huart2.Init.WordLength = UART_WORDLENGTH_8B;}//used to select the desired word length
-	  else{huart2.Init.WordLength = UART_WORDLENGTH_9B;}
-	  huart2.Init.BaudRate = t; // this statment sets the baud rate
-	  if(p == 0){huart2.Init.Parity = UART_PARITY_NONE;} // these 3 statments set the parity
-	  else if(p == 1){huart2.Init.Parity = UART_PARITY_ODD;}
-	  else{huart2.Init.Parity = UART_PARITY_EVEN;}
+	  if(n == 7){husart2.Init.WordLength = USART_WORDLENGTH_7B;} // these there if-else statments are to
+	  else if (n == 8){husart2.Init.WordLength = USART_WORDLENGTH_8B;}//used to select the desired word length
+	  else{husart2.Init.WordLength = USART_WORDLENGTH_9B;}
+	  husart2.Init.BaudRate = t; // this statment sets the baud rate
+	  if(p == 0){husart2.Init.Parity = USART_PARITY_NONE;} // these 3 statments set the parity
+	  else if(p == 1){husart2.Init.Parity = USART_PARITY_ODD;}
+	  else{husart2.Init.Parity = USART_PARITY_EVEN;}
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
 
   /* USER CODE END USART2_Init 1 */
-  huart2.Instance = USART2;
-
-  huart2.Init.StopBits = UART_STOPBITS_1;
-
-  huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart2) != HAL_OK)
+  husart2.Instance = USART2;
+  husart2.Init.Parity = USART_PARITY_NONE;
+  husart2.Init.Mode = USART_MODE_TX_RX;
+  husart2.Init.CLKPolarity = USART_POLARITY_LOW;
+  husart2.Init.CLKPhase = USART_PHASE_1EDGE;
+  husart2.Init.CLKLastBit = USART_LASTBIT_DISABLE;
+  if (HAL_USART_Init(&husart2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -381,6 +305,28 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+void sendData(uint8_t* data){// this function sends data, the data must have the "~" at the end of it
+	HAL_USART_Transmit(&husart2,"sendData", sizeof("sendData"), 500);
+	///// this block finds where "~" is and increases the size variable.
+	uint8_t i = 0;
+	uint8_t size = 0;
+	uint8_t v[1] = {"~"};
+	while (data[size] != v[0] && size<= 100){size++;} // this while increases the size and if the "~" is not found it stops at 100
+	/////
+	uint8_t datasend [size];
+	while (data[i] != v[0]){// this while recopies the the data array into the datasend array without the "~"
+		datasend[i] = data[i];
+		i++;}
+
+	HAL_USART_Transmit(&husart2,datasend, sizeof(datasend), 500); // trasmits datasend
+
+}
+
+void getData(void){
+	 HAL_USART_Transmit(&husart2,"getData", sizeof("getData"), 500);
+	HAL_USART_Receive(&husart2, dataloc, sizeof(dataloc), HAL_MAX_DELAY); // this line waits until HAL_MAX_DELAY until the data gets sent
+	sendData(&dataloc[0]);
+}
 /* USER CODE END 4 */
 
 /**

@@ -1,35 +1,35 @@
-17:50:04 **** Incremental Build of configuration Debug for project Uart_driver ****
+00:06:48 **** Incremental Build of configuration Debug for project Uart_driver ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m7 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F767xx -DDEBUG -c -I../Core/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc -I../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:123:12: warning: unused variable 'testdata' [-Wunused-variable]
+../Core/Src/main.c:110:12: warning: unused variable 'testdata' [-Wunused-variable]
     uint8_t testdata[11] = "TEST TEST\n~";
             ^~~~~~~~
-../Core/Src/main.c:117:11: warning: unused variable 'i' [-Wunused-variable]
+../Core/Src/main.c:103:11: warning: unused variable 'i' [-Wunused-variable]
    uint8_t i = 0;
            ^
 ../Core/Src/main.c: In function 'sendData':
-../Core/Src/main.c:135:28: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  HAL_UART_Transmit(&huart2,"sendData", sizeof("sendData"), 500);
-                            ^~~~~~~~~~
-In file included from ../Core/Inc/stm32f7xx_hal_conf.h:410:0,
+../Core/Src/main.c:312:30: warning: pointer targets in passing argument 2 of 'HAL_USART_Transmit' differ in signedness [-Wpointer-sign]
+  HAL_USART_Transmit(&husart2,"sendData", sizeof("sendData"), 500);
+                              ^~~~~~~~~~
+In file included from ../Core/Inc/stm32f7xx_hal_conf.h:414:0,
                  from ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:30,
                  from ../Core/Inc/main.h:31,
                  from ../Core/Src/main.c:21:
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:1434:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
- HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
-                   ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_usart.h:815:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_USART_Transmit(USART_HandleTypeDef *husart, uint8_t *pTxData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~~
 ../Core/Src/main.c: In function 'getData':
-../Core/Src/main.c:150:28: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
-  HAL_UART_Transmit(&huart2,"getData", sizeof("getData"), 500);
-                            ^~~~~~~~~
-In file included from ../Core/Inc/stm32f7xx_hal_conf.h:410:0,
+../Core/Src/main.c:327:31: warning: pointer targets in passing argument 2 of 'HAL_USART_Transmit' differ in signedness [-Wpointer-sign]
+   HAL_USART_Transmit(&husart2,"getData", sizeof("getData"), 500);
+                               ^~~~~~~~~
+In file included from ../Core/Inc/stm32f7xx_hal_conf.h:414:0,
                  from ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:30,
                  from ../Core/Inc/main.h:31,
                  from ../Core/Src/main.c:21:
-../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:1434:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
- HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
-                   ^~~~~~~~~~~~~~~~~
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_usart.h:815:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_USART_Transmit(USART_HandleTypeDef *husart, uint8_t *pTxData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~~~
 arm-none-eabi-gcc -o "Uart_driver.elf" @"objects.list"   -mcpu=cortex-m7 -T"C:\Users\Sawoud\Desktop\MACFE\Uart_driver\Uart_driver\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Uart_driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Uart_driver.elf
  
@@ -37,7 +37,7 @@ arm-none-eabi-objdump -h -S  Uart_driver.elf  > "Uart_driver.list"
 arm-none-eabi-objcopy  -O binary  Uart_driver.elf  "Uart_driver.bin"
 arm-none-eabi-size   Uart_driver.elf 
    text	   data	    bss	    dec	    hex	filename
-  13568	     20	   1852	  15440	   3c50	Uart_driver.elf
+  11360	     28	   1652	  13040	   32f0	Uart_driver.elf
 Finished building: default.size.stdout
  
 Finished building: Uart_driver.bin
@@ -45,5 +45,5 @@ Finished building: Uart_driver.bin
 Finished building: Uart_driver.list
  
 
-17:50:09 Build Finished. 0 errors, 4 warnings. (took 4s.867ms)
+00:06:49 Build Finished. 0 errors, 4 warnings. (took 1s.235ms)
 
