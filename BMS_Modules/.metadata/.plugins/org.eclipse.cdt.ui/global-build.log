@@ -1,0 +1,7 @@
+13:35:19 **** Incremental Build of configuration Debug for project BMS ****
+make -j12 all 
+arm-none-eabi-size   BMS.elf 
+   text	   data	    bss	    dec	    hex	filename
+   5100	     24	   1576	   6700	   1a2c	BMS.elf
+Finished building: default.size.stdout
+ 
