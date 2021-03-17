@@ -101,17 +101,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   uint8_t i = 0;
 
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-	  uint8_t testdata[11] = "TEST TEST\n~";
-	  HAL_Delay(500);
-	  getData();
-
-
-  }
+  // while (1)
+  // {
+  //   /* USER CODE END WHILE */
+  //
+  //   /* USER CODE BEGIN 3 */
+  //
+  //
+  //
+  // }
   /* USER CODE END 3 */
 }
 
@@ -325,7 +323,6 @@ void sendData(uint8_t* data){// this function sends data, the data must have the
 void getData(void){
 	 HAL_USART_Transmit(&husart2,"getData", sizeof("getData"), 500);
 	HAL_USART_Receive(&husart2, dataloc, sizeof(dataloc), HAL_MAX_DELAY); // this line waits until HAL_MAX_DELAY until the data gets sent
-	sendData(&dataloc[0]);
 }
 /* USER CODE END 4 */
 
