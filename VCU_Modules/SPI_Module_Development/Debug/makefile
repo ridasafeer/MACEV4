@@ -54,8 +54,8 @@ all: main-build
 main-build: SPI_Module_Development.elf secondary-outputs
 
 # Tool invocations
-SPI_Module_Development.elf: $(OBJS) $(USER_OBJS) C:\Users\alec\OneDrive\ -\ McMaster\ University\STM32\ Development\VCU\ -\ Formula\SPI_Module_Development\STM32F767ZITX_FLASH.ld
-	arm-none-eabi-gcc -o "SPI_Module_Development.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\alec\OneDrive - McMaster University\STM32 Development\VCU - Formula\SPI_Module_Development\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SPI_Module_Development.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+SPI_Module_Development.elf: $(OBJS) $(USER_OBJS) C:\Users\doria\STM32CubeIDE\spi\VCU_Modules\SPI_Module_Development\STM32F767ZITX_FLASH.ld
+	arm-none-eabi-gcc -o "SPI_Module_Development.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\doria\STM32CubeIDE\spi\VCU_Modules\SPI_Module_Development\STM32F767ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SPI_Module_Development.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
