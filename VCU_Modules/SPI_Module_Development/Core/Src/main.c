@@ -88,6 +88,8 @@ static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx
 static void SPI_Accel_Init();
 static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len);
 static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst);
+static void SPI_Accel_Deinit();
+static void SPI_Deinit(SPI_HandleTypeDef *hspi);
 
 
 /* USER CODE END PFP */
@@ -167,6 +169,8 @@ int main(void)
 		spi_buf[2] = 0;
 		//spi_buf[3] = 0;
 		//spi_buf[4] = 0;
+
+		//SPI_Deinit(&hspi4);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -426,9 +430,15 @@ static void SPI_Accel_Init()
 {
 	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16/ 1000 Kilobits per second)
 	//Carries 8 bits of data and initialized on mode 3
+	//Makes the first bit the most significant bit
 
 	SPI_Init(4,3,8,1000,1);
 
+}
+
+static void SPI_Accel_Deinit()
+{
+	SPI_Deinit(&hspi4);
 }
 
 static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len)
@@ -670,6 +680,11 @@ static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_RESET);
 	HAL_SPI_TransmitReceive(hspi, (uint8_t *)Tx_buf, (uint8_t *)Rx_buf, buf_len, 100);
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_SET);
+}
+
+static void SPI_Deinit(SPI_HandleTypeDef *hspi)
+{
+	HAL_SPI_DeInit(hspi);
 }
 
 /* USER CODE END 4 */

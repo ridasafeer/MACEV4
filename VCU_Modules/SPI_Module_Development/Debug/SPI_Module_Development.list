@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 0000002e  00000000  00000000  0002000c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000679c  00000000  00000000  0002003a  2**0
+ 12 .debug_info   000067d4  00000000  00000000  0002003a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00001137  00000000  00000000  000267d6  2**0
+ 13 .debug_abbrev 00001137  00000000  00000000  0002680e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000660  00000000  00000000  00027910  2**3
+ 14 .debug_aranges 00000670  00000000  00000000  00027948  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 000005c8  00000000  00000000  00027f70  2**3
+ 15 .debug_ranges 000005d8  00000000  00000000  00027fb8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  000256fa  00000000  00000000  00028538  2**0
+ 16 .debug_macro  000256fa  00000000  00000000  00028590  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00005512  00000000  00000000  0004dc32  2**0
+ 17 .debug_line   00005536  00000000  00000000  0004dc8a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000e95e7  00000000  00000000  00053144  2**0
+ 18 .debug_str    000e9603  00000000  00000000  000531c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  0013c72b  2**0
+ 19 .comment      0000007b  00000000  00000000  0013c7c3  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000191c  00000000  00000000  0013c7a8  2**2
+ 20 .debug_frame  0000195c  00000000  00000000  0013c840  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -986,9 +986,10 @@ static void SPI_Accel_Init()
  8000908:	af02      	add	r7, sp, #8
 	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16/ 1000 Kilobits per second)
 	//Carries 8 bits of data and initialized on mode 3
+	//Makes the first bit the most significant bit
 
-	SPI_Init(4,3,8,1000,0);
- 800090a:	2300      	movs	r3, #0
+	SPI_Init(4,3,8,1000,1);
+ 800090a:	2301      	movs	r3, #1
  800090c:	9300      	str	r3, [sp, #0]
  800090e:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
  8000912:	2208      	movs	r2, #8
@@ -1003,6 +1004,9 @@ static void SPI_Accel_Init()
 	...
 
 08000924 <SPI_Accel_Transmit_Receive>:
+{
+	SPI_Deinit(&hspi4);
+}
 
 static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len)
 {
