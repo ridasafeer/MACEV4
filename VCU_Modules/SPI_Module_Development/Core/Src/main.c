@@ -77,7 +77,7 @@ static void MX_SPI5_Init(void);
 /* USER CODE BEGIN PFP */
 //static void SPI_Select(SPI_HandleTypeDef* hspi, uint8_t desired_SPI);
 
-static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec);
+static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec, uint8_t MSBFirst);
 static SPI_HandleTypeDef* SPI_Select(uint8_t desired_SPI);
 static void SPI_Mode_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_mode);
 static void SPI_Calculate_Baudrate_Prescaler(SPI_HandleTypeDef *hspi, uint32_t KBits_per_sec);
@@ -87,6 +87,7 @@ static void SPI_Transmit(SPI_HandleTypeDef *hspi, char *Tx_buf, uint8_t buf_len,
 static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin);
 static void SPI_Accel_Init();
 static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len);
+static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst);
 
 
 /* USER CODE END PFP */
@@ -128,8 +129,8 @@ int main(void)
   //MX_SPI4_Init();
   //MX_SPI5_Init();
   /* USER CODE BEGIN 2 */
-  //SPI_Init(4, 2, 8, 125);
-  //SPI_Init(5, 2, 8, 125);
+  //SPI_Init(4, 2, 8, 125, 1);
+  //SPI_Init(5, 2, 8, 125, 1);
   SPI_Accel_Init();
 
   HAL_GPIO_WritePin(SPI4_SS_GPIO_Port, SPI4_SS_Pin, GPIO_PIN_SET);
@@ -152,7 +153,7 @@ int main(void)
 		//SPI_Transmit(&hspi4, &spi_buf, buf_len);
 		//SPI_Transmit_Receive(&hspi5, &spi_buf, &Rx_buf, buf_len);
 
-		//SPI_Test_Transmit(&hspi4, spi_buf, buf_len, SPI5_SS_GPIO_Port, SPI5_SS_Pin);
+		//SPI_Transmit(&hspi4, spi_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
 
 
 		SPI_Accel_Transmit_Receive(&spi_buf, &Rx_buf, 4);
@@ -426,7 +427,7 @@ static void SPI_Accel_Init()
 	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16/ 1000 Kilobits per second)
 	//Carries 8 bits of data and initialized on mode 3
 
-	SPI_Init(4,2,8,1000);
+	SPI_Init(4,3,8,1000,1);
 
 }
 
@@ -435,7 +436,7 @@ static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_l
 	SPI_Transmit_Receive(&hspi4, Tx_buf, Rx_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
 }
 
-static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec)
+static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec, uint8_t MSBFirst)
 {
 	//selects appropriate SPI line, sets the pointer hspi to the address of corresponding SPI line e.g. &hspi1
 	SPI_HandleTypeDef *hspi = SPI_Select(desired_SPI);
@@ -449,6 +450,8 @@ static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize
 	SPI_Mode_Select(hspi, SPI_mode);
 	//Sets correct datasize (in number of bits)
 	SPI_Datasize_Select(hspi, SPI_datasize);
+	//Selects if the MSB goes first or last
+	SPI_MSB_Select(hspi, MSBFirst);
 
 	if (HAL_SPI_Init(hspi) != HAL_OK)
 	    {
@@ -563,7 +566,7 @@ static void SPI_Default_Configs(SPI_HandleTypeDef *hspi)
 	hspi->Init.Direction = SPI_DIRECTION_2LINES;
 	hspi->Init.NSS = SPI_NSS_SOFT;
 	//hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16; //Function now made to simplify the process
-	hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
+	hspi->Init.FirstBit = SPI_FIRSTBIT_MSB; // Find a function to change this
 	hspi->Init.TIMode = SPI_TIMODE_DISABLE;
 	hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
 	hspi->Init.CRCPolynomial = 7;
@@ -634,6 +637,23 @@ static void SPI_Mode_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_mode)
 	default:
 		//handle error
 		break;
+	}
+}
+
+static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst)
+{
+	switch(MSBFirst)
+	{
+	case(0):
+		hspi->Init.FirstBit = SPI_FIRSTBIT_LSB;
+		break;
+	case(1):
+		hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
+		break;
+	default:
+		//error handling
+		break;
+
 	}
 }
 
