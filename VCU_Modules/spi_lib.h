@@ -59,10 +59,9 @@ static void SPI_Accel_Deinit()
 	SPI_Deinit(&hspi4);
 }
 
-
 static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len)
 {
-	SPI_Transmit_Receive(&hspi4, Tx_buf, Rx_buf, buf_len, GPIO_PIN_4, GPIOE);
+	SPI_Transmit_Receive(&hspi4, Tx_buf, Rx_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
 }
 
 static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec, uint8_t MSBFirst)
