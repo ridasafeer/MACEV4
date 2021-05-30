@@ -8,26 +8,13 @@
 #ifndef INC_SPI_LIB_H_
 #define INC_SPI_LIB_H_
 
+//Pre-definied SPI handles, used for easy initialization
 SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 SPI_HandleTypeDef hspi3;
 SPI_HandleTypeDef hspi4;
 SPI_HandleTypeDef hspi5;
 SPI_HandleTypeDef hspi6;
-
-GPIO_TypeDef* SPI1_Port;
-GPIO_TypeDef* SPI2_Port;
-GPIO_TypeDef* SPI3_Port;
-GPIO_TypeDef* SPI4_Port;
-GPIO_TypeDef* SPI5_Port;
-GPIO_TypeDef* SPI6_Port;
-
-uint16_t SPI1_Pin;
-uint16_t SPI2_Pin;
-uint16_t SPI3_Pin;
-uint16_t SPI4_Pin;
-uint16_t SPI5_Pin;
-uint16_t SPI6_Pin;
 
 static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec, uint8_t MSBFirst);
 static SPI_HandleTypeDef* SPI_Select(uint8_t desired_SPI);
@@ -38,32 +25,55 @@ static void SPI_Datasize_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_datasize);
 static void SPI_Transmit(SPI_HandleTypeDef *hspi, char *Tx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin);
 static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin);
 static void SPI_Accel_Init();
-static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len);
+static void SPI_Accel_Receive(char *Rx_buf, uint8_t buf_len);
 static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst);
 static void SPI_Accel_Deinit();
 static void SPI_Deinit(SPI_HandleTypeDef *hspi);
 static void SPI_Receive(SPI_HandleTypeDef *hspi, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin);
 
+
+/**
+  * @brief SPI Accelerometer Initialization Function
+  * @param None
+  * @retval None
+  */
 static void SPI_Accel_Init()
 {
-	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16/ 1000 Kilobits per second)
+	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16 to attain speeds of 1000 Kilobits per second)
 	//Carries 8 bits of data and initialized on mode 3
 	//Makes the first bit the most significant bit
 
 	SPI_Init(4,3,8,1000,1);
 
+	//Pull the Slave Select Line High
+	HAL_GPIO_WritePin(SPI4_SS_GPIO_Port, SPI4_SS_Pin, SET);
 }
 
+/**
+  * @brief SPI Accelerometer Uninitialization Function
+  * @param None
+  * @retval None
+  */
 static void SPI_Accel_Deinit()
 {
 	SPI_Deinit(&hspi4);
 }
 
-static void SPI_Accel_Transmit_Receive(char *Tx_buf, char *Rx_buf, uint8_t buf_len)
+/**
+  * @brief SPI Accelerometer Receive Function
+  * @param Receive buffer, length of buffer
+  * @retval None (Directly updates receive buffer through pointer)
+  */
+static void SPI_Accel_Receive(char *Rx_buf, uint8_t buf_len)
 {
-	SPI_Transmit_Receive(&hspi4, Tx_buf, Rx_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
+	SPI_Receive(&hspi4, Rx_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
 }
 
+/**
+  * @brief Base Layer SPI Initialization Function
+  * @param Desired SPI Number, SPI Mode, Data size limit, communication speed in kilobits/sec, Placement of Most significant bit
+  * @retval None
+  */
 static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize, uint32_t KBits_per_sec, uint8_t MSBFirst)
 {
 	//selects appropriate SPI line, sets the pointer hspi to the address of corresponding SPI line e.g. &hspi1
@@ -87,6 +97,11 @@ static void SPI_Init(uint8_t desired_SPI, uint8_t SPI_mode, uint8_t SPI_datasize
 	    }
 }
 
+/**
+  * @brief Base Layer SPI Datasize Select Function
+  * @param SPI Driver, Desired data size limit
+  * @retval None
+  */
 static void SPI_Datasize_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_datasize)
 {
 	uint32_t datasize_arr[13] = {SPI_DATASIZE_4BIT, SPI_DATASIZE_5BIT, SPI_DATASIZE_6BIT, SPI_DATASIZE_7BIT, SPI_DATASIZE_8BIT, SPI_DATASIZE_9BIT, SPI_DATASIZE_10BIT, SPI_DATASIZE_11BIT, SPI_DATASIZE_12BIT, SPI_DATASIZE_13BIT, SPI_DATASIZE_15BIT, SPI_DATASIZE_16BIT};
@@ -97,8 +112,16 @@ static void SPI_Datasize_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_datasize)
 	hspi->Init.DataSize = datasize_arr[datasize_index];
 }
 
+/**
+  * @brief Base Layer SPI Communication Speed Select Function
+  * @param SPI Driver, Desired communication speed limit
+  * @retval None
+  */
 static void SPI_Calculate_Baudrate_Prescaler(SPI_HandleTypeDef *hspi, uint32_t KBits_per_sec)
 {
+	//Takes clock speed and divides by the desired bits/second you want to send to obtain appropriate prescaler
+	//Eg. Clock frequency is 16 MHz and you want to send 2000 KBits per second, your prescaler would be 16MHz/(2000*10^3) = 8
+	//Max speed is attained when prescaler is = 2 therefore you can only communicate up to 8 Mega bits per second
 	uint32_t quotient = HAL_RCC_GetSysClockFreq()/(KBits_per_sec*1000);
 
 	if (quotient <=2)
@@ -147,6 +170,11 @@ static void SPI_Calculate_Baudrate_Prescaler(SPI_HandleTypeDef *hspi, uint32_t K
 	}
 }
 
+/**
+  * @brief Base Layer SPI Default Settings Function - Sets Default Configurations for All SPI Drivers
+  * @param SPI Driver
+  * @retval None
+  */
 static void SPI_Default_Configs(SPI_HandleTypeDef *hspi)
 {
 	hspi->Init.Mode = SPI_MODE_MASTER;
@@ -159,11 +187,14 @@ static void SPI_Default_Configs(SPI_HandleTypeDef *hspi)
 	hspi->Init.CRCPolynomial = 7;
 	hspi->Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
 // FLAG ALERT ERROR - not an actual error, but now that i have your attention below should be disabled, just makes it easier to view on logic analyzer
-	hspi->Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+	hspi->Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
 }
 
-//below was removed as a param, kept there to remind myself
-//SPI_HandleTypeDef* hspi
+/**
+  * @brief Base Layer SPI Select Function
+  * @param Desired SPI Driver
+  * @retval SPI Driver Corresponding to the Input
+  */
 static SPI_HandleTypeDef* SPI_Select(uint8_t desired_SPI)
 {
 	SPI_HandleTypeDef *hspi;
@@ -200,6 +231,11 @@ static SPI_HandleTypeDef* SPI_Select(uint8_t desired_SPI)
 	return hspi;
 }
 
+/**
+  * @brief Base Layer SPI Mode Select Function
+  * @param SPI Driver, Desired Mode Number
+  * @retval None
+  */
 static void SPI_Mode_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_mode)
 {
 	switch(SPI_mode)
@@ -226,6 +262,11 @@ static void SPI_Mode_Select(SPI_HandleTypeDef *hspi, uint8_t SPI_mode)
 	}
 }
 
+/**
+  * @brief Base Layer SPI Most Significant Bit First or Last Select Function
+  * @param SPI Driver, Most Significant Bit First or Last (0 for last or 1 for first)
+  * @retval None
+  */
 static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst)
 {
 	switch(MSBFirst)
@@ -243,6 +284,11 @@ static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst)
 	}
 }
 
+/**
+  * @brief Base Layer SPI Receive Function
+  * @param SPI Driver, Receive Buffer, Buffer Length, Desired Slave Select Port, Desired Slave Select Pin
+  * @retval None
+  */
 static void SPI_Receive(SPI_HandleTypeDef *hspi, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin)
 {
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_RESET);
@@ -250,6 +296,11 @@ static void SPI_Receive(SPI_HandleTypeDef *hspi, char *Rx_buf, uint8_t buf_len, 
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_SET);
 }
 
+/**
+  * @brief Base Layer SPI Transmit Function
+  * @param SPI Driver, Transmit Buffer, Buffer Length, Desired Slave Select Port, Desired Slave Select Pin
+  * @retval None
+  */
 static void SPI_Transmit(SPI_HandleTypeDef *hspi, char *Tx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin)
 {
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_RESET);
@@ -257,6 +308,11 @@ static void SPI_Transmit(SPI_HandleTypeDef *hspi, char *Tx_buf, uint8_t buf_len,
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_SET);
 }
 
+/**
+  * @brief Base Layer SPI Transmit and Receive Function
+  * @param SPI Driver, Transmit Buffer, Receive Buffer, Buffer Length, Desired Slave Select Port, Desired Slave Select Pin
+  * @retval None
+  */
 static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin)
 {
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_RESET);
@@ -264,6 +320,11 @@ static void SPI_Transmit_Receive(SPI_HandleTypeDef *hspi, char *Tx_buf, char *Rx
 	HAL_GPIO_WritePin(SS_Port, SS_Pin, GPIO_PIN_SET);
 }
 
+/**
+  * @brief Base Layer SPI Uninitialization Function
+  * @param SPI Driver
+  * @retval None
+  */
 static void SPI_Deinit(SPI_HandleTypeDef *hspi)
 {
 	HAL_SPI_DeInit(hspi);
