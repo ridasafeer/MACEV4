@@ -31,7 +31,6 @@ static void SPI_Accel_Deinit();
 static void SPI_Deinit(SPI_HandleTypeDef *hspi);
 static void SPI_Receive(SPI_HandleTypeDef *hspi, char *Rx_buf, uint8_t buf_len, GPIO_TypeDef* SS_Port, uint16_t SS_Pin);
 
-
 /**
   * @brief SPI Accelerometer Initialization Function
   * @param None
@@ -42,11 +41,10 @@ static void SPI_Accel_Init()
 	//Initialize SPI4 on appropriate pins with a clock rate of 1MHz (baudrate prescaler of 16 to attain speeds of 1000 Kilobits per second)
 	//Carries 8 bits of data and initialized on mode 3
 	//Makes the first bit the most significant bit
-
 	SPI_Init(4,3,8,1000,1);
 
 	//Pull the Slave Select Line High
-	HAL_GPIO_WritePin(SPI4_SS_GPIO_Port, SPI4_SS_Pin, SET);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4, SET);
 }
 
 /**
@@ -66,7 +64,7 @@ static void SPI_Accel_Deinit()
   */
 static void SPI_Accel_Receive(char *Rx_buf, uint8_t buf_len)
 {
-	SPI_Receive(&hspi4, Rx_buf, buf_len, SPI4_SS_GPIO_Port, SPI4_SS_Pin);
+	SPI_Receive(&hspi4, Rx_buf, buf_len, GPIOE, GPIO_PIN_4);
 }
 
 /**
@@ -180,13 +178,10 @@ static void SPI_Default_Configs(SPI_HandleTypeDef *hspi)
 	hspi->Init.Mode = SPI_MODE_MASTER;
 	hspi->Init.Direction = SPI_DIRECTION_2LINES;
 	hspi->Init.NSS = SPI_NSS_SOFT;
-	//hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16; //Function now made to simplify the process
-	//hspi->Init.FirstBit = SPI_FIRSTBIT_MSB; // Find a function to change this
 	hspi->Init.TIMode = SPI_TIMODE_DISABLE;
 	hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
 	hspi->Init.CRCPolynomial = 7;
 	hspi->Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-// FLAG ALERT ERROR - not an actual error, but now that i have your attention below should be disabled, just makes it easier to view on logic analyzer
 	hspi->Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
 }
 
