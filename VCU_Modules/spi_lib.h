@@ -44,7 +44,7 @@ static void SPI_Accel_Init()
 	SPI_Init(4,3,8,1000,1);
 
 	//Pull the Slave Select Line High
-	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4, SET);
+	HAL_GPIO_WritePin(GPIOE, GPIO_PIN_4, GPIO_PIN_SET);
 }
 
 /**
@@ -275,7 +275,6 @@ static void SPI_MSB_Select(SPI_HandleTypeDef *hspi, uint8_t MSBFirst)
 	default:
 		//error handling
 		break;
-
 	}
 }
 
