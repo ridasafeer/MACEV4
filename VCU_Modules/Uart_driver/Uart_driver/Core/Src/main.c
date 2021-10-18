@@ -50,9 +50,11 @@ USART_HandleTypeDef husart2;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_USART2_Init(int n, int t, int p);
+void MX_USART2_Init(int , int t, int p);
 void getData(void);
 void sendData(uint8_t* data);
+void GPS_Init(void);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -92,24 +94,26 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_Init(8,115200,0);
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t i = 0;
 
-  // while (1)
-  // {
-  //   /* USER CODE END WHILE */
+  //uint8_t i = 0;
+
+  //MX_USART2_Init(8,115200,0);
+  //GPS_Init();
+
+  //while(1){}
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   //
-  //   /* USER CODE BEGIN 3 */
   //
   //
   //
-  // }
   /* USER CODE END 3 */
 }
 
@@ -164,24 +168,73 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
-static void MX_USART2_Init(int n, int t, int p)
+void MX_USART2_Init(int n, int t, int p)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-	  if(n == 7){husart2.Init.WordLength = USART_WORDLENGTH_7B;} // these there if-else statments are to
-	  else if (n == 8){husart2.Init.WordLength = USART_WORDLENGTH_8B;}//used to select the desired word length
-	  else{husart2.Init.WordLength = USART_WORDLENGTH_9B;}
-	  husart2.Init.BaudRate = t; // this statment sets the baud rate
-	  if(p == 0){husart2.Init.Parity = USART_PARITY_NONE;} // these 3 statments set the parity
-	  else if(p == 1){husart2.Init.Parity = USART_PARITY_ODD;}
-	  else{husart2.Init.Parity = USART_PARITY_EVEN;}
+
+	if(n < 7 || n > 9){
+		HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+		Error_Handler();
+	} else {
+		if(n == 7){husart2.Init.WordLength = USART_WORDLENGTH_7B;} // these there if-else statments are to
+	    else if (n == 8){husart2.Init.WordLength = USART_WORDLENGTH_8B;}//used to select the desired word length
+  	    else{husart2.Init.WordLength = USART_WORDLENGTH_9B;}
+	}
+
+	if(p < 0 || p > 2){
+		HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+		Error_Handler();
+
+	} else {
+		if(p == 0){husart2.Init.Parity = USART_PARITY_NONE;} // these 3 statments set the parity
+		else if(p == 1){husart2.Init.Parity = USART_PARITY_ODD;}
+		else{husart2.Init.Parity = USART_PARITY_EVEN;}
+	}
+	if(t < 19200 || t > 12500000){
+		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+		Error_Handler();
+	} else {husart2.Init.BaudRate = t;}
+
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
 
   /* USER CODE END USART2_Init 1 */
   husart2.Instance = USART2;
-  husart2.Init.Parity = USART_PARITY_NONE;
+  husart2.Init.StopBits = USART_STOPBITS_1;
+  husart2.Init.Mode = USART_MODE_TX_RX;
+  husart2.Init.CLKPolarity = USART_POLARITY_LOW;
+  husart2.Init.CLKPhase = USART_PHASE_1EDGE;
+  husart2.Init.CLKLastBit = USART_LASTBIT_DISABLE;
+  if (HAL_USART_Init(&husart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
+
+}
+
+void GPS_Init(void)
+{
+	/*
+	 * Given GPS data format 8N1
+	 */
+
+  /* USER CODE BEGIN USART2_Init 0 */
+	husart2.Init.WordLength = USART_WORDLENGTH_8B;
+	husart2.Init.BaudRate = 115200;
+	husart2.Init.Parity = USART_PARITY_NONE;
+	husart2.Init.StopBits = USART_STOPBITS_1;
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  husart2.Instance = USART2;
   husart2.Init.Mode = USART_MODE_TX_RX;
   husart2.Init.CLKPolarity = USART_POLARITY_LOW;
   husart2.Init.CLKPhase = USART_PHASE_1EDGE;
