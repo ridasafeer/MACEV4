@@ -32,9 +32,10 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-static void MX_USART2_Init(int n, int t, int p);
+void MX_USART2_Init(int n, int t, int p);
 void getData(void);
 void sendData(uint8_t* data);
+void GPS_Init(void);
 
 /* USER CODE END Includes */
 
