@@ -1,0 +1,10 @@
+Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
+Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+DashboardView.cpp:80:6:virtual void DashboardView::tearDownScreen()	0	static
+DashboardView.cpp:49:6:virtual void DashboardView::setupScreen()	80	static
+DashboardView.cpp:95:6:virtual void DashboardView::setBatteryTemp(int)	0	static
+DashboardView.cpp:141:6:virtual void DashboardView::handleTickEvent()	16	static
+DashboardView.cpp:37:1:DashboardView::DashboardView()	8	static
+DashboardView.cpp:188:1:cpp)	0	static
+DashboardView.hpp:19:13:DashboardView::~DashboardView()	8	static
+DashboardView.hpp:19:13:virtual DashboardView::~DashboardView()	8	static
