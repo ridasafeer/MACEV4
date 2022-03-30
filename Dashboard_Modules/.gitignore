@@ -1,0 +1,36 @@
+# Ignore generated TouchGFX files
+/TouchGFX/generated
+/TouchGFX/build
+/TouchGFX/simulator/msvs/.vs
+/.settings
+
+# Pulled from https://github.com/touchgfx/touchgfx-open-repository/blob/master/.gitignore
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+

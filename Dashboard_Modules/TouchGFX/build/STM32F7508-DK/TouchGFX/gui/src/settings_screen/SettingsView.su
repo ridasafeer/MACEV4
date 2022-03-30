@@ -1,0 +1,13 @@
+Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
+Screen.hpp:143:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
+Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+SettingsViewBase.hpp:24:18:virtual void SettingsViewBase::scrollList1UpdateItem(Settings_Toggle&, int16_t)	0	static
+SettingsView.cpp:13:6:virtual void SettingsView::tearDownScreen()	0	static
+DrawableList.hpp:79:7:touchgfx::DrawableListItems<Settings_Toggle, 2>::~DrawableListItems()	16	static
+DrawableList.hpp:101:21:int16_t touchgfx::DrawableListItems<TYPE, SIZE>::getNumberOfDrawables() [with TYPE = Settings_Toggle; int SIZE = 2]	0	static
+SettingsView.cpp:8:6:virtual void SettingsView::setupScreen()	0	static
+DrawableList.hpp:79:7:virtual touchgfx::DrawableListItems<Settings_Toggle, 2>::~DrawableListItems()	8	static
+DrawableList.hpp:82:23:touchgfx::Drawable* touchgfx::DrawableListItems<TYPE, SIZE>::getDrawable(int16_t) [with TYPE = Settings_Toggle; int SIZE = 2]	8	static
+SettingsView.hpp:11:13:SettingsView::~SettingsView()	8	static
+SettingsView.hpp:11:13:virtual SettingsView::~SettingsView()	8	static
+SettingsView.cpp:3:1:SettingsView::SettingsView()	8	static
