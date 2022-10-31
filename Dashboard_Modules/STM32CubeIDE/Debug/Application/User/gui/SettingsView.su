@@ -1,0 +1,13 @@
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:143:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+../../TouchGFX/generated/gui_generated/include/gui_generated/settings_screen/SettingsViewBase.hpp:23:18:virtual void SettingsViewBase::scrollList1UpdateItem(Settings_Toggle&, int16_t)	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/settings_screen/SettingsView.cpp:13:6:virtual void SettingsView::tearDownScreen()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/DrawableList.hpp:79:7:touchgfx::DrawableListItems<Settings_Toggle, 6>::~DrawableListItems()	16	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/DrawableList.hpp:101:21:int16_t touchgfx::DrawableListItems<TYPE, SIZE>::getNumberOfDrawables() [with TYPE = Settings_Toggle; int SIZE = 6]	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/settings_screen/SettingsView.cpp:8:6:virtual void SettingsView::setupScreen()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/DrawableList.hpp:79:7:virtual touchgfx::DrawableListItems<Settings_Toggle, 6>::~DrawableListItems()	8	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/DrawableList.hpp:82:23:touchgfx::Drawable* touchgfx::DrawableListItems<TYPE, SIZE>::getDrawable(int16_t) [with TYPE = Settings_Toggle; int SIZE = 6]	8	static
+../../TouchGFX/gui/include/gui/settings_screen/SettingsView.hpp:11:13:SettingsView::~SettingsView()	8	static
+../../TouchGFX/gui/include/gui/settings_screen/SettingsView.hpp:11:13:virtual SettingsView::~SettingsView()	8	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/settings_screen/SettingsView.cpp:3:1:SettingsView::SettingsView()	8	static
