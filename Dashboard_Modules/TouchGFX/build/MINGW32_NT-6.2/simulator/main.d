@@ -99,6 +99,10 @@ build/MINGW32_NT-6.2/simulator/main.o: simulator/main.cpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/ScrollBase.hpp \
  gui/include/gui/containers/Settings_Toggle.hpp \
  generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp \
+ gui/include/gui/bootscreen_screen/BootScreenView.hpp \
+ generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp \
+ gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
  generated/gui_generated/include/gui_generated/common/SimConstants.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/touch/SDL2TouchController.hpp \
  generated/simulator/include/simulator/mainBase.hpp
@@ -302,6 +306,14 @@ gui/include/gui/settings_screen/SettingsPresenter.hpp:
 gui/include/gui/containers/Settings_Toggle.hpp:
 
 generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp:
+
+gui/include/gui/bootscreen_screen/BootScreenView.hpp:
+
+generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp:
+
+gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
 
 generated/gui_generated/include/gui_generated/common/SimConstants.hpp:
 

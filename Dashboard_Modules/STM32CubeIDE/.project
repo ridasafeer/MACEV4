@@ -315,6 +315,16 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TouchGFX/target/generated/TouchGFXGeneratedHAL.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/BootScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/bootscreen_screen/BootScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/BootScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/bootscreen_screen/BootScreenView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/FrontendApplication.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/common/FrontendApplication.cpp</locationURI>
@@ -425,6 +435,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/UnmappedDataFont.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/BootScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/bootscreen_screen/BootScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/FrontendApplicationBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp</locationURI>
@@ -453,6 +468,31 @@
 			<name>Application/User/generated/image_Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_90_degrees.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_90_degrees.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_BootScreen_01.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_BootScreen_01.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_BootScreen_02.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_BootScreen_02.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_BootScreen_03.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_BootScreen_03.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_BootScreen_04.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_BootScreen_04.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_BootScreen_05.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_BootScreen_05.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_horiz.cpp</name>

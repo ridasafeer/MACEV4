@@ -16,12 +16,13 @@ public:
     virtual ~FrontendApplicationBase() { }
 
     // Dashboard
-    void gotoDashboardScreenNoTransition();
-
     void gotoDashboardScreenSlideTransitionSouth();
 
     // Settings
     void gotoSettingsScreenCoverTransitionNorth();
+
+    // BootScreen
+    void gotoBootScreenScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -29,12 +30,13 @@ protected:
     Model& model;
 
     // Dashboard
-    void gotoDashboardScreenNoTransitionImpl();
-
     void gotoDashboardScreenSlideTransitionSouthImpl();
 
     // Settings
     void gotoSettingsScreenCoverTransitionNorthImpl();
+
+    // BootScreen
+    void gotoBootScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

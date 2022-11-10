@@ -77,6 +77,10 @@ build/MINGW32_NT-6.2/generated/gui_generated/src/common/FrontendApplicationBase.
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/ScrollBase.hpp \
  gui/include/gui/containers/Settings_Toggle.hpp \
  generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp \
+ gui/include/gui/bootscreen_screen/BootScreenView.hpp \
+ generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp \
+ gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
  generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -236,6 +240,14 @@ gui/include/gui/settings_screen/SettingsPresenter.hpp:
 gui/include/gui/containers/Settings_Toggle.hpp:
 
 generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp:
+
+gui/include/gui/bootscreen_screen/BootScreenView.hpp:
+
+generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp:
+
+gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
 
 generated/texts/include/texts/TextKeysAndLanguages.hpp:
 

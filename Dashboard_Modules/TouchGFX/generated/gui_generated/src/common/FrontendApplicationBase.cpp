@@ -13,6 +13,8 @@
 #include <gui/dashboard_screen/DashboardPresenter.hpp>
 #include <gui/settings_screen/SettingsView.hpp>
 #include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/bootscreen_screen/BootScreenView.hpp>
+#include <gui/bootscreen_screen/BootScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -32,17 +34,6 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
  */
 
 // Dashboard
-
-void FrontendApplicationBase::gotoDashboardScreenNoTransition()
-{
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDashboardScreenNoTransitionImpl);
-    pendingScreenTransitionCallback = &transitionCallback;
-}
-
-void FrontendApplicationBase::gotoDashboardScreenNoTransitionImpl()
-{
-    touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
-}
 
 void FrontendApplicationBase::gotoDashboardScreenSlideTransitionSouth()
 {
@@ -66,4 +57,17 @@ void FrontendApplicationBase::gotoSettingsScreenCoverTransitionNorth()
 void FrontendApplicationBase::gotoSettingsScreenCoverTransitionNorthImpl()
 {
     touchgfx::makeTransition<SettingsView, SettingsPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// BootScreen
+
+void FrontendApplicationBase::gotoBootScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoBootScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoBootScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<BootScreenView, BootScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

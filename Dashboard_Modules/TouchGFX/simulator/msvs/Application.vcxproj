@@ -29,6 +29,9 @@
     <ClCompile Include="..\..\gui\src\containers\Settings_Toggle.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\Settings_ToggleBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ProgressWrapper.cpp"/>
+    <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\bootscreen_screen\BootScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -185,6 +188,9 @@
     <ClInclude Include="..\..\gui\include\gui\containers\Settings_Toggle.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\Settings_ToggleBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ProgressWrapper.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\bootscreen_screen\BootScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
