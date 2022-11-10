@@ -196,6 +196,18 @@
     <Filter Include="Source Files\generated\gui_generated\containers">
       <UniqueIdentifier>895B8B26-AE1D-D84F-DA8F-C2842E6F1ED3</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\welcomescreen_screen">
+      <UniqueIdentifier>48675B5D-251E-772B-5D9F-E4DA81A361C6</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\welcomescreen_screen">
+      <UniqueIdentifier>D2A404F1-994F-9FCF-9AB1-D21A18FC3B23</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\welcomescreen_screen">
+      <UniqueIdentifier>777DA4E6-AC98-636E-2C46-DD14DBA02B9F</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\welcomescreen_screen">
+      <UniqueIdentifier>16E43073-6846-6825-BDF9-4A40E2779622</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -251,6 +263,15 @@
     </ClCompile>
     <ClCompile Include="..\..\gui\src\containers\ProgressWrapper.cpp">
       <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\welcomescreen_screen\WelcomeScreenPresenter.cpp">
+      <Filter>Source Files\gui\welcomescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\welcomescreen_screen\WelcomeScreenView.cpp">
+      <Filter>Source Files\gui\welcomescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\welcomescreen_screen\WelcomeScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\welcomescreen_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -711,6 +732,15 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\containers\ProgressWrapper.hpp">
       <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\welcomescreen_screen\WelcomeScreenPresenter.hpp">
+      <Filter>Header Files\gui\welcomescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\welcomescreen_screen\WelcomeScreenView.hpp">
+      <Filter>Header Files\gui\welcomescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\welcomescreen_screen\WelcomeScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\welcomescreen_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

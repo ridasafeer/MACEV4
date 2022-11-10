@@ -19,6 +19,8 @@
 #include <gui/dashboard_screen/DashboardPresenter.hpp>
 #include <gui/settings_screen/SettingsView.hpp>
 #include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/welcomescreen_screen/WelcomeScreenView.hpp>
+#include <gui/welcomescreen_screen/WelcomeScreenPresenter.hpp>
 
 
 /**
@@ -43,7 +45,8 @@ public:
      */
     typedef touchgfx::meta::TypeList< DashboardView,
             touchgfx::meta::TypeList< SettingsView,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< WelcomeScreenView,
+            touchgfx::meta::Nil > >
             > GeneratedViewTypes;
 
     /**
@@ -57,7 +60,8 @@ public:
      */
     typedef touchgfx::meta::TypeList< DashboardPresenter,
             touchgfx::meta::TypeList< SettingsPresenter,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< WelcomeScreenPresenter,
+            touchgfx::meta::Nil > >
             > GeneratedPresenterTypes;
 
     /**

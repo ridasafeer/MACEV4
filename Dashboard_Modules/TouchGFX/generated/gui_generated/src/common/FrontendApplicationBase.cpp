@@ -13,6 +13,8 @@
 #include <gui/dashboard_screen/DashboardPresenter.hpp>
 #include <gui/settings_screen/SettingsView.hpp>
 #include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/welcomescreen_screen/WelcomeScreenView.hpp>
+#include <gui/welcomescreen_screen/WelcomeScreenPresenter.hpp>
 
 using namespace touchgfx;
 

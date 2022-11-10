@@ -355,6 +355,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/settings_screen/SettingsView.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/WelcomeScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/welcomescreen_screen/WelcomeScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/WelcomeScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/welcomescreen_screen/WelcomeScreenView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/ApplicationFontProvider.cpp</locationURI>
@@ -443,6 +453,11 @@
 			<name>Application/User/generated/SettingsViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/settings_screen/SettingsViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/WelcomeScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/welcomescreen_screen/WelcomeScreenViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/BitmapDatabase.cpp</name>

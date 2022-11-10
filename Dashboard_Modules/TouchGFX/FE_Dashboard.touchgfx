@@ -398,7 +398,7 @@
                 "ProgressRangeMax": 100,
                 "ProgressRangeSteps": 0,
                 "ProgressRangeStepsMin": 0,
-                "ProgressInitialValue": 60,
+                "ProgressInitialValue": 23,
                 "Name": "frontRightMotorTempProgress",
                 "X": 40,
                 "Y": 0,
@@ -703,9 +703,26 @@
               "ScreenTransitionDirection": "South",
               "ActionComponent": "Dashboard"
             }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerScreenEntered"
+            },
+            "Action": {
+              "Type": "ActionExecuteCode"
+            }
           }
         ],
         "Name": "Settings",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [],
+        "Interactions": [],
+        "Name": "WelcomeScreen",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       }

@@ -29,6 +29,9 @@
     <ClCompile Include="..\..\gui\src\containers\Settings_Toggle.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\Settings_ToggleBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ProgressWrapper.cpp"/>
+    <ClCompile Include="..\..\gui\src\welcomescreen_screen\WelcomeScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\welcomescreen_screen\WelcomeScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\welcomescreen_screen\WelcomeScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -185,6 +188,9 @@
     <ClInclude Include="..\..\gui\include\gui\containers\Settings_Toggle.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\Settings_ToggleBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ProgressWrapper.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\welcomescreen_screen\WelcomeScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\welcomescreen_screen\WelcomeScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\welcomescreen_screen\WelcomeScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

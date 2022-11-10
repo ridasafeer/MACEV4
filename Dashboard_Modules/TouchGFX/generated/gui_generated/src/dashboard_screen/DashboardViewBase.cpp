@@ -106,7 +106,7 @@ DashboardViewBase::DashboardViewBase() :
     frontRightMotorTempProgress.setDirection(touchgfx::AbstractDirectionProgress::UP);
     frontRightMotorTempProgress.setBackground(touchgfx::Bitmap(BITMAP_SMALLER_VERTICAL_PROGRESS_BAR_ID));
     frontRightMotorTempProgress.setColor(touchgfx::Color::getColorFromRGB(0, 151, 255));
-    frontRightMotorTempProgress.setValue(60);
+    frontRightMotorTempProgress.setValue(23);
     motorTemperatures.add(frontRightMotorTempProgress);
 
     frontLeftMotorTempProgress.setXY(9, 0);
