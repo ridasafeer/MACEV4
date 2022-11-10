@@ -24,13 +24,13 @@ public:
     // BootScreen
     void gotoBootScreenScreenNoTransition();
 
-    // DrivingScreen
-    void gotoDrivingScreenScreenSlideTransitionSouth();
-
     // HomeScreen
     void gotoHomeScreenScreenWipeTransitionSouth();
 
     void gotoHomeScreenScreenSlideTransitionNorth();
+
+    // DrivingScreen
+    void gotoDrivingScreenScreenSlideTransitionSouth();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -46,13 +46,13 @@ protected:
     // BootScreen
     void gotoBootScreenScreenNoTransitionImpl();
 
-    // DrivingScreen
-    void gotoDrivingScreenScreenSlideTransitionSouthImpl();
-
     // HomeScreen
     void gotoHomeScreenScreenWipeTransitionSouthImpl();
 
     void gotoHomeScreenScreenSlideTransitionNorthImpl();
+
+    // DrivingScreen
+    void gotoDrivingScreenScreenSlideTransitionSouthImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

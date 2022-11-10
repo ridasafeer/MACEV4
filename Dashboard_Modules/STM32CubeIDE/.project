@@ -495,6 +495,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_battery.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_battery.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_90_degrees.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_90_degrees.cpp</locationURI>

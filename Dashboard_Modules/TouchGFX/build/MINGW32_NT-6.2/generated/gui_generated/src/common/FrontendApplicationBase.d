@@ -82,6 +82,11 @@ build/MINGW32_NT-6.2/generated/gui_generated/src/common/FrontendApplicationBase.
  generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp \
  gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
+ gui/include/gui/homescreen_screen/HomeScreenView.hpp \
+ generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp \
+ gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp \
+ ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp \
  generated/gui_generated/include/gui_generated/drivingscreen_screen/DrivingScreenViewBase.hpp \
  gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp \
@@ -100,11 +105,6 @@ build/MINGW32_NT-6.2/generated/gui_generated/src/common/FrontendApplicationBase.
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainter.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp \
- gui/include/gui/homescreen_screen/HomeScreenView.hpp \
- generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp \
- gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp \
- ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
  generated/texts/include/texts/TextKeysAndLanguages.hpp \
  ../Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  ../Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -275,6 +275,16 @@ gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
 
+gui/include/gui/homescreen_screen/HomeScreenView.hpp:
+
+generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp:
+
+gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp:
+
+../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
+
 gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp:
 
 generated/gui_generated/include/gui_generated/drivingscreen_screen/DrivingScreenViewBase.hpp:
@@ -310,16 +320,6 @@ gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp:
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp:
 
 ../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp:
-
-gui/include/gui/homescreen_screen/HomeScreenView.hpp:
-
-generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp:
-
-gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp:
-
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp:
-
-../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
 
 generated/texts/include/texts/TextKeysAndLanguages.hpp:
 

@@ -22,10 +22,10 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/bootscreen_screen/BootScreenView.hpp>
 #include <gui/bootscreen_screen/BootScreenPresenter.hpp>
-#include <gui/drivingscreen_screen/DrivingScreenView.hpp>
-#include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
 #include <gui/homescreen_screen/HomeScreenView.hpp>
 #include <gui/homescreen_screen/HomeScreenPresenter.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenView.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
 
 
 /**
@@ -51,8 +51,8 @@ public:
     typedef touchgfx::meta::TypeList< DashboardView,
             touchgfx::meta::TypeList< SettingsView,
             touchgfx::meta::TypeList< BootScreenView,
-            touchgfx::meta::TypeList< DrivingScreenView,
             touchgfx::meta::TypeList< HomeScreenView,
+            touchgfx::meta::TypeList< DrivingScreenView,
             touchgfx::meta::Nil > > > >
             > GeneratedViewTypes;
 
@@ -68,8 +68,8 @@ public:
     typedef touchgfx::meta::TypeList< DashboardPresenter,
             touchgfx::meta::TypeList< SettingsPresenter,
             touchgfx::meta::TypeList< BootScreenPresenter,
-            touchgfx::meta::TypeList< DrivingScreenPresenter,
             touchgfx::meta::TypeList< HomeScreenPresenter,
+            touchgfx::meta::TypeList< DrivingScreenPresenter,
             touchgfx::meta::Nil > > > >
             > GeneratedPresenterTypes;
 

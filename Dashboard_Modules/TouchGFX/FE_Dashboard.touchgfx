@@ -781,6 +781,75 @@
       {
         "Components": [
           {
+            "Type": "ScalableImage",
+            "Filename": "rida-home-temp.png",
+            "Alpha": 255,
+            "ScalingAlgorithm": "Nearest-neighbor",
+            "Name": "scalableImage1",
+            "X": -15,
+            "Y": -12,
+            "Width": 508,
+            "Height": 297,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_small.png",
+            "Alpha": 0,
+            "TextId": "SingleUseId17",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Name": "buttonGoDriving",
+            "X": 323,
+            "Y": 206,
+            "Width": 170,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "StartDriving",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonGoDriving"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "South",
+              "ActionComponent": "DrivingScreen"
+            }
+          }
+        ],
+        "Name": "HomeScreen",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
             "Type": "Box",
             "Color": {
               "Red": 14,
@@ -857,11 +926,10 @@
             },
             "Direction": "Right",
             "Alpha": 255,
-            "Style": "Style3",
             "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
             "IndicatorPositionX": 2,
             "IndicatorPositionY": 2,
-            "IndicatorPositionWidth": 180,
+            "IndicatorPositionWidth": 80,
             "IndicatorPositionHeight": 16,
             "ProgressRangeMin": 0,
             "ProgressRangeMax": 100,
@@ -950,6 +1018,23 @@
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
+          },
+          {
+            "Type": "ScalableImage",
+            "Filename": "battery.png",
+            "Alpha": 255,
+            "ScalingAlgorithm": "Nearest-neighbor",
+            "Name": "scalableImage1",
+            "X": 184,
+            "Y": 234,
+            "Width": 28,
+            "Height": 17,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
           }
         ],
         "Interactions": [
@@ -969,75 +1054,6 @@
           }
         ],
         "Name": "DrivingScreen",
-        "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
-      },
-      {
-        "Components": [
-          {
-            "Type": "ScalableImage",
-            "Filename": "rida-home-temp.png",
-            "Alpha": 255,
-            "ScalingAlgorithm": "Nearest-neighbor",
-            "Name": "scalableImage1",
-            "X": -15,
-            "Y": -12,
-            "Width": 508,
-            "Height": 297,
-            "Visible": true,
-            "LockPosition": false,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "Type": "ButtonWithLabel",
-            "Pressed": "__designer\\Dark_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Dark_Buttons_Round_Edge_small.png",
-            "Alpha": 0,
-            "TextId": "SingleUseId17",
-            "ReleasedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "PressedColor": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "TextRotation": "0",
-            "Name": "buttonGoDriving",
-            "X": 323,
-            "Y": 206,
-            "Width": 170,
-            "Height": 60,
-            "Visible": true,
-            "LockPosition": false,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          }
-        ],
-        "Interactions": [
-          {
-            "InteractionName": "StartDriving",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "buttonGoDriving"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionSlide",
-              "ScreenTransitionDirection": "South",
-              "ActionComponent": "DrivingScreen"
-            }
-          }
-        ],
-        "Name": "HomeScreen",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       }
