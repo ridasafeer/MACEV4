@@ -718,36 +718,6 @@
         "Name": "Settings",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
-      },
-      {
-        "Components": [
-          {
-            "Type": "AnimatedImage",
-            "FileNameFirst": "fe1.png",
-            "FileNameLast": "fe2.png",
-            "UpdateTicksInterval": 100,
-            "Alpha": 255,
-            "StartOnLoad": true,
-            "ReverseEnabled": false,
-            "LoopEnabled": true,
-            "AnimationEndedCallback": false,
-            "Name": "animatedImage1",
-            "X": -1291,
-            "Y": -42,
-            "Width": 1920,
-            "Height": 1080,
-            "Visible": true,
-            "LockPosition": false,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          }
-        ],
-        "Interactions": [],
-        "Name": "WelcomeScreen",
-        "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
       }
     ],
     "CustomContainerDefinitions": [
@@ -865,7 +835,7 @@
       "Height": 272
     },
     "SelectedColorDepth": 16,
-    "StartupScreenName": "WelcomeScreen",
+    "StartupScreenName": "Settings",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",
