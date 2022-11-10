@@ -470,6 +470,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_90_degrees.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_fe1.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_fe1.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_fe2.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_fe2.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_horiz.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_horiz.cpp</locationURI>
