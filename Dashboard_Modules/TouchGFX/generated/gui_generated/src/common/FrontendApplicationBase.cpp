@@ -46,6 +46,17 @@ void FrontendApplicationBase::gotoDashboardScreenSlideTransitionSouthImpl()
     touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
+void FrontendApplicationBase::gotoDashboardScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDashboardScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDashboardScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 // Settings
 
 void FrontendApplicationBase::gotoSettingsScreenCoverTransitionNorth()

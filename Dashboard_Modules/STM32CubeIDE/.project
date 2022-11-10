@@ -530,6 +530,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_Icons_Back_arrow_32.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_Blue_Icons_Power_32.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_Icons_Power_32.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_Blue_Icons_Settings_32.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_Icons_Settings_32.cpp</locationURI>
@@ -543,6 +548,16 @@
 			<name>Application/User/generated/image_Blue_Togglebars_Toggle_round_large_button_ON.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Blue_Togglebars_Toggle_round_large_button_ON.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Buttons_Round_Edge_icon_button.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Buttons_Round_Edge_icon_button.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Buttons_Round_Edge_icon_button_pressed.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Buttons_Round_Edge_icon_button_pressed.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/LanguageGb.cpp</name>

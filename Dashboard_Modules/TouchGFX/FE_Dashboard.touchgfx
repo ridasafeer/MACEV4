@@ -732,9 +732,47 @@
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
+          },
+          {
+            "Type": "ButtonWithIcon",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_icon_button_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_icon_button.png",
+            "Alpha": 255,
+            "IconPressed": "__designer\\Blue_Icons_Power_32.png",
+            "IconReleased": "__designer\\Blue_Icons_Power_32.png",
+            "IconX": 16,
+            "IconY": 16,
+            "IconHeight": 29,
+            "IconWidth": 29,
+            "IconStyle": "Icon47",
+            "Name": "buttonWithIcon1",
+            "X": 413,
+            "Y": 204,
+            "Width": 60,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
           }
         ],
-        "Interactions": [],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithIcon1"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Dashboard"
+            }
+          }
+        ],
         "Name": "BootScreen",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
@@ -835,6 +873,18 @@
       {
         "TextEntryId": "SingleUseId11",
         "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId12",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId14",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId15",
+        "IsResource": true
       }
     ],
     "Name": "STM32F7508-DK",
