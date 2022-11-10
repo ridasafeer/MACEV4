@@ -11,6 +11,7 @@
 #include <touchgfx/transitions/NoTransition.hpp>
 #include <touchgfx/transitions/CoverTransition.hpp>
 #include <touchgfx/transitions/SlideTransition.hpp>
+#include <touchgfx/transitions/WipeTransition.hpp>
 
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
@@ -21,6 +22,10 @@
 #include <gui/settings_screen/SettingsPresenter.hpp>
 #include <gui/bootscreen_screen/BootScreenView.hpp>
 #include <gui/bootscreen_screen/BootScreenPresenter.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenView.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
+#include <gui/homescreen_screen/HomeScreenView.hpp>
+#include <gui/homescreen_screen/HomeScreenPresenter.hpp>
 
 
 /**
@@ -46,7 +51,9 @@ public:
     typedef touchgfx::meta::TypeList< DashboardView,
             touchgfx::meta::TypeList< SettingsView,
             touchgfx::meta::TypeList< BootScreenView,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< DrivingScreenView,
+            touchgfx::meta::TypeList< HomeScreenView,
+            touchgfx::meta::Nil > > > >
             > GeneratedViewTypes;
 
     /**
@@ -61,7 +68,9 @@ public:
     typedef touchgfx::meta::TypeList< DashboardPresenter,
             touchgfx::meta::TypeList< SettingsPresenter,
             touchgfx::meta::TypeList< BootScreenPresenter,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< DrivingScreenPresenter,
+            touchgfx::meta::TypeList< HomeScreenPresenter,
+            touchgfx::meta::Nil > > > >
             > GeneratedPresenterTypes;
 
     /**
@@ -76,7 +85,9 @@ public:
     typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
             touchgfx::meta::TypeList< CoverTransition<NORTH>,
             touchgfx::meta::TypeList< SlideTransition<SOUTH>,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< WipeTransition<SOUTH>,
+            touchgfx::meta::TypeList< SlideTransition<NORTH>,
+            touchgfx::meta::Nil > > > >
             > GeneratedTransitionTypes;
 
     /**

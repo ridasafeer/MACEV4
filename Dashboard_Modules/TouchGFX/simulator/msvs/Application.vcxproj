@@ -32,6 +32,12 @@
     <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\bootscreen_screen\BootScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\drivingscreen_screen\DrivingScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\drivingscreen_screen\DrivingScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\drivingscreen_screen\DrivingScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\homescreen_screen\HomeScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -191,6 +197,12 @@
     <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\bootscreen_screen\BootScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\drivingscreen_screen\DrivingScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\drivingscreen_screen\DrivingScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\drivingscreen_screen\DrivingScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\homescreen_screen\HomeScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
