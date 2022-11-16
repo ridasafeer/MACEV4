@@ -1,0 +1,5 @@
+../../TouchGFX/gui/include/gui/containers/ProgressWrapper.hpp:50:11:ProgressWrapper::~ProgressWrapper()	0	static
+../../TouchGFX/gui/include/gui/containers/ProgressWrapper.hpp:50:11:virtual ProgressWrapper::~ProgressWrapper()	8	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/containers/ProgressWrapper.cpp:20:1:ProgressWrapper::ProgressWrapper(touchgfx::BoxProgress*, progessConfig)	24	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/containers/ProgressWrapper.cpp:48:6:void ProgressWrapper::setValue(int)	24	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/containers/ProgressWrapper.cpp:80:5:int ProgressWrapper::computeColour(int, int, int)	8	static

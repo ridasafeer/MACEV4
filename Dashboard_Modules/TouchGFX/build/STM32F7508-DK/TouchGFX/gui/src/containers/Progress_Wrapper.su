@@ -1,5 +1,0 @@
-Progress_Wrapper.hpp:25:11:Progress_Wrapper::~Progress_Wrapper()	0	static
-Progress_Wrapper.hpp:25:11:virtual Progress_Wrapper::~Progress_Wrapper()	8	static
-Progress_Wrapper.cpp:3:1:Progress_Wrapper::Progress_Wrapper(touchgfx::BoxProgress, progess_config)	16	static
-Progress_Wrapper.cpp:11:6:void Progress_Wrapper::handleTickEvent()	0	static
-Progress_Wrapper.cpp:15:5:int Progress_Wrapper::set_active()	8	static

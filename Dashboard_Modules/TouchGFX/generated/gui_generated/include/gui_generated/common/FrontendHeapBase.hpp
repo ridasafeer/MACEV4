@@ -86,8 +86,9 @@ public:
             touchgfx::meta::TypeList< CoverTransition<NORTH>,
             touchgfx::meta::TypeList< SlideTransition<SOUTH>,
             touchgfx::meta::TypeList< WipeTransition<SOUTH>,
+            touchgfx::meta::TypeList< CoverTransition<EAST>,
             touchgfx::meta::TypeList< SlideTransition<NORTH>,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::Nil > > > > >
             > GeneratedTransitionTypes;
 
     /**

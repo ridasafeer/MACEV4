@@ -45,6 +45,7 @@ TouchGFX/build/STM32F7508-DK/TouchGFX/generated/gui_generated/src/common/Fronten
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Widget.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/WipeTransition.hpp \
  TouchGFX/gui/include/gui/common/FrontendApplication.hpp \
  TouchGFX/gui/include/gui/dashboard_screen/DashboardView.hpp \
  TouchGFX/generated/gui_generated/include/gui_generated/dashboard_screen/DashboardViewBase.hpp \
@@ -78,8 +79,33 @@ TouchGFX/build/STM32F7508-DK/TouchGFX/generated/gui_generated/src/common/Fronten
  Middlewares/ST/touchgfx/framework/include/touchgfx/containers/scrollers/ScrollBase.hpp \
  TouchGFX/gui/include/gui/containers/Settings_Toggle.hpp \
  TouchGFX/generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp \
- TouchGFX/gui/include/gui/containers/Vertical_Progress_Bar.hpp \
- TouchGFX/generated/gui_generated/include/gui_generated/containers/Vertical_Progress_BarBase.hpp \
+ TouchGFX/gui/include/gui/bootscreen_screen/BootScreenView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp \
+ TouchGFX/gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp \
+ TouchGFX/gui/include/gui/homescreen_screen/HomeScreenView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp \
+ TouchGFX/gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp \
+ TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp \
+ TouchGFX/generated/gui_generated/include/gui_generated/drivingscreen_screen/DrivingScreenViewBase.hpp \
+ TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Gauge.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Circle.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CWRUtil.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/Utils.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Rasterizer.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Outline.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Cell.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Renderer.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/RenderingBuffer.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Scanline.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainter.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp \
+ Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp \
  TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp \
  Middlewares/ST/touchgfx/framework/include/platform/driver/lcd/LCD16bpp.hpp \
  Middlewares/ST/touchgfx/framework/include/touchgfx/lcd/LCD16DebugPrinter.hpp
@@ -174,6 +200,8 @@ Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/SlideTransition.h
 
 Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/SnapshotWidget.hpp:
 
+Middlewares/ST/touchgfx/framework/include/touchgfx/transitions/WipeTransition.hpp:
+
 TouchGFX/gui/include/gui/common/FrontendApplication.hpp:
 
 TouchGFX/gui/include/gui/dashboard_screen/DashboardView.hpp:
@@ -240,9 +268,59 @@ TouchGFX/gui/include/gui/containers/Settings_Toggle.hpp:
 
 TouchGFX/generated/gui_generated/include/gui_generated/containers/Settings_ToggleBase.hpp:
 
-TouchGFX/gui/include/gui/containers/Vertical_Progress_Bar.hpp:
+TouchGFX/gui/include/gui/bootscreen_screen/BootScreenView.hpp:
 
-TouchGFX/generated/gui_generated/include/gui_generated/containers/Vertical_Progress_BarBase.hpp:
+TouchGFX/generated/gui_generated/include/gui_generated/bootscreen_screen/BootScreenViewBase.hpp:
+
+TouchGFX/gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/AnimatedImage.hpp:
+
+TouchGFX/gui/include/gui/homescreen_screen/HomeScreenView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/homescreen_screen/HomeScreenViewBase.hpp:
+
+TouchGFX/gui/include/gui/homescreen_screen/HomeScreenPresenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ScalableImage.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/ButtonWithLabel.hpp:
+
+TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp:
+
+TouchGFX/generated/gui_generated/include/gui_generated/drivingscreen_screen/DrivingScreenViewBase.hpp:
+
+TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/Gauge.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/TextureMapper.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Circle.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CWRUtil.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/Utils.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Rasterizer.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Outline.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Cell.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Renderer.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/RenderingBuffer.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/Scanline.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainter.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp:
+
+Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp:
 
 TouchGFX/generated/texts/include/texts/TextKeysAndLanguages.hpp:
 

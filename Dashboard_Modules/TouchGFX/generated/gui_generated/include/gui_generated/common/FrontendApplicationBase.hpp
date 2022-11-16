@@ -18,6 +18,8 @@ public:
     // Dashboard
     void gotoDashboardScreenSlideTransitionSouth();
 
+    void gotoDashboardScreenCoverTransitionEast();
+
     // Settings
     void gotoSettingsScreenCoverTransitionNorth();
 
@@ -39,6 +41,8 @@ protected:
 
     // Dashboard
     void gotoDashboardScreenSlideTransitionSouthImpl();
+
+    void gotoDashboardScreenCoverTransitionEastImpl();
 
     // Settings
     void gotoSettingsScreenCoverTransitionNorthImpl();

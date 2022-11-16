@@ -38,7 +38,7 @@ TouchGFX/build/STM32F7508-DK/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discove
  Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  Drivers/BSP/STM32F7508-Discovery/../Components/ft5336/ft5336.h \
- c:\touchgfxprojects\fe_dashboard\drivers\bsp\components\common\ts.h
+ Drivers/BSP/STM32F7508-Discovery/../Components/ft5336/../Common/ts.h
 
 Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.h:
 
@@ -120,4 +120,4 @@ Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
 Drivers/BSP/STM32F7508-Discovery/../Components/ft5336/ft5336.h:
 
-c:\touchgfxprojects\fe_dashboard\drivers\bsp\components\common\ts.h:
+Drivers/BSP/STM32F7508-Discovery/../Components/ft5336/../Common/ts.h:

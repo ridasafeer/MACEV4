@@ -18,12 +18,12 @@ Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	stati
 Widget.hpp:47:18:virtual void touchgfx::Widget::getLastChild(int16_t, int16_t, touchgfx::Drawable**)	0	static
 AbstractButton.hpp:86:18:virtual bool touchgfx::AbstractButton::getPressedState() const	0	static
 View.hpp:36:7:touchgfx::View<SettingsPresenter>::~View()	0	static
-SettingsViewBase.hpp:24:18:virtual void SettingsViewBase::scrollList1UpdateItem(Settings_Toggle&, int16_t)	0	static
-DrawableList.hpp:101:21:int16_t touchgfx::DrawableListItems<TYPE, SIZE>::getNumberOfDrawables() [with TYPE = Settings_Toggle; int SIZE = 2]	0	static
+SettingsViewBase.hpp:23:18:virtual void SettingsViewBase::scrollList1UpdateItem(Settings_Toggle&, int16_t)	0	static
+DrawableList.hpp:101:21:int16_t touchgfx::DrawableListItems<TYPE, SIZE>::getNumberOfDrawables() [with TYPE = Settings_Toggle; int SIZE = 6]	0	static
 Callback.hpp:218:8:touchgfx::Callback<SettingsViewBase, touchgfx::DrawableListItemsInterface*, short int, short int>::~Callback()	0	static
 Callback.hpp:357:8:touchgfx::Callback<SettingsViewBase, const touchgfx::AbstractButton&>::~Callback()	0	static
-DrawableList.hpp:79:7:touchgfx::DrawableListItems<Settings_Toggle, 2>::~DrawableListItems()	16	static
-SettingsViewBase.hpp:21:13:SettingsViewBase::~SettingsViewBase()	8	static
+DrawableList.hpp:79:7:touchgfx::DrawableListItems<Settings_Toggle, 6>::~DrawableListItems()	16	static
+SettingsViewBase.hpp:20:13:SettingsViewBase::~SettingsViewBase()	8	static
 ClickListener.hpp:33:7:touchgfx::ClickListener<touchgfx::ButtonWithIcon>::~ClickListener()	0	static
 Callback.hpp:250:18:void touchgfx::Callback<dest_type, T1, T2, T3>::execute(T1, T2, T3) [with dest_type = SettingsViewBase; T1 = touchgfx::DrawableListItemsInterface*; T2 = short int; T3 = short int]	16	static
 Callback.hpp:260:18:bool touchgfx::Callback<dest_type, T1, T2, T3>::isValid() const [with dest_type = SettingsViewBase; T1 = touchgfx::DrawableListItemsInterface*; T2 = short int; T3 = short int]	0	static
@@ -31,17 +31,16 @@ Callback.hpp:386:18:void touchgfx::Callback<dest_type, T1, void, void>::execute(
 Callback.hpp:396:18:bool touchgfx::Callback<dest_type, T1, void, void>::isValid() const [with dest_type = SettingsViewBase; T1 = const touchgfx::AbstractButton&]	0	static
 View.hpp:36:7:virtual touchgfx::View<SettingsPresenter>::~View()	8	static
 ClickListener.hpp:33:7:virtual touchgfx::ClickListener<touchgfx::ButtonWithIcon>::~ClickListener()	8	static
-DrawableList.hpp:79:7:virtual touchgfx::DrawableListItems<Settings_Toggle, 2>::~DrawableListItems()	8	static
+DrawableList.hpp:79:7:virtual touchgfx::DrawableListItems<Settings_Toggle, 6>::~DrawableListItems()	8	static
 Callback.hpp:357:8:virtual touchgfx::Callback<SettingsViewBase, const touchgfx::AbstractButton&>::~Callback()	8	static
 Callback.hpp:218:8:virtual touchgfx::Callback<SettingsViewBase, touchgfx::DrawableListItemsInterface*, short int, short int>::~Callback()	8	static
-SettingsViewBase.hpp:21:13:virtual SettingsViewBase::~SettingsViewBase()	8	static
-DrawableList.hpp:82:23:touchgfx::Drawable* touchgfx::DrawableListItems<TYPE, SIZE>::getDrawable(int16_t) [with TYPE = Settings_Toggle; int SIZE = 2]	8	static
-SettingsViewBase.cpp:45:6:virtual void SettingsViewBase::setupScreen()	8	static
+SettingsViewBase.hpp:20:13:virtual SettingsViewBase::~SettingsViewBase()	8	static
+DrawableList.hpp:82:23:touchgfx::Drawable* touchgfx::DrawableListItems<TYPE, SIZE>::getDrawable(int16_t) [with TYPE = Settings_Toggle; int SIZE = 6]	8	static
+SettingsViewBase.cpp:42:6:virtual void SettingsViewBase::setupScreen()	16	static
 AbstractButton.hpp:73:18:virtual void touchgfx::AbstractButton::executeAction()	8	static
-SettingsViewBase.cpp:66:6:void SettingsViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface*, int16_t, int16_t)	16	static
+SettingsViewBase.cpp:62:6:void SettingsViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface*, int16_t, int16_t)	16	static
 ClickListener.hpp:49:18:void touchgfx::ClickListener<T>::handleClickEvent(const touchgfx::ClickEvent&) [with T = touchgfx::ButtonWithIcon]	16	static
-SettingsViewBase.cpp:55:6:void SettingsViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&)	8	static
-Drawable.hpp:297:10:void touchgfx::Drawable::setXY(int16_t, int16_t)	16	static
-Drawable.hpp:216:10:void touchgfx::Drawable::setPosition(int16_t, int16_t, int16_t, int16_t)	16	static
+SettingsViewBase.cpp:51:6:void SettingsViewBase::buttonCallbackHandler(const touchgfx::AbstractButton&)	8	static
+Drawable.hpp:216:10:void touchgfx::Drawable::setPosition(int16_t, int16_t, int16_t, int16_t)	24	static
 Box.hpp:33:5:touchgfx::Box::Box()	0	static
 SettingsViewBase.cpp:8:1:SettingsViewBase::SettingsViewBase()	72	static

@@ -1,0 +1,6 @@
+../../TouchGFX/gui/include/gui/model/ModelListener.hpp:32:18:virtual void ModelListener::batteryTempUpdated(int)	0	static
+../../TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp:28:13:DrivingScreenPresenter::~DrivingScreenPresenter()	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/drivingscreen_screen/DrivingScreenPresenter.cpp:10:6:virtual void DrivingScreenPresenter::activate()	0	static
+../../TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp:28:13:virtual DrivingScreenPresenter::~DrivingScreenPresenter()	8	static
+../../TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenPresenter.hpp:28:13:virtual void* DrivingScreenPresenter::_ZThn4_N22DrivingScreenPresenterD1Ev()	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/drivingscreen_screen/DrivingScreenPresenter.cpp:4:1:DrivingScreenPresenter::DrivingScreenPresenter(DrivingScreenView&)	8	static
