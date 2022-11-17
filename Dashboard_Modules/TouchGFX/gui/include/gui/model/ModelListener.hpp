@@ -19,6 +19,8 @@ public:
     
     virtual ~ModelListener() {}
 
+    virtual void dataRxed() {}
+
     void bind(Model* m)
     {
         model = m;

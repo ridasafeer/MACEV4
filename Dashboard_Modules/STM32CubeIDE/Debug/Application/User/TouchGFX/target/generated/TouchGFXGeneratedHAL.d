@@ -108,6 +108,10 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainter.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp \
+ ../../TouchGFX/gui/include/gui/console_screen/ConsoleView.hpp \
+ ../../TouchGFX/generated/gui_generated/include/gui_generated/console_screen/ConsoleViewBase.hpp \
+ ../../TouchGFX/gui/include/gui/console_screen/ConsolePresenter.hpp \
+ ../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/ScrollableContainer.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp \
  ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f750xx.h \
@@ -254,6 +258,10 @@ Application/User/TouchGFX/target/generated/TouchGFXGeneratedHAL.o: \
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/AbstractPainter.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/Canvas.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/widgets/canvas/CanvasWidget.hpp:
+../../TouchGFX/gui/include/gui/console_screen/ConsoleView.hpp:
+../../TouchGFX/generated/gui_generated/include/gui_generated/console_screen/ConsoleViewBase.hpp:
+../../TouchGFX/gui/include/gui/console_screen/ConsolePresenter.hpp:
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/containers/ScrollableContainer.hpp:
 ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/GPIO.hpp:
 ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:
 ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f750xx.h:

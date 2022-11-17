@@ -26,6 +26,8 @@
 #include <gui/homescreen_screen/HomeScreenPresenter.hpp>
 #include <gui/drivingscreen_screen/DrivingScreenView.hpp>
 #include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
+#include <gui/console_screen/ConsoleView.hpp>
+#include <gui/console_screen/ConsolePresenter.hpp>
 
 
 /**
@@ -53,7 +55,8 @@ public:
             touchgfx::meta::TypeList< BootScreenView,
             touchgfx::meta::TypeList< HomeScreenView,
             touchgfx::meta::TypeList< DrivingScreenView,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::TypeList< ConsoleView,
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -70,7 +73,8 @@ public:
             touchgfx::meta::TypeList< BootScreenPresenter,
             touchgfx::meta::TypeList< HomeScreenPresenter,
             touchgfx::meta::TypeList< DrivingScreenPresenter,
-            touchgfx::meta::Nil > > > >
+            touchgfx::meta::TypeList< ConsolePresenter,
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**

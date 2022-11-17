@@ -38,6 +38,9 @@
     <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\homescreen_screen\HomeScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsolePresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsoleView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\console_screen\ConsoleViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -203,6 +206,9 @@
     <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\homescreen_screen\HomeScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsolePresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsoleView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\console_screen\ConsoleViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

@@ -82,6 +82,15 @@ void TouchGFX_Task(void *argument);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+int isDataTerminal = 0;
+char dataBuffer[100];
+
+void DataCallback()
+{
+  isDataTerminal = 1;
+  strncpy(dataBuffer, "Hello World Forrest", 100);
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -167,7 +176,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    DataCallback();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

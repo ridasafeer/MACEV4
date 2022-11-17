@@ -1,6 +1,6 @@
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:63:43:const touchgfx::TypedText::TypedTextData* TypedTextDatabase::getInstance(touchgfx::LanguageId)	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:68:10:uint16_t TypedTextDatabase::getInstanceSize()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:73:24:const touchgfx::Font** TypedTextDatabase::getFonts()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:78:23:const touchgfx::Font* TypedTextDatabase::setFont(touchgfx::FontId, const touchgfx::Font*)	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:85:6:void TypedTextDatabase::resetFont(touchgfx::FontId)	8	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:100:1:cpp)	8	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:73:43:const touchgfx::TypedText::TypedTextData* TypedTextDatabase::getInstance(touchgfx::LanguageId)	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:78:10:uint16_t TypedTextDatabase::getInstanceSize()	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:83:24:const touchgfx::Font** TypedTextDatabase::getFonts()	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:88:23:const touchgfx::Font* TypedTextDatabase::setFont(touchgfx::FontId, const touchgfx::Font*)	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:95:6:void TypedTextDatabase::resetFont(touchgfx::FontId)	8	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/generated/texts/src/TypedTextDatabase.cpp:113:1:cpp)	8	static

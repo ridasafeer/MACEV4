@@ -34,6 +34,9 @@ public:
     // DrivingScreen
     void gotoDrivingScreenScreenSlideTransitionSouth();
 
+    // Console
+    void gotoConsoleScreenSlideTransitionNorth();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -57,6 +60,9 @@ protected:
 
     // DrivingScreen
     void gotoDrivingScreenScreenSlideTransitionSouthImpl();
+
+    // Console
+    void gotoConsoleScreenSlideTransitionNorthImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

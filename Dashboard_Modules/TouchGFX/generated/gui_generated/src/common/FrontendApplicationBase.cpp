@@ -19,6 +19,8 @@
 #include <gui/homescreen_screen/HomeScreenPresenter.hpp>
 #include <gui/drivingscreen_screen/DrivingScreenView.hpp>
 #include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
+#include <gui/console_screen/ConsoleView.hpp>
+#include <gui/console_screen/ConsolePresenter.hpp>
 
 using namespace touchgfx;
 
@@ -122,4 +124,17 @@ void FrontendApplicationBase::gotoDrivingScreenScreenSlideTransitionSouth()
 void FrontendApplicationBase::gotoDrivingScreenScreenSlideTransitionSouthImpl()
 {
     touchgfx::makeTransition<DrivingScreenView, DrivingScreenPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Console
+
+void FrontendApplicationBase::gotoConsoleScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoConsoleScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoConsoleScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<ConsoleView, ConsolePresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

@@ -232,6 +232,18 @@
     <Filter Include="Source Files\generated\gui_generated\drivingscreen_screen">
       <UniqueIdentifier>FEDD9441-B9C7-1C70-A20E-3F9FAD90622B</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\console_screen">
+      <UniqueIdentifier>CB047D10-EC83-345A-8AD0-B99106069DD3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\console_screen">
+      <UniqueIdentifier>9271917E-FF77-8CF8-FD4E-C164FF8FCFCA</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\console_screen">
+      <UniqueIdentifier>D25AAFD5-4499-8F4D-0270-5029857DA038</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\console_screen">
+      <UniqueIdentifier>8E33E34F-4819-9DC5-EE0B-40FE7DC9B279</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -314,6 +326,15 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\gui_generated\src\homescreen_screen\HomeScreenViewBase.cpp">
       <Filter>Source Files\generated\gui_generated\homescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsolePresenter.cpp">
+      <Filter>Source Files\gui\console_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsoleView.cpp">
+      <Filter>Source Files\gui\console_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\console_screen\ConsoleViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\console_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -801,6 +822,15 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\homescreen_screen\HomeScreenViewBase.hpp">
       <Filter>Header Files\generated\gui_generated\homescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsolePresenter.hpp">
+      <Filter>Header Files\gui\console_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsoleView.hpp">
+      <Filter>Header Files\gui\console_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\console_screen\ConsoleViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\console_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
