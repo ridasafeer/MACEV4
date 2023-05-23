@@ -22,7 +22,7 @@
 *                       DEFINES
 *********************************************************/
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 // ADC:
 #define APPS1_ADC_CHANNEL 					(10)
