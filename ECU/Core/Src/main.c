@@ -21,7 +21,17 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <pthread.h>
+#include "string.h"
 #include "globals.h"
+#include "uart.h"
+#include "printf.h"
+#include "canal.h"
+#include "adc.h"
+#include "rtscheduler.h"
+#include "canal_fc_messages.h"
+#include "InverterStartupControl.h"
+#include "rtwtypes.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,20 +58,39 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_CAN1_Init(void);
-static void MX_CAN2_Init(void);
-static void MX_CAN3_Init(void);
-static void MX_ADC1_Init(void);
 static void MX_SPI4_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
+void setControlSystemInputs(void*);
+void getControlSystemOutputs(void*);
+void transmitToAMKMotors(void*);
+
+UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart3;
+
+UART_st debug_uart = {
+	.uart_num = 3,
+	.huart = &huart3,
+	.bit_position = LSB_First,
+	.baudrate = UART_115200,
+	.mode = UART_TX_RX,
+	.datasize = UART_Datasize_8,
+};
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+RtScheduler_tasks tasks = {
+	[eTASK1_5MS] = {
+		getControlSystemOutputs,
+		transmitToAMKMotors,
+	},
+	[eTASK2_200MS] = {
+		setControlSystemInputs,
+		InverterStartupControl_step,
+	},
+};
 /* USER CODE END 0 */
 
 /**
@@ -92,14 +121,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CAN1_Init();
-  MX_CAN2_Init();
-  MX_CAN3_Init();
-  MX_ADC1_Init();
-  MX_SPI4_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+  Printf_Init(&debug_uart);
+  CanAL_Init(&pt1_can);
+  CanAL_Init(&veh_can);
+  ADC_Init(&adc1);
+  InverterStartupControl_initialize();
+
+  RtScheduler_startRunning(tasks);
 
   /* USER CODE END 2 */
 
@@ -159,169 +188,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief ADC1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ADC1_Init(void)
-{
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-  */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-  */
-  sConfig.Channel = ADC_CHANNEL_10;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  /* USER CODE END ADC1_Init 2 */
-
-}
-
-/**
-  * @brief CAN1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_CAN1_Init(void)
-{
-
-  /* USER CODE BEGIN CAN1_Init 0 */
-
-  /* USER CODE END CAN1_Init 0 */
-
-  /* USER CODE BEGIN CAN1_Init 1 */
-
-  /* USER CODE END CAN1_Init 1 */
-  hcan1.Instance = CAN1;
-  hcan1.Init.Prescaler = 2;
-  hcan1.Init.Mode = CAN_MODE_SILENT_LOOPBACK;
-  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan1.Init.TimeSeg1 = CAN_BS1_13TQ;
-  hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan1.Init.TimeTriggeredMode = DISABLE;
-  hcan1.Init.AutoBusOff = DISABLE;
-  hcan1.Init.AutoWakeUp = DISABLE;
-  hcan1.Init.AutoRetransmission = DISABLE;
-  hcan1.Init.ReceiveFifoLocked = DISABLE;
-  hcan1.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN CAN1_Init 2 */
-
-  /* USER CODE END CAN1_Init 2 */
-
-}
-
-/**
-  * @brief CAN2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_CAN2_Init(void)
-{
-
-  /* USER CODE BEGIN CAN2_Init 0 */
-
-  /* USER CODE END CAN2_Init 0 */
-
-  /* USER CODE BEGIN CAN2_Init 1 */
-
-  /* USER CODE END CAN2_Init 1 */
-  hcan2.Instance = CAN2;
-  hcan2.Init.Prescaler = 2;
-  hcan2.Init.Mode = CAN_MODE_NORMAL;
-  hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan2.Init.TimeSeg1 = CAN_BS1_13TQ;
-  hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan2.Init.TimeTriggeredMode = DISABLE;
-  hcan2.Init.AutoBusOff = DISABLE;
-  hcan2.Init.AutoWakeUp = DISABLE;
-  hcan2.Init.AutoRetransmission = DISABLE;
-  hcan2.Init.ReceiveFifoLocked = DISABLE;
-  hcan2.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN CAN2_Init 2 */
-
-  /* USER CODE END CAN2_Init 2 */
-
-}
-
-/**
-  * @brief CAN3 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_CAN3_Init(void)
-{
-
-  /* USER CODE BEGIN CAN3_Init 0 */
-
-  /* USER CODE END CAN3_Init 0 */
-
-  /* USER CODE BEGIN CAN3_Init 1 */
-
-  /* USER CODE END CAN3_Init 1 */
-  hcan3.Instance = CAN3;
-  hcan3.Init.Prescaler = 2;
-  hcan3.Init.Mode = CAN_MODE_NORMAL;
-  hcan3.Init.SyncJumpWidth = CAN_SJW_1TQ;
-  hcan3.Init.TimeSeg1 = CAN_BS1_13TQ;
-  hcan3.Init.TimeSeg2 = CAN_BS2_2TQ;
-  hcan3.Init.TimeTriggeredMode = DISABLE;
-  hcan3.Init.AutoBusOff = DISABLE;
-  hcan3.Init.AutoWakeUp = DISABLE;
-  hcan3.Init.AutoRetransmission = DISABLE;
-  hcan3.Init.ReceiveFifoLocked = DISABLE;
-  hcan3.Init.TransmitFifoPriority = DISABLE;
-  if (HAL_CAN_Init(&hcan3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN CAN3_Init 2 */
-
-  /* USER CODE END CAN3_Init 2 */
-
 }
 
 /**
@@ -400,41 +266,6 @@ static void MX_USART2_UART_Init(void)
 }
 
 /**
-  * @brief USART3 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USART3_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART3_Init 0 */
-
-  /* USER CODE END USART3_Init 0 */
-
-  /* USER CODE BEGIN USART3_Init 1 */
-
-  /* USER CODE END USART3_Init 1 */
-  huart3.Instance = USART3;
-  huart3.Init.BaudRate = 115200;
-  huart3.Init.WordLength = UART_WORDLENGTH_8B;
-  huart3.Init.StopBits = UART_STOPBITS_1;
-  huart3.Init.Parity = UART_PARITY_NONE;
-  huart3.Init.Mode = UART_MODE_TX_RX;
-  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart3.Init.OverSampling = UART_OVERSAMPLING_16;
-  huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  if (HAL_UART_Init(&huart3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN USART3_Init 2 */
-
-  /* USER CODE END USART3_Init 2 */
-
-}
-
-/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -491,6 +322,72 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+// Step functions
+void setControlSystemInputs(void *args) {
+  ADC_Scan(&adc1);
+  InverterStartupControl_U.APPS = Get_Single_Chan_Average(&adc1, APPS1_ADC_CHANNEL);
+  InverterStartupControl_U.AMK_ActualVelocity_R = AMK1_ActualValues1.AMK_ActualVelocity;         
+  InverterStartupControl_U.AMK_MagnetizingCurrent_R = AMK1_ActualValues1.AMK_MagnetizingCurrent;
+  InverterStartupControl_U.AMK_TorqueCurrent_R = AMK1_ActualValues1.AMK_TorqueCurrent;          
+  InverterStartupControl_U.AMK_bDcOn_R = AMK1_ActualValues1.AMK_bDcOn;                  
+  InverterStartupControl_U.AMK_bDerating_R = AMK1_ActualValues1.AMK_bDerating;              
+  InverterStartupControl_U.AMK_bError_R = AMK1_ActualValues1.AMK_bError;                 
+  InverterStartupControl_U.AMK_bInverterOn_R = AMK1_ActualValues1.AMK_bInverterOn;            
+  InverterStartupControl_U.AMK_bQuitDcOn_R = AMK1_ActualValues1.AMK_bQuitDcOn;              
+  InverterStartupControl_U.AMK_bQuitInverterOn_R = AMK1_ActualValues1.AMK_bQuitInverterOn;        
+  InverterStartupControl_U.AMK_bSystemReady_R = AMK1_ActualValues1.AMK_bSystemReady;           
+  InverterStartupControl_U.AMK_bWarn_R = AMK1_ActualValues1.AMK_bWarn;                  
+  InverterStartupControl_U.AMK_ErrorInfo_R = AMK1_ActualValues2.AMK_ErrorInfo;              
+  InverterStartupControl_U.AMK_TempIGBT_R = AMK1_ActualValues2.AMK_TempIGBT;               
+  InverterStartupControl_U.AMK_TempInverter_R = AMK1_ActualValues2.AMK_TempInverter;           
+  InverterStartupControl_U.AMK_TempMotor_R = AMK1_ActualValues2.AMK_TempMotor;              
+  InverterStartupControl_U.AMK_ActualVelocity_L = AMK0_ActualValues1.AMK_ActualVelocity;         
+  InverterStartupControl_U.AMK_MagnetizingCurrent_L = AMK0_ActualValues1.AMK_MagnetizingCurrent;     
+  InverterStartupControl_U.AMK_TorqueCurrent_L = AMK0_ActualValues1.AMK_TorqueCurrent;          
+  InverterStartupControl_U.AMK_bDcOn_L = AMK0_ActualValues1.AMK_bDcOn;                  
+  InverterStartupControl_U.AMK_bDerating_L = AMK0_ActualValues1.AMK_bDerating;              
+  InverterStartupControl_U.AMK_bError_L = AMK0_ActualValues1.AMK_bError;                 
+  InverterStartupControl_U.AMK_bInverterOn_L = AMK0_ActualValues1.AMK_bInverterOn;            
+  InverterStartupControl_U.AMK_bQuitDcOn_L = AMK0_ActualValues1.AMK_bQuitDcOn;              
+  InverterStartupControl_U.AMK_bQuitInverterOn_L = AMK0_ActualValues1.AMK_bQuitInverterOn;        
+  InverterStartupControl_U.AMK_bSystemReady_L = AMK0_ActualValues1.AMK_bSystemReady;           
+  InverterStartupControl_U.AMK_bWarn_L = AMK0_ActualValues1.AMK_bWarn;                  
+  InverterStartupControl_U.AMK_ErrorInfo_L = AMK0_ActualValues2.AMK_ErrorInfo;              
+  InverterStartupControl_U.AMK_TempIGBT_L = AMK0_ActualValues2.AMK_TempIGBT;               
+  InverterStartupControl_U.AMK_TempInverter_L = AMK0_ActualValues2.AMK_TempInverter;           
+  InverterStartupControl_U.AMK_TempMotor_L = AMK0_ActualValues2.AMK_TempMotor;              
+}
+
+void getControlSystemOutputs(void *args) {
+  InverterStartupControl_Y.AMK_bInverterOn_R = AMK1_SetPoints1.AMK_bInverterOn;
+  InverterStartupControl_Y.AMK_bDcOn_R = AMK1_SetPoints1.AMK_bDcOn;
+  InverterStartupControl_Y.AMK_bEnable_R = AMK1_SetPoints1.AMK_bEnable;
+  InverterStartupControl_Y.AMK_bErrorReset_R = AMK1_SetPoints1.AMK_bErrorReset;
+  InverterStartupControl_Y.AMK_TargetVelocity_R = AMK1_SetPoints1.AMK_TargetVelocity;
+  InverterStartupControl_Y.AMK_TorqueLimitPositiv_R = AMK1_SetPoints1.AMK_TorqueLimitPositiv;
+  InverterStartupControl_Y.AMK_TorqueLimitNegativ_R = AMK1_SetPoints1.AMK_TorqueLimitNegativ;
+  InverterStartupControl_Y.AMK_bInverterOn_L = AMK0_SetPoints1.AMK_bInverterOn;
+  InverterStartupControl_Y.AMK_bDcOn_L = AMK0_SetPoints1.AMK_bDcOn;
+  InverterStartupControl_Y.AMK_bEnable_L = AMK0_SetPoints1.AMK_bEnable;
+  InverterStartupControl_Y.AMK_bErrorReset_L = AMK0_SetPoints1.AMK_bErrorReset;
+  InverterStartupControl_Y.AMK_TargetVelocity_L = AMK0_SetPoints1.AMK_TargetVelocity;
+  InverterStartupControl_Y.AMK_TorqueLimitPositiv_L = AMK0_SetPoints1.AMK_TorqueLimitPositiv;
+  InverterStartupControl_Y.AMK_TorqueLimitNegativ_L = AMK0_SetPoints1.AMK_TorqueLimitNegativ;
+}
+
+void transmitToAMKMotors(void* args) {
+	CANAL_PRINT("TRANSMITTING\n\r");
+	CanAL_Transmit(&pt1_can, AMK0_SETPOINTS1_CANAL_ID);
+	CanAL_Transmit(&pt1_can, AMK1_SETPOINTS1_CANAL_ID);
+}
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+	TeCanALRet ret = CanAL_Receive(&pt1_can);
+	if (ret != CANAL_OK) {
+		CANAL_PRINT("Could not recognize message\n\r");
+	}
+}
+
 /* USER CODE END 4 */
 
 /**
@@ -504,6 +401,8 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+	  CANAL_PRINT("oh no! error handler\n\r");
+	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, true);
   }
   /* USER CODE END Error_Handler_Debug */
 }
