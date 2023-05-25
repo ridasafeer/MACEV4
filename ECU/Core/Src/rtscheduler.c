@@ -11,22 +11,18 @@
 static uint64_t RtScheduler_systick = 0;
 static uint8_t RtScheduler_taskCounter[N_RATES] = {
 	0, // 5ms tasks
-	0, // 200ms tasks
 };
 // Note: RtScheduler_nTasksPerRate must be updated alongside RtScheduler_tasks when tasks are added/removed
 static const uint8_t RtScheduler_nTasksPerRate[N_RATES] = {
-	2, // 5ms
-	2, // 200ms
+	4, // 5ms
 };
 
 static bool RtScheduler_taskMarkedForExecution[N_RATES] = {
 	false, // 5ms bucket
-	false, // 200ms bucket
 };
 // Track which tasks have been executed during this tick period already
 static bool RtScheduler_taskExecutedThisTick[N_RATES] = {
 	false, // 5ms bucket
-	false  // 200ms bucket
 };
 
 static uint64_t RtScheduler_GetTimeMs(void);

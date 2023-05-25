@@ -27,13 +27,11 @@
 
 typedef enum {
 	eTASK1_5MS = 0,
-	eTASK2_200MS,
 	N_RATES
 } eRtScheduler_TaskRates;
 
-static const uint32_t RtScheduler_rateMs[RTSCHEDULER_MAX_TASK_RATES] = {
+static const uint32_t RtScheduler_rateMs[N_RATES] = {
 	[eTASK1_5MS] 	= 5u,
-	[eTASK2_200MS] 	= 200u,
 };
 
 typedef void (*RtScheduler_tasks[N_RATES][RTSCHEDULER_MAX_TASKS_PER_RATE])(void*);

@@ -83,12 +83,10 @@ UART_st debug_uart = {
 /* USER CODE BEGIN 0 */
 RtScheduler_tasks tasks = {
 	[eTASK1_5MS] = {
-		getControlSystemOutputs,
-		transmitToAMKMotors,
-	},
-	[eTASK2_200MS] = {
 		setControlSystemInputs,
 		InverterStartupControl_step,
+		getControlSystemOutputs,
+		transmitToAMKMotors,
 	},
 };
 /* USER CODE END 0 */
