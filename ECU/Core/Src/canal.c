@@ -79,7 +79,7 @@ static TeCanALRet setInstance(CAN_HandleTypeDef* hcan, TeCanALInstance canNum){
 
 static void setDefaults(CAN_HandleTypeDef* hcan) {
 	hcan->Init.TimeTriggeredMode = DISABLE;
-	hcan->Init.AutoBusOff = DISABLE;
+	hcan->Init.AutoBusOff = ENABLE;
 	hcan->Init.AutoWakeUp = DISABLE;
 	hcan->Init.AutoRetransmission = DISABLE;
 	hcan->Init.ReceiveFifoLocked = DISABLE;
