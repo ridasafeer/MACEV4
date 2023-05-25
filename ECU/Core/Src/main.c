@@ -41,6 +41,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define MAX_ADC_VALUE (4096)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -357,20 +358,20 @@ void setControlSystemInputs(void *args) {
 }
 
 void getControlSystemOutputs(void *args) {
-  InverterStartupControl_Y.AMK_bInverterOn_R = AMK1_SetPoints1.AMK_bInverterOn;
-  InverterStartupControl_Y.AMK_bDcOn_R = AMK1_SetPoints1.AMK_bDcOn;
-  InverterStartupControl_Y.AMK_bEnable_R = AMK1_SetPoints1.AMK_bEnable;
-  InverterStartupControl_Y.AMK_bErrorReset_R = AMK1_SetPoints1.AMK_bErrorReset;
-  InverterStartupControl_Y.AMK_TargetVelocity_R = AMK1_SetPoints1.AMK_TargetVelocity;
-  InverterStartupControl_Y.AMK_TorqueLimitPositiv_R = AMK1_SetPoints1.AMK_TorqueLimitPositiv;
-  InverterStartupControl_Y.AMK_TorqueLimitNegativ_R = AMK1_SetPoints1.AMK_TorqueLimitNegativ;
-  InverterStartupControl_Y.AMK_bInverterOn_L = AMK0_SetPoints1.AMK_bInverterOn;
-  InverterStartupControl_Y.AMK_bDcOn_L = AMK0_SetPoints1.AMK_bDcOn;
-  InverterStartupControl_Y.AMK_bEnable_L = AMK0_SetPoints1.AMK_bEnable;
-  InverterStartupControl_Y.AMK_bErrorReset_L = AMK0_SetPoints1.AMK_bErrorReset;
-  InverterStartupControl_Y.AMK_TargetVelocity_L = AMK0_SetPoints1.AMK_TargetVelocity;
-  InverterStartupControl_Y.AMK_TorqueLimitPositiv_L = AMK0_SetPoints1.AMK_TorqueLimitPositiv;
-  InverterStartupControl_Y.AMK_TorqueLimitNegativ_L = AMK0_SetPoints1.AMK_TorqueLimitNegativ;
+  AMK1_SetPoints1.AMK_bInverterOn= InverterStartupControl_Y.AMK_bInverterOn_R;
+  AMK1_SetPoints1.AMK_bDcOn= InverterStartupControl_Y.AMK_bDcOn_R;
+  AMK1_SetPoints1.AMK_bEnable= InverterStartupControl_Y.AMK_bEnable_R;
+  AMK1_SetPoints1.AMK_bErrorReset= InverterStartupControl_Y.AMK_bErrorReset_R;
+  AMK1_SetPoints1.AMK_TargetVelocity= InverterStartupControl_Y.AMK_TargetVelocity_R;
+  AMK1_SetPoints1.AMK_TorqueLimitPositiv= InverterStartupControl_Y.AMK_TorqueLimitPositiv_R;
+  AMK1_SetPoints1.AMK_TorqueLimitNegativ= InverterStartupControl_Y.AMK_TorqueLimitNegativ_R;
+  AMK0_SetPoints1.AMK_bInverterOn= InverterStartupControl_Y.AMK_bInverterOn_L;
+  AMK0_SetPoints1.AMK_bDcOn= InverterStartupControl_Y.AMK_bDcOn_L;
+  AMK0_SetPoints1.AMK_bEnable= InverterStartupControl_Y.AMK_bEnable_L;
+  AMK0_SetPoints1.AMK_bErrorReset= InverterStartupControl_Y.AMK_bErrorReset_L;
+  AMK0_SetPoints1.AMK_TargetVelocity= InverterStartupControl_Y.AMK_TargetVelocity_L;
+  AMK0_SetPoints1.AMK_TorqueLimitPositiv= InverterStartupControl_Y.AMK_TorqueLimitPositiv_L;
+  AMK0_SetPoints1.AMK_TorqueLimitNegativ= InverterStartupControl_Y.AMK_TorqueLimitNegativ_L;
 }
 
 void transmitToAMKMotors(void* args) {
