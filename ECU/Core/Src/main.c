@@ -324,7 +324,7 @@ static void MX_GPIO_Init(void)
 // Step functions
 void setControlSystemInputs(void *args) {
   ADC_Scan(&adc1);
-  InverterStartupControl_U.APPS = (float)Get_Single_Chan_Average(&adc1, APPS1_ADC_CHANNEL) / MAX_ADC_VALUE;
+  InverterStartupControl_U.APPS = ((float)Get_Single_Chan_Average(&adc1, APPS2_ADC_CHANNEL)) / (float)MAX_ADC_VALUE;
   InverterStartupControl_U.AMK_ActualVelocity_R = AMK1_ActualValues1.AMK_ActualVelocity;         
   InverterStartupControl_U.AMK_MagnetizingCurrent_R = AMK1_ActualValues1.AMK_MagnetizingCurrent;
   InverterStartupControl_U.AMK_TorqueCurrent_R = AMK1_ActualValues1.AMK_TorqueCurrent;          
