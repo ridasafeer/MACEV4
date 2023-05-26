@@ -134,13 +134,13 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_CAN1_Init();
-  MX_CAN2_Init();
-  MX_CAN3_Init();
-  MX_ADC1_Init();
-  MX_SPI4_Init();
-  MX_USART2_UART_Init();
-  MX_USART3_UART_Init();
+  //MX_CAN1_Init();
+  //MX_CAN2_Init();
+  //MX_CAN3_Init();
+  //MX_ADC1_Init();
+  //MX_SPI4_Init();
+  //MX_USART2_UART_Init();
+  //MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   Printf_Init(&debug_uart);
   CanAL_Init(&pt1_can);
@@ -227,7 +227,7 @@ static void MX_ADC1_Init(void)
   hadc1.Instance = ADC1;
   hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
   hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
@@ -537,7 +537,7 @@ static void MX_GPIO_Init(void)
 // Step functions
 void setControlSystemInputs(void *args) {
   ADC_Scan(&adc1);
-  InverterStartupControl_U.APPS = ((float)Get_Single_Chan_Average(&adc1, APPS2_ADC_CHANNEL)) / (float)MAX_ADC_VALUE;
+  InverterStartupControl_U.APPS = Get_Single_Chan_Average(&adc1, APPS2_ADC_CHANNEL);
   InverterStartupControl_U.AMK_ActualVelocity_R = AMK1_ActualValues1.AMK_ActualVelocity;         
   InverterStartupControl_U.AMK_MagnetizingCurrent_R = AMK1_ActualValues1.AMK_MagnetizingCurrent;
   InverterStartupControl_U.AMK_TorqueCurrent_R = AMK1_ActualValues1.AMK_TorqueCurrent;          
