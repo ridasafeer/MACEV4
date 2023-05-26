@@ -1,0 +1,8 @@
+canal.c:61:19:setInstance	5
+canal.c:80:13:setDefaults	1
+canal.c:90:19:setTimingParams	8
+canal.c:111:19:setMode	5
+canal.c:119:19:setFilters	2
+canal.c:147:12:CanAL_Init	10
+canal.c:176:12:CanAL_Receive	6
+canal.c:206:12:CanAL_Transmit	3

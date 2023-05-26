@@ -1,0 +1,5 @@
+rtscheduler.c:33:5:RtScheduler_startRunning	8
+rtscheduler.c:83:10:convertToMs	1
+rtscheduler.c:91:6:RtScheduler_Tick	1
+rtscheduler.c:95:10:RtScheduler_GetTicks	1
+rtscheduler.c:99:10:RtScheduler_GetTimeMs	1

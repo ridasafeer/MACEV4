@@ -1,0 +1,5 @@
+../Core/Src/InverterStartupControl.c:72:6:InverterStartup_LEFT_MOTOR_Init	24	static
+../Core/Src/InverterStartupControl.c:92:6:InverterStartupContr_LEFT_MOTOR	88	static
+../Core/Src/InverterStartupControl.c:439:6:InverterStartupControl_step	64	static
+../Core/Src/InverterStartupControl.c:692:6:InverterStartupControl_initialize	32	static
+../Core/Src/InverterStartupControl.c:745:6:InverterStartupControl_terminate	4	static

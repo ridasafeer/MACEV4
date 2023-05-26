@@ -1,0 +1,13 @@
+../Core/Src/adc.c:23:13:ADC_Channel_Select	16	static
+../Core/Src/adc.c:85:13:ADC_Chan_Config	32	static
+../Core/Src/adc.c:98:19:adc_instance_select	16	static
+../Core/Src/adc.c:118:19:adc_set_num_conversions	16	static
+../Core/Src/adc.c:136:13:adc_default_configs	16	static
+../Core/Src/adc.c:154:12:ADC_Init	104	static
+../Core/Src/adc.c:192:12:ADC_Scan	32	static
+../Core/Src/adc.c:229:10:Get_Single_Chan_Average	64	static
+../Core/Src/adc.c:255:8:Get_Single_Chan_Average_Scaled	48	static
+../Core/Src/adc.c:286:12:Scale_Buffer	40	static
+../Core/Src/adc.c:303:12:Get_Chan_Averages	48	static
+../Core/Src/adc.c:324:12:Get_Chan_Averages_Scaled	48	static
+../Core/Src/adc.c:347:8:Get_Voltage_Conversion	24	static

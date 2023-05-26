@@ -1,0 +1,7 @@
+printf.c:27:16:Printf_Init	2
+printf.c:48:5:_isatty	3
+printf.c:57:5:_write	4
+printf.c:75:5:_close	3
+printf.c:84:5:_lseek	1
+printf.c:93:5:_read	3
+printf.c:110:5:_fstat	3
