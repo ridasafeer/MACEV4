@@ -1,0 +1,13 @@
+adc.c:23:13:ADC_Channel_Select	20
+adc.c:85:13:ADC_Chan_Config	2
+adc.c:98:19:adc_instance_select	5
+adc.c:118:19:adc_set_num_conversions	4
+adc.c:136:13:adc_default_configs	1
+adc.c:154:12:ADC_Init	8
+adc.c:192:12:ADC_Scan	9
+adc.c:229:10:Get_Single_Chan_Average	4
+adc.c:255:8:Get_Single_Chan_Average_Scaled	5
+adc.c:286:12:Scale_Buffer	4
+adc.c:303:12:Get_Chan_Averages	4
+adc.c:324:12:Get_Chan_Averages_Scaled	4
+adc.c:347:8:Get_Voltage_Conversion	1
