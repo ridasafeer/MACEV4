@@ -1,0 +1,10 @@
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
+../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:80:6:virtual void DashboardView::tearDownScreen()	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:49:6:virtual void DashboardView::setupScreen()	80	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:95:6:virtual void DashboardView::setBatteryTemp(int)	0	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:141:6:virtual void DashboardView::handleTickEvent()	16	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:37:1:DashboardView::DashboardView()	8	static
+D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/dashboard_screen/DashboardView.cpp:188:1:cpp)	0	static
+../../TouchGFX/gui/include/gui/dashboard_screen/DashboardView.hpp:19:13:DashboardView::~DashboardView()	8	static
+../../TouchGFX/gui/include/gui/dashboard_screen/DashboardView.hpp:19:13:virtual DashboardView::~DashboardView()	8	static

@@ -13,6 +13,14 @@
 #include <gui/dashboard_screen/DashboardPresenter.hpp>
 #include <gui/settings_screen/SettingsView.hpp>
 #include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/bootscreen_screen/BootScreenView.hpp>
+#include <gui/bootscreen_screen/BootScreenPresenter.hpp>
+#include <gui/homescreen_screen/HomeScreenView.hpp>
+#include <gui/homescreen_screen/HomeScreenPresenter.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenView.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
+#include <gui/console_screen/ConsoleView.hpp>
+#include <gui/console_screen/ConsolePresenter.hpp>
 
 using namespace touchgfx;
 
@@ -33,17 +41,6 @@ FrontendApplicationBase::FrontendApplicationBase(Model& m, FrontendHeap& heap)
 
 // Dashboard
 
-void FrontendApplicationBase::gotoDashboardScreenNoTransition()
-{
-    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDashboardScreenNoTransitionImpl);
-    pendingScreenTransitionCallback = &transitionCallback;
-}
-
-void FrontendApplicationBase::gotoDashboardScreenNoTransitionImpl()
-{
-    touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
-}
-
 void FrontendApplicationBase::gotoDashboardScreenSlideTransitionSouth()
 {
     transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDashboardScreenSlideTransitionSouthImpl);
@@ -53,6 +50,17 @@ void FrontendApplicationBase::gotoDashboardScreenSlideTransitionSouth()
 void FrontendApplicationBase::gotoDashboardScreenSlideTransitionSouthImpl()
 {
     touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoDashboardScreenCoverTransitionEast()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDashboardScreenCoverTransitionEastImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDashboardScreenCoverTransitionEastImpl()
+{
+    touchgfx::makeTransition<DashboardView, DashboardPresenter, touchgfx::CoverTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
 // Settings
@@ -66,4 +74,67 @@ void FrontendApplicationBase::gotoSettingsScreenCoverTransitionNorth()
 void FrontendApplicationBase::gotoSettingsScreenCoverTransitionNorthImpl()
 {
     touchgfx::makeTransition<SettingsView, SettingsPresenter, touchgfx::CoverTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// BootScreen
+
+void FrontendApplicationBase::gotoBootScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoBootScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoBootScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<BootScreenView, BootScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// HomeScreen
+
+void FrontendApplicationBase::gotoHomeScreenScreenWipeTransitionSouth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoHomeScreenScreenWipeTransitionSouthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoHomeScreenScreenWipeTransitionSouthImpl()
+{
+    touchgfx::makeTransition<HomeScreenView, HomeScreenPresenter, touchgfx::WipeTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+void FrontendApplicationBase::gotoHomeScreenScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoHomeScreenScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoHomeScreenScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<HomeScreenView, HomeScreenPresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// DrivingScreen
+
+void FrontendApplicationBase::gotoDrivingScreenScreenSlideTransitionSouth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDrivingScreenScreenSlideTransitionSouthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDrivingScreenScreenSlideTransitionSouthImpl()
+{
+    touchgfx::makeTransition<DrivingScreenView, DrivingScreenPresenter, touchgfx::SlideTransition<SOUTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// Console
+
+void FrontendApplicationBase::gotoConsoleScreenSlideTransitionNorth()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoConsoleScreenSlideTransitionNorthImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoConsoleScreenSlideTransitionNorthImpl()
+{
+    touchgfx::makeTransition<ConsoleView, ConsolePresenter, touchgfx::SlideTransition<NORTH>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

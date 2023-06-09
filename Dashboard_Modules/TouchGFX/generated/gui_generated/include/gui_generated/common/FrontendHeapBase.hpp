@@ -11,6 +11,7 @@
 #include <touchgfx/transitions/NoTransition.hpp>
 #include <touchgfx/transitions/CoverTransition.hpp>
 #include <touchgfx/transitions/SlideTransition.hpp>
+#include <touchgfx/transitions/WipeTransition.hpp>
 
 #include <gui/common/FrontendApplication.hpp>
 #include <gui/model/Model.hpp>
@@ -19,6 +20,14 @@
 #include <gui/dashboard_screen/DashboardPresenter.hpp>
 #include <gui/settings_screen/SettingsView.hpp>
 #include <gui/settings_screen/SettingsPresenter.hpp>
+#include <gui/bootscreen_screen/BootScreenView.hpp>
+#include <gui/bootscreen_screen/BootScreenPresenter.hpp>
+#include <gui/homescreen_screen/HomeScreenView.hpp>
+#include <gui/homescreen_screen/HomeScreenPresenter.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenView.hpp>
+#include <gui/drivingscreen_screen/DrivingScreenPresenter.hpp>
+#include <gui/console_screen/ConsoleView.hpp>
+#include <gui/console_screen/ConsolePresenter.hpp>
 
 
 /**
@@ -43,7 +52,11 @@ public:
      */
     typedef touchgfx::meta::TypeList< DashboardView,
             touchgfx::meta::TypeList< SettingsView,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< BootScreenView,
+            touchgfx::meta::TypeList< HomeScreenView,
+            touchgfx::meta::TypeList< DrivingScreenView,
+            touchgfx::meta::TypeList< ConsoleView,
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -57,7 +70,11 @@ public:
      */
     typedef touchgfx::meta::TypeList< DashboardPresenter,
             touchgfx::meta::TypeList< SettingsPresenter,
-            touchgfx::meta::Nil >
+            touchgfx::meta::TypeList< BootScreenPresenter,
+            touchgfx::meta::TypeList< HomeScreenPresenter,
+            touchgfx::meta::TypeList< DrivingScreenPresenter,
+            touchgfx::meta::TypeList< ConsolePresenter,
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**
@@ -72,7 +89,10 @@ public:
     typedef touchgfx::meta::TypeList< touchgfx::NoTransition,
             touchgfx::meta::TypeList< CoverTransition<NORTH>,
             touchgfx::meta::TypeList< SlideTransition<SOUTH>,
-            touchgfx::meta::Nil > >
+            touchgfx::meta::TypeList< WipeTransition<SOUTH>,
+            touchgfx::meta::TypeList< CoverTransition<EAST>,
+            touchgfx::meta::TypeList< SlideTransition<NORTH>,
+            touchgfx::meta::Nil > > > > >
             > GeneratedTransitionTypes;
 
     /**
@@ -82,7 +102,7 @@ public:
 
     virtual void gotoStartScreen(FrontendApplication& app)
     {
-        app.gotoDashboardScreenNoTransition();
+        app.gotoBootScreenScreenNoTransition();
     }
 protected:
     FrontendHeapBase(touchgfx::AbstractPartition& presenters, touchgfx::AbstractPartition& views, touchgfx::AbstractPartition& transitions, FrontendApplication& app)

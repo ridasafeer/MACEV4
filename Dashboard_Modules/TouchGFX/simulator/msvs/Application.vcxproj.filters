@@ -196,6 +196,54 @@
     <Filter Include="Source Files\generated\gui_generated\containers">
       <UniqueIdentifier>895B8B26-AE1D-D84F-DA8F-C2842E6F1ED3</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\bootscreen_screen">
+      <UniqueIdentifier>5AC6AC74-5582-9C20-EC13-C79DC0C0665B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\bootscreen_screen">
+      <UniqueIdentifier>603BE402-8815-D1DE-B07D-0DAC2709EBF1</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\bootscreen_screen">
+      <UniqueIdentifier>FFA1A286-9048-DCE9-E1BD-35D5E2B164CE</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\bootscreen_screen">
+      <UniqueIdentifier>A8230A3C-40CB-2C07-DC89-C8BE68D715F1</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\drivingscreen_screen">
+      <UniqueIdentifier>84E9CE10-DA1C-42A8-5FF4-F3BB9CD194B5</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\homescreen_screen">
+      <UniqueIdentifier>EC60B5B2-970A-A331-5FF6-E1C7A12E4172</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\homescreen_screen">
+      <UniqueIdentifier>33C2AE9F-5FB0-994E-1E68-38452FF8CE68</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\drivingscreen_screen">
+      <UniqueIdentifier>410E57ED-6784-4E3F-BBB3-A254A1F49183</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\homescreen_screen">
+      <UniqueIdentifier>C17E327E-B00F-0DC5-B532-4BDA987C6614</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\homescreen_screen">
+      <UniqueIdentifier>4F0F0E50-AB99-D45F-6FFF-EF3E62FA6F81</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\drivingscreen_screen">
+      <UniqueIdentifier>1163FF49-4CF4-FD0C-FF51-1F982FC3A920</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\drivingscreen_screen">
+      <UniqueIdentifier>FEDD9441-B9C7-1C70-A20E-3F9FAD90622B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\console_screen">
+      <UniqueIdentifier>CB047D10-EC83-345A-8AD0-B99106069DD3</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\console_screen">
+      <UniqueIdentifier>9271917E-FF77-8CF8-FD4E-C164FF8FCFCA</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\console_screen">
+      <UniqueIdentifier>D25AAFD5-4499-8F4D-0270-5029857DA038</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\console_screen">
+      <UniqueIdentifier>8E33E34F-4819-9DC5-EE0B-40FE7DC9B279</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -251,6 +299,42 @@
     </ClCompile>
     <ClCompile Include="..\..\gui\src\containers\ProgressWrapper.cpp">
       <Filter>Source Files\gui\containers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenPresenter.cpp">
+      <Filter>Source Files\gui\bootscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\bootscreen_screen\BootScreenView.cpp">
+      <Filter>Source Files\gui\bootscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\bootscreen_screen\BootScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\bootscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\drivingscreen_screen\DrivingScreenPresenter.cpp">
+      <Filter>Source Files\gui\drivingscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\drivingscreen_screen\DrivingScreenView.cpp">
+      <Filter>Source Files\gui\drivingscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\drivingscreen_screen\DrivingScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\drivingscreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenPresenter.cpp">
+      <Filter>Source Files\gui\homescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\homescreen_screen\HomeScreenView.cpp">
+      <Filter>Source Files\gui\homescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\homescreen_screen\HomeScreenViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\homescreen_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsolePresenter.cpp">
+      <Filter>Source Files\gui\console_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\console_screen\ConsoleView.cpp">
+      <Filter>Source Files\gui\console_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\console_screen\ConsoleViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\console_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -711,6 +795,42 @@
     </ClInclude>
     <ClInclude Include="..\..\gui\include\gui\containers\ProgressWrapper.hpp">
       <Filter>Header Files\gui\containers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenPresenter.hpp">
+      <Filter>Header Files\gui\bootscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\bootscreen_screen\BootScreenView.hpp">
+      <Filter>Header Files\gui\bootscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\bootscreen_screen\BootScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\bootscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\drivingscreen_screen\DrivingScreenPresenter.hpp">
+      <Filter>Header Files\gui\drivingscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\drivingscreen_screen\DrivingScreenView.hpp">
+      <Filter>Header Files\gui\drivingscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\drivingscreen_screen\DrivingScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\drivingscreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenPresenter.hpp">
+      <Filter>Header Files\gui\homescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\homescreen_screen\HomeScreenView.hpp">
+      <Filter>Header Files\gui\homescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\homescreen_screen\HomeScreenViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\homescreen_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsolePresenter.hpp">
+      <Filter>Header Files\gui\console_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\console_screen\ConsoleView.hpp">
+      <Filter>Header Files\gui\console_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\console_screen\ConsoleViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\console_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

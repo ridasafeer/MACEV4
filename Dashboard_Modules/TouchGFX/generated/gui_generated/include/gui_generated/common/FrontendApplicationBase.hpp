@@ -16,12 +16,26 @@ public:
     virtual ~FrontendApplicationBase() { }
 
     // Dashboard
-    void gotoDashboardScreenNoTransition();
-
     void gotoDashboardScreenSlideTransitionSouth();
+
+    void gotoDashboardScreenCoverTransitionEast();
 
     // Settings
     void gotoSettingsScreenCoverTransitionNorth();
+
+    // BootScreen
+    void gotoBootScreenScreenNoTransition();
+
+    // HomeScreen
+    void gotoHomeScreenScreenWipeTransitionSouth();
+
+    void gotoHomeScreenScreenSlideTransitionNorth();
+
+    // DrivingScreen
+    void gotoDrivingScreenScreenSlideTransitionSouth();
+
+    // Console
+    void gotoConsoleScreenSlideTransitionNorth();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -29,12 +43,26 @@ protected:
     Model& model;
 
     // Dashboard
-    void gotoDashboardScreenNoTransitionImpl();
-
     void gotoDashboardScreenSlideTransitionSouthImpl();
+
+    void gotoDashboardScreenCoverTransitionEastImpl();
 
     // Settings
     void gotoSettingsScreenCoverTransitionNorthImpl();
+
+    // BootScreen
+    void gotoBootScreenScreenNoTransitionImpl();
+
+    // HomeScreen
+    void gotoHomeScreenScreenWipeTransitionSouthImpl();
+
+    void gotoHomeScreenScreenSlideTransitionNorthImpl();
+
+    // DrivingScreen
+    void gotoDrivingScreenScreenSlideTransitionSouthImpl();
+
+    // Console
+    void gotoConsoleScreenSlideTransitionNorthImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

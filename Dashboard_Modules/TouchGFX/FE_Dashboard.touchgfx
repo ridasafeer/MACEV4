@@ -708,6 +708,565 @@
         "Name": "Settings",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Type": "AnimatedImage",
+            "FileNameFirst": "BootScreen_01.png",
+            "FileNameLast": "BootScreen_05.png",
+            "UpdateTicksInterval": 750,
+            "Alpha": 255,
+            "StartOnLoad": true,
+            "ReverseEnabled": false,
+            "LoopEnabled": true,
+            "AnimationEndedCallback": false,
+            "Name": "animatedImage1",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 270,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithIcon",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_icon_button_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_icon_button.png",
+            "Alpha": 255,
+            "IconPressed": "__designer\\Blue_Icons_Power_32.png",
+            "IconReleased": "__designer\\Blue_Icons_Power_32.png",
+            "IconX": 16,
+            "IconY": 16,
+            "IconHeight": 29,
+            "IconWidth": 29,
+            "IconStyle": "Icon47",
+            "Name": "buttonGoHome",
+            "X": 413,
+            "Y": 204,
+            "Width": 60,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "BootupGoHome",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonGoHome"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "South",
+              "ActionComponent": "HomeScreen"
+            }
+          }
+        ],
+        "Name": "BootScreen",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Type": "ScalableImage",
+            "Filename": "rida-home-temp.png",
+            "Alpha": 255,
+            "ScalingAlgorithm": "Nearest-neighbor",
+            "Name": "scalableImage1",
+            "X": -15,
+            "Y": -12,
+            "Width": 508,
+            "Height": 297,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_small.png",
+            "Alpha": 0,
+            "TextId": "SingleUseId17",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Name": "buttonGoDriving",
+            "X": 323,
+            "Y": 206,
+            "Width": 170,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_small.png",
+            "Alpha": 0,
+            "TextId": "SingleUseId18",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Name": "buttonGoDashboard",
+            "X": -15,
+            "Y": 212,
+            "Width": 170,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_small.png",
+            "Alpha": 0,
+            "TextId": "SingleUseId19",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Name": "buttonGoConsole",
+            "X": 253,
+            "Y": 57,
+            "Width": 170,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "StartDriving",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonGoDriving"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "South",
+              "ActionComponent": "DrivingScreen"
+            }
+          },
+          {
+            "InteractionName": "gotToTestScreen",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonGoDashboard"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionCover",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Dashboard"
+            }
+          },
+          {
+            "InteractionName": "goToTerminal",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonGoConsole"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "North",
+              "ActionComponent": "Console"
+            }
+          }
+        ],
+        "Name": "HomeScreen",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Type": "Box",
+            "Color": {
+              "Red": 14,
+              "Green": 14,
+              "Blue": 14
+            },
+            "Alpha": 255,
+            "Name": "box1",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 272,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "Gauge",
+            "FileNameBackground": "__designer\\Blue_Gauges_original_gauge_background_style_01.png",
+            "BackgroundOffsetX": 0,
+            "BackgroundOffsetY": 0,
+            "RotationCenterX": 125,
+            "RotationCenterY": 125,
+            "StartAngle": -90,
+            "EndAngle": 90,
+            "RangeMin": 0,
+            "RangeMax": 100,
+            "InitialValue": 50,
+            "UseAnimation": false,
+            "Easing": "Linear",
+            "EasingOption": "In",
+            "FileNameNeedle": "__designer\\Blue_Needles_original_gauge_needle_style_00.png",
+            "NeedleRotationCenterX": 11,
+            "NeedleRotationCenterY": 55,
+            "NeedleMovingRenderingAlgorithm": "Bilinear Interpolation",
+            "NeedleSteadyRenderingAlgorithm": "Bilinear Interpolation",
+            "UseArc": false,
+            "ArcColor": {
+              "Red": 20,
+              "Green": 151,
+              "Blue": 197
+            },
+            "SetArcPosition": false,
+            "ArcX": 0,
+            "ArcY": 0,
+            "ArcWidth": 0,
+            "ArcHeight": 0,
+            "ArcRadius": 0,
+            "ArcLineWidth": 0,
+            "ArcCapStyle": "Butt",
+            "ArcOnTopOfNeedle": false,
+            "Alpha": 255,
+            "Name": "gauge1",
+            "X": 219,
+            "Y": 11,
+            "Width": 251,
+            "Height": 251,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "BoxProgress",
+            "Color": {
+              "Red": 168,
+              "Green": 0,
+              "Blue": 0
+            },
+            "Direction": "Right",
+            "Alpha": 255,
+            "FileNameBackground": "__designer\\Blue_ProgressIndicators_bg_medium_progress_indicator_bg_square_0_degrees.png",
+            "IndicatorPositionX": 2,
+            "IndicatorPositionY": 2,
+            "IndicatorPositionWidth": 80,
+            "IndicatorPositionHeight": 16,
+            "ProgressRangeMin": 0,
+            "ProgressRangeMax": 100,
+            "ProgressRangeSteps": 0,
+            "ProgressRangeStepsMin": 0,
+            "ProgressInitialValue": 60,
+            "Name": "boxProgress1",
+            "X": 30,
+            "Y": 232,
+            "Width": 184,
+            "Height": 20,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithIcon",
+            "Pressed": "__designer\\Dark_Buttons_Round_Edge_icon_button_pressed.png",
+            "Released": "__designer\\Dark_Buttons_Round_Edge_icon_button.png",
+            "Alpha": 255,
+            "IconPressed": "__designer\\Dark_Icons_Home_48.png",
+            "IconReleased": "__designer\\Dark_Icons_Home_48.png",
+            "IconX": 6,
+            "IconY": 7,
+            "IconHeight": 47,
+            "IconWidth": 48,
+            "Name": "buttonHome",
+            "X": 0,
+            "Y": 0,
+            "Width": 60,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "Gauge",
+            "FileNameBackground": "Dark_Clocks_Backgrounds_clock_standard_background_small.png",
+            "BackgroundOffsetX": 0,
+            "BackgroundOffsetY": 0,
+            "RotationCenterX": 72,
+            "RotationCenterY": 71,
+            "StartAngle": 3,
+            "EndAngle": 131,
+            "RangeMin": 0,
+            "RangeMax": 100,
+            "InitialValue": 29,
+            "UseAnimation": false,
+            "Easing": "Linear",
+            "EasingOption": "In",
+            "FileNameNeedle": "__designer\\Dark_Clocks_Hands_clock_standard_second_hand.png",
+            "NeedleRotationCenterX": 0,
+            "NeedleRotationCenterY": 65,
+            "NeedleMovingRenderingAlgorithm": "Bilinear Interpolation",
+            "NeedleSteadyRenderingAlgorithm": "Bilinear Interpolation",
+            "UseArc": false,
+            "ArcColor": {
+              "Red": 20,
+              "Green": 151,
+              "Blue": 197
+            },
+            "SetArcPosition": false,
+            "ArcX": 0,
+            "ArcY": 0,
+            "ArcWidth": 0,
+            "ArcHeight": 0,
+            "ArcRadius": 0,
+            "ArcLineWidth": 0,
+            "ArcCapStyle": "Butt",
+            "ArcOnTopOfNeedle": false,
+            "Alpha": 255,
+            "Name": "gauge2",
+            "X": 30,
+            "Y": 71,
+            "Width": 144,
+            "Height": 150,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ScalableImage",
+            "Filename": "battery.png",
+            "Alpha": 255,
+            "ScalingAlgorithm": "Nearest-neighbor",
+            "Name": "scalableImage1",
+            "X": 184,
+            "Y": 234,
+            "Width": 28,
+            "Height": 17,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "GoHome",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonHome"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "North",
+              "ActionComponent": "HomeScreen"
+            }
+          }
+        ],
+        "Name": "DrivingScreen",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Type": "Box",
+            "Color": {
+              "Red": 20,
+              "Green": 20,
+              "Blue": 20
+            },
+            "Alpha": 255,
+            "Name": "background",
+            "X": 0,
+            "Y": 0,
+            "Width": 480,
+            "Height": 272,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Components": [],
+            "Type": "ScrollableContainer",
+            "HorizontalScrollEnabled": true,
+            "VerticalScrollEnabled": true,
+            "ScrollbarsVisible": false,
+            "ScrollbarsVisibleOnPressed": true,
+            "ScrollbarsColor": {
+              "Red": 0,
+              "Green": 0,
+              "Blue": 0
+            },
+            "ScrollbarsAlpha": 255,
+            "Name": "scrollableContainer1",
+            "X": 6,
+            "Y": 11,
+            "Width": 250,
+            "Height": 250,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "TextArea",
+            "TextId": "SingleUseId22",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "TextId": "SingleUseId23",
+              "UseBuffer": true,
+              "BufferSize": 20
+            },
+            "Name": "textTerminal",
+            "X": 256,
+            "Y": 11,
+            "Width": 215,
+            "Height": 198,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
+            "Alpha": 255,
+            "TextId": "SingleUseId24",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Style": "Style4",
+            "Name": "buttonUpdateTerminal",
+            "X": 286,
+            "Y": 201,
+            "Width": 170,
+            "Height": 60,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "UpdateTerminal",
+            "HasCompletedTrigger": false,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonUpdateTerminal"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "updateTerminal"
+            }
+          }
+        ],
+        "Name": "Console",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
       }
     ],
     "CustomContainerDefinitions": [
@@ -805,6 +1364,42 @@
       {
         "TextEntryId": "SingleUseId11",
         "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId12",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId14",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId15",
+        "IsResource": true
+      },
+      {
+        "TextEntryId": "SingleUseId17",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId18",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId19",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId22",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId23",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId24",
+        "IsResource": false
       }
     ],
     "Name": "STM32F7508-DK",
@@ -813,7 +1408,7 @@
       "Height": 272
     },
     "SelectedColorDepth": 16,
-    "StartupScreenName": "Dashboard",
+    "StartupScreenName": "BootScreen",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",

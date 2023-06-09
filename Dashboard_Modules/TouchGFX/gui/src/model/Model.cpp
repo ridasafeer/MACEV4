@@ -16,6 +16,8 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 
+extern int isDataTerminal;
+
 // Temporary variable for testing
 int count_model = 0;
 
@@ -32,4 +34,9 @@ void Model::tick() {
 	// On each tick, update the battery temperature with the count
 	modelListener->batteryTempUpdated(count_model);
 
+//	if (isDataTerminal == 1)
+//	{
+//		modelListener->dataRxed();
+//		isDataTerminal = 0;
+//	}
 }
