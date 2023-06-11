@@ -1192,7 +1192,7 @@
           },
           {
             "Type": "TextArea",
-            "TextId": "SingleUseId22",
+            "TextId": "SingleUseId25",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -1202,11 +1202,6 @@
             "Alpha": 255,
             "AutoSize": false,
             "LineSpacing": 0,
-            "Wildcard1": {
-              "TextId": "SingleUseId23",
-              "UseBuffer": true,
-              "BufferSize": 20
-            },
             "Name": "textTerminal",
             "X": 256,
             "Y": 11,
@@ -1390,15 +1385,11 @@
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId22",
-        "IsResource": false
-      },
-      {
-        "TextEntryId": "SingleUseId23",
-        "IsResource": false
-      },
-      {
         "TextEntryId": "SingleUseId24",
+        "IsResource": false
+      },
+      {
+        "TextEntryId": "SingleUseId25",
         "IsResource": false
       }
     ],

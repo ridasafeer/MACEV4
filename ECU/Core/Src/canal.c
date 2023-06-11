@@ -182,7 +182,7 @@ TeCanALRet CanAL_Receive(TsCanAL* can) {
 	if (can == NULL) return CANAL_NULL_REF;
 
 	// Get raw message
-	if (HAL_CAN_GetRxMessage(can->hcan, DEFAULT_RX_FIFO, &RxHeader, RxData) != HAL_OK) {
+	if (HAL_CAN_GetRxMessage(can->hcan, DEFAULT_RX_FIFO, &RxHeader, RxData) != HAL_OK) { //the fifo being used is defined as a macro
 		return CANAL_GET_RXMESSAGE_FAILED;
 	}
 

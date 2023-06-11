@@ -11,8 +11,6 @@ public:
     virtual ~Screen2View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-    virtual void can_Data(char *data);
-
 protected:
 };
 

@@ -3,6 +3,7 @@
 /*********************************************************************************/
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 #include "BitmapDatabase.hpp"
 
 Screen2ViewBase::Screen2ViewBase()
@@ -11,12 +12,17 @@ Screen2ViewBase::Screen2ViewBase()
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    scalableImage1.setBitmap(touchgfx::Bitmap(BITMAP_RIDA_HOME_TEMP_ID));
-    scalableImage1.setPosition(0, 0, 480, 272);
-    scalableImage1.setScalingAlgorithm(touchgfx::ScalableImage::NEAREST_NEIGHBOR);
+    textArea2.setXY(200, 124);
+    textArea2.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    textArea2.setLinespacing(0);
+    textArea2.setTypedText(touchgfx::TypedText(T_SINGLEUSEID5));
+
+    button1.setXY(188, 37);
+    button1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
 
     add(__background);
-    add(scalableImage1);
+    add(textArea2);
+    add(button1);
 }
 
 void Screen2ViewBase::setupScreen()

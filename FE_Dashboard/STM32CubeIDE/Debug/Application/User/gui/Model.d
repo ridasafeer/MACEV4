@@ -1,5 +1,5 @@
 Application/User/gui/Model.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/TouchGFX/gui/src/model/Model.cpp \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/TouchGFX/gui/src/model/Model.cpp \
  ../../TouchGFX/gui/include/gui/model/Model.hpp \
  ../../TouchGFX/gui/include/gui/model/ModelListener.hpp \
  ../../Core/Inc/main.h \

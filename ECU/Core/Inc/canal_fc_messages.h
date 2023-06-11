@@ -353,6 +353,8 @@ typedef struct DashboardData {
     float GpsVehicleSpeed;
 }TsDashboardData;
 
+
+//
 /** 
  * Message: TemperatureInfo
  * Senders: ['FC']
@@ -371,6 +373,8 @@ typedef struct TemperatureInfo {
     uint8_t RightRearMotorTemperature;    
     // Unit: ï¿½C
     uint8_t BatteryTemperature;
+    //Unit: None, test var
+    uint8_t test_byte;
 }TsTemperatureInfo;
 
 /** 

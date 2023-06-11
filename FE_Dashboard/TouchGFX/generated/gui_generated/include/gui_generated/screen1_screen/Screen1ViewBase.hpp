@@ -37,20 +37,10 @@ protected:
     /*
      * Wildcard Buffers
      */
-    static const uint16_t TEXTAREA1_SIZE = 20;
+    static const uint16_t TEXTAREA1_SIZE = 4;
     touchgfx::Unicode::UnicodeChar textArea1Buffer[TEXTAREA1_SIZE];
 
 private:
-
-    /*
-     * Callback Declarations
-     */
-    touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButton&> buttonCallback;
-
-    /*
-     * Callback Handler Declarations
-     */
-    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
 
 };
 

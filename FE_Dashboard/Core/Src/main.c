@@ -43,7 +43,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-CAN_HandleTypeDef hcan1;
+CAN_HandleTypeDef hcan1; //our desired CAN data struct, handled by HAL CAN driver 
 
 CRC_HandleTypeDef hcrc;
 
@@ -71,7 +71,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
 };
 /* Definitions for canQueue */
 osMessageQueueId_t canQueueHandle;
-const osMessageQueueAttr_t canQueue_attributes = {
+const osMessageQueueAttr_t canQueue_attributes = { //lmao what is this
     .name = "canQueue"};
 /* USER CODE BEGIN PV */
 
@@ -86,7 +86,7 @@ static void MX_DMA2D_Init(void);
 static void MX_FMC_Init(void);
 static void MX_LTDC_Init(void);
 static void MX_USART1_UART_Init(void);
-static void MX_CAN1_Init(void);
+static void MX_CAN1_Init(void); //init CAN channel 1 for comms bw dashboard - FC
 void StartDefaultTask(void *argument);
 extern void TouchGFX_Task(void *argument);
 
@@ -98,25 +98,30 @@ extern void TouchGFX_Task(void *argument);
 /* USER CODE BEGIN 0 */
 
 uint8_t RxData[257];
-canData_t *canData_q;
+canData_t *canData_q; //ptr to CAN struct
 
-// TODO: replace with HAL_RxEventCallback
+// TODO: replace with HAL_RxEventCallback this should be the HAL ISR called when receive messages received on dashboard CAN lines
 // void testing_can_data_callback(CRC_HandleTypeDef *hcrc, uint16_t Size)
-void testing_can_data_callback(uint8_t *RxData, uint16_t Size)
+
+
+//to accurately test the callback functionality, this includes a ptr/arr name to a buffer to hold the data i.e. RxData that the core HAL function STM_HAL_GetRxMessage() places the raw data bits in
+void testing_can_data_callback(uint8_t *RxData, uint16_t Size) //to test, the input is the buffer to CAN data is placed in + (2) the size of 
 {
-  RxData[Size] = '\0';
+  RxData[Size] = '\0'; //placing termination character at the end so that the type casting of RxData into a char ptr will be read as a string due to term char
   if (osMessageQueueGetSpace(canQueueHandle) > 0)
   {
+    // (1) put the data received in the CAN struct's data into the RxData main array via strncpy: simple ver of how RxGetMessage will place the CAN received bits into our buffer RxData[]
     strncpy(canData_q->Data, (char *)RxData, Size + 1);
+    //TODO: How is canData even getting it's data without the proper callback void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)?
+    // (2) change the size of the data member in the CAN struct
     canData_q->size = Size + 1;
+    // (3) put the struct as a new message into the os queue
     osMessageQueuePut(canQueueHandle, &canData_q, 0, 0);
   }
 }
 
 // uint8_t RxData2[] = "Hello World";
 // testing_can_data_callback(RxData2, strlen((char *)RxData2));
-
-char stringTest[] = "Hello world";
 
 /* USER CODE END 0 */
 
@@ -162,7 +167,7 @@ int main(void)
   MX_FMC_Init();
   MX_LTDC_Init();
   MX_USART1_UART_Init();
-  MX_CAN1_Init();
+  MX_CAN1_Init(); //the channel we are using - CAN1 
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
 
@@ -185,7 +190,7 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of canQueue */
-  canQueueHandle = osMessageQueueNew(16, sizeof(uint8_t), &canQueue_attributes);
+  canQueueHandle = osMessageQueueNew(16, sizeof(uint8_t), &canQueue_attributes); //creating a new  CAN queue for this program execution
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -204,13 +209,24 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
+
+  //Rida Safeer, 2023-06-10 - test code into the sample can struct
+  char stringTest[] = "canTest";
+  strncpy(canData_q->Data, stringTest, strlen(stringTest));
+  canData_q->size = strlen(stringTest);
+  //since the interrupts are not configed, we will simulate a message being received by manually called callback function 
+  testing_can_data_callback(RxData, strlen(stringTest));
+
+  //debuging stepps
+    //check the callback function to see if everything makes sense
+
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
-  /* Infinite loop */
+  /* Infinite loop */ // - we never use this because the scheduler is being used now
   /* USER CODE BEGIN WHILE */
   while (1)
   {
@@ -314,6 +330,10 @@ static void MX_CAN1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN CAN1_Init 2 */
+
+  //Rida Safeer, 2023-06-10
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+
 
   /* USER CODE END CAN1_Init 2 */
 }

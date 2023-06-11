@@ -27,7 +27,8 @@ public:
 
     virtual ~Screen1Presenter(){};
 
-    virtual void can_Data(char *data); // also defined in ModelListener.hpp
+    virtual void can_Data(char* data); // also defined in ModelListener.hpp
+    //virtual void can_Data(char data); // also defined in ModelListener.hpp
 
 private:
     Screen1Presenter();

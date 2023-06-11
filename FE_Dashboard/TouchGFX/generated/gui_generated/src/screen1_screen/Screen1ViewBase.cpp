@@ -6,8 +6,7 @@
 #include "BitmapDatabase.hpp"
 #include <texts/TextKeysAndLanguages.hpp>
 
-Screen1ViewBase::Screen1ViewBase() :
-    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
+Screen1ViewBase::Screen1ViewBase()
 {
 
     __background.setPosition(0, 0, 480, 272);
@@ -22,15 +21,13 @@ Screen1ViewBase::Screen1ViewBase() :
 
     button1.setXY(300, 203);
     button1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_ROUND_EDGE_SMALL_PRESSED_ID));
-    button1.setAction(buttonCallback);
 
-    textArea1.setXY(194, 170);
+    textArea1.setPosition(39, 89, 417, 155);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
     textArea1.setLinespacing(0);
-    Unicode::snprintf(textArea1Buffer, TEXTAREA1_SIZE, "%s", touchgfx::TypedText(T_SINGLEUSEID2).getText());
+    textArea1Buffer[0] = 0;
     textArea1.setWildcard(textArea1Buffer);
-    textArea1.resizeToCurrentText();
-    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID1));
+    textArea1.setTypedText(touchgfx::TypedText(T_SINGLEUSEID3));
 
     add(__background);
     add(image1);
@@ -42,15 +39,4 @@ Screen1ViewBase::Screen1ViewBase() :
 void Screen1ViewBase::setupScreen()
 {
 
-}
-
-void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
-{
-    if (&src == &button1)
-    {
-        //Interaction1
-        //When button1 clicked change screen to Screen2
-        //Go to Screen2 with screen transition towards East
-        application().gotoScreen2ScreenSlideTransitionEast();
-    }
 }

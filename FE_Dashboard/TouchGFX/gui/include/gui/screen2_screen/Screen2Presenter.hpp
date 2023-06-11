@@ -11,7 +11,7 @@ class Screen2View;
 class Screen2Presenter : public touchgfx::Presenter, public ModelListener
 {
 public:
-    Screen2Presenter(Screen2View &v);
+    Screen2Presenter(Screen2View& v);
 
     /**
      * The activate function is called automatically when this screen is "switched in"
@@ -25,14 +25,12 @@ public:
      */
     virtual void deactivate();
 
-    virtual ~Screen2Presenter(){};
-
-    virtual void can_Data(char *data); // also defined in ModelListener.hpp
+    virtual ~Screen2Presenter() {};
 
 private:
     Screen2Presenter();
 
-    Screen2View &view;
+    Screen2View& view;
 };
 
 #endif // SCREEN2PRESENTER_HPP

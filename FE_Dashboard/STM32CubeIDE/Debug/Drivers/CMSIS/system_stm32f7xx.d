@@ -1,5 +1,5 @@
 Drivers/CMSIS/system_stm32f7xx.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Core/Src/system_stm32f7xx.c \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Core/Src/system_stm32f7xx.c \
  ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h \
  ../../Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f750xx.h \
  ../../Drivers/CMSIS/Include/core_cm7.h \

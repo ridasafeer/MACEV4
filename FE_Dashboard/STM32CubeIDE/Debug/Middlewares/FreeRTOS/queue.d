@@ -1,5 +1,5 @@
 Middlewares/FreeRTOS/queue.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Middlewares/Third_Party/FreeRTOS/Source/queue.c \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Middlewares/Third_Party/FreeRTOS/Source/queue.c \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
  ../../Core/Inc/FreeRTOSConfig.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \

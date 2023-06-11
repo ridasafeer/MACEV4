@@ -57,10 +57,12 @@ extern "C"
 
   /* USER CODE BEGIN EFP */
 
+
+//Receiving CAN message unmarshalled to canData_t struct
   typedef struct
   {
     int size;       // size of the message
-    char Data[257]; // data of the message
+    char Data[257]; // data of the message. stores raw data collected via STM HAL CAN low level methods (gen code)
   } canData_t;
 
 /* USER CODE END EFP */

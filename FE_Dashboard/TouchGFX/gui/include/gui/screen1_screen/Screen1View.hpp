@@ -11,7 +11,9 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-    virtual void can_Data(char *data);
+
+    //user code begin
+    virtual void canTest_Data(char* data);
 
 protected:
 };

@@ -586,8 +586,9 @@ TeCanALRet Unmarshal_DashboardData(uint8_t *RxData) {
 			* DASHBOARDDATA_GPSVEHICLESPEED_FACTOR)
 			+ DASHBOARDDATA_GPSVEHICLESPEED_OFFSET; 
             
-	//  Writing to global struct instance
+	//  Writing to global (externed) struct instance
 	DashboardData = temp;
+	// **** THIS IS WHAT IS SENT TO DASHBOARD
 
 	return CANAL_OK;
 }
@@ -1175,6 +1176,7 @@ TeCanALRet Marshal_CoolingLoopModes(uint8_t *TxData) {
  *               FUNCTION POINTER TABLE
  *********************************************************/
 
+//pointer look up table
 static const struct {
 	TeMessageID ID;
 	BinaryUnmarshaller *Unmarshal;

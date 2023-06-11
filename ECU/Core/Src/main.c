@@ -52,6 +52,8 @@
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
+
+//initialized for each dif channel that STM supprts, CAN1, CAN2 + CAN3
 CAN_HandleTypeDef hcan1;
 CAN_HandleTypeDef hcan2;
 CAN_HandleTypeDef hcan3;
@@ -134,6 +136,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  //We are not using the regular STM CAN init functions. instead using our custom function canal_init()
   //MX_CAN1_Init();
   //MX_CAN2_Init();
   //MX_CAN3_Init();
@@ -142,13 +145,15 @@ int main(void)
   //MX_USART2_UART_Init();
   //MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+
+
   Printf_Init(&debug_uart);
-  CanAL_Init(&pt1_can);
-  CanAL_Init(&veh_can);
-  ADC_Init(&adc1);
+  CanAL_Init(&pt1_can); //Powertrain CAN struct
+  CanAL_Init(&veh_can); //Vehicle CAN struct
+  ADC_Init(&adc1); 
   InverterStartupControl_initialize();
 
-  RtScheduler_startRunning(tasks);
+  RtScheduler_startRunning(tasks); //begin task scheduler
 
   /* USER CODE END 2 */
 
@@ -587,13 +592,17 @@ void getControlSystemOutputs(void *args) {
   AMK0_SetPoints1.AMK_TorqueLimitNegativ= InverterStartupControl_Y.AMK_TorqueLimitNegativ_L;
 }
 
+
+//the main functions that call CAN transmit and receive
 void transmitToAMKMotors(void* args) {
 	CANAL_PRINT("TRANSMITTING\n\r");
 	CanAL_Transmit(&pt1_can, AMK0_SETPOINTS1_CANAL_ID);
 	CanAL_Transmit(&pt1_can, AMK1_SETPOINTS1_CANAL_ID);
 }
 
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+//HAL's low level callback function
+//this is the callback that will eventually dictate how we receive the data: Calling HAL_GetMessage
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) { //interrupt handler for receive - will be called when a message is sent, receives a LO on an idle line then it is called (i think)
 	TeCanALRet ret = CanAL_Receive(&pt1_can);
 	if (ret != CANAL_OK) {
 		CANAL_PRINT("Could not recognize message\n\r");

@@ -1,5 +1,5 @@
 Application/User/gui/Screen1Presenter.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/TouchGFX/gui/src/screen1_screen/Screen1Presenter.cpp \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/TouchGFX/gui/src/screen1_screen/Screen1Presenter.cpp \
  ../../TouchGFX/gui/include/gui/screen1_screen/Screen1View.hpp \
  ../../TouchGFX/generated/gui_generated/include/gui_generated/screen1_screen/Screen1ViewBase.hpp \
  ../../TouchGFX/gui/include/gui/common/FrontendApplication.hpp \

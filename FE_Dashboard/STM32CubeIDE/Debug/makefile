@@ -87,8 +87,8 @@ all: main-build
 main-build: STM32F7508-DK.elf secondary-outputs
 
 # Tool invocations
-STM32F7508-DK.elf STM32F7508-DK.map: $(OBJS) $(USER_OBJS) D:\ProgramFiles\STM32_workspace\dashboard-project\FE_Dashboard\STM32CubeIDE\STM32F750N8HX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "STM32F7508-DK.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"D:\ProgramFiles\STM32_workspace\dashboard-project\FE_Dashboard\STM32CubeIDE\STM32F750N8HX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F7508-DK.map" -Wl,--gc-sections -static -LD:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+STM32F7508-DK.elf STM32F7508-DK.map: $(OBJS) $(USER_OBJS) C:\Users\ridas\OneDrive\Desktop\Formula_Electric\dashboard-final\front-controller\stm32-mcu\FE_Dashboard\STM32CubeIDE\STM32F750N8HX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "STM32F7508-DK.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\ridas\OneDrive\Desktop\Formula_Electric\dashboard-final\front-controller\stm32-mcu\FE_Dashboard\STM32CubeIDE\STM32F750N8HX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F7508-DK.map" -Wl,--gc-sections -static -LD:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc -LD:/ProgramFiles/STM32_workspace/stm32-mcu/FE_Dashboard/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc -LC:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Middlewares/ST/touchgfx/lib/core/cortex_m7/gcc --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

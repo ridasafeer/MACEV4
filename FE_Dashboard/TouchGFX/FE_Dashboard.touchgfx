@@ -13,7 +13,7 @@
             "Width": 480,
             "Height": 270,
             "Visible": true,
-            "LockPosition": false,
+            "LockPosition": true,
             "Draggable": false,
             "Clickable": false,
             "Fadeable": false,
@@ -61,7 +61,43 @@
           },
           {
             "Type": "TextArea",
-            "TextId": "SingleUseId1",
+            "TextId": "SingleUseId3",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 255,
+            "AutoSize": false,
+            "LineSpacing": 0,
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 4
+            },
+            "Name": "textArea1",
+            "X": 39,
+            "Y": 89,
+            "Width": 417,
+            "Height": 155,
+            "Visible": true,
+            "LockPosition": false,
+            "Draggable": false,
+            "Clickable": false,
+            "Fadeable": false,
+            "Moveable": false
+          }
+        ],
+        "Interactions": [],
+        "Name": "Screen1",
+        "OverrideDefaultBufferSize": false,
+        "CanvasBufferSize": 0
+      },
+      {
+        "Components": [
+          {
+            "Type": "TextArea",
+            "TextId": "SingleUseId5",
             "TextRotation": "0",
             "Color": {
               "Red": 255,
@@ -72,14 +108,13 @@
             "AutoSize": true,
             "LineSpacing": 0,
             "Wildcard1": {
-              "TextId": "SingleUseId2",
-              "UseBuffer": true,
-              "BufferSize": 20
+              "UseBuffer": false,
+              "BufferSize": 0
             },
-            "Name": "textArea1",
-            "X": 194,
-            "Y": 170,
-            "Width": 96,
+            "Name": "textArea2",
+            "X": 200,
+            "Y": 124,
+            "Width": 57,
             "Height": 25,
             "Visible": true,
             "LockPosition": false,
@@ -87,40 +122,18 @@
             "Clickable": false,
             "Fadeable": false,
             "Moveable": false
-          }
-        ],
-        "Interactions": [
+          },
           {
-            "InteractionName": "Interaction1",
-            "HasCompletedTrigger": false,
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "button1"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionSlide",
-              "ScreenTransitionDirection": "East",
-              "ActionComponent": "Screen2"
-            }
-          }
-        ],
-        "Name": "Screen1",
-        "OverrideDefaultBufferSize": false,
-        "CanvasBufferSize": 0
-      },
-      {
-        "Components": [
-          {
-            "Type": "ScalableImage",
-            "Filename": "rida-home-temp.png",
+            "Type": "Button",
+            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
+            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
             "Alpha": 255,
-            "ScalingAlgorithm": "Nearest-neighbor",
-            "Name": "scalableImage1",
-            "X": 0,
-            "Y": 0,
-            "Width": 480,
-            "Height": 272,
+            "Style": "Style4",
+            "Name": "button1",
+            "X": 188,
+            "Y": 37,
+            "Width": 170,
+            "Height": 60,
             "Visible": true,
             "LockPosition": false,
             "Draggable": false,
@@ -138,11 +151,11 @@
     "CustomContainerDefinitions": [],
     "TextEntries": [
       {
-        "TextEntryId": "SingleUseId1",
+        "TextEntryId": "SingleUseId3",
         "IsResource": false
       },
       {
-        "TextEntryId": "SingleUseId2",
+        "TextEntryId": "SingleUseId5",
         "IsResource": false
       }
     ],

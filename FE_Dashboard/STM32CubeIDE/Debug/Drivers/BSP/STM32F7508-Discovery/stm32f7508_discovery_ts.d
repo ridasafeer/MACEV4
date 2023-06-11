@@ -1,7 +1,7 @@
 Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.c \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.h \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery.h \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.c \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.h \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery.h \
  ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../../Core/Inc/stm32f7xx_hal_conf.h \
  ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -40,10 +40,10 @@ Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.o: \
  ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
- d:\programfiles\stm32_workspace\dashboard-project\fe_dashboard\drivers\bsp\components\ft5336\ft5336.h \
- d:\programfiles\stm32_workspace\dashboard-project\fe_dashboard\drivers\bsp\components\common\ts.h
-D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.h:
-D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery.h:
+ c:\users\ridas\onedrive\desktop\formula_electric\dashboard-final\front-controller\stm32-mcu\fe_dashboard\drivers\bsp\components\ft5336\ft5336.h \
+ c:\users\ridas\onedrive\desktop\formula_electric\dashboard-final\front-controller\stm32-mcu\fe_dashboard\drivers\bsp\components\common\ts.h
+C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery_ts.h:
+C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/Drivers/BSP/STM32F7508-Discovery/stm32f7508_discovery.h:
 ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../../Core/Inc/stm32f7xx_hal_conf.h:
 ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:
@@ -82,5 +82,5 @@ D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/Drivers/BSP/STM32
 ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 ../../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
-d:\programfiles\stm32_workspace\dashboard-project\fe_dashboard\drivers\bsp\components\ft5336\ft5336.h:
-d:\programfiles\stm32_workspace\dashboard-project\fe_dashboard\drivers\bsp\components\common\ts.h:
+c:\users\ridas\onedrive\desktop\formula_electric\dashboard-final\front-controller\stm32-mcu\fe_dashboard\drivers\bsp\components\ft5336\ft5336.h:
+c:\users\ridas\onedrive\desktop\formula_electric\dashboard-final\front-controller\stm32-mcu\fe_dashboard\drivers\bsp\components\common\ts.h:

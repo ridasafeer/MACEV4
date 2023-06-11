@@ -14,10 +14,13 @@ public:
     }
 
     void tick();
+    char* getRData() {
+        return RData;
+    }
+    char RData[257];
 
 protected:
     ModelListener *modelListener;
-    char RData[257];
 };
 
 #endif // MODEL_HPP

@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "string": "c",
+        "functional": "c",
+        "limits": "c",
+        "memory": "c",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp"
+    }
+}

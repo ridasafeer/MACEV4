@@ -1,5 +1,5 @@
 Application/User/generated/BitmapDatabase.o: \
- D:/ProgramFiles/STM32_workspace/dashboard-project/FE_Dashboard/TouchGFX/generated/images/src/BitmapDatabase.cpp \
+ C:/Users/ridas/OneDrive/Desktop/Formula_Electric/dashboard-final/front-controller/stm32-mcu/FE_Dashboard/TouchGFX/generated/images/src/BitmapDatabase.cpp \
  ../../TouchGFX/generated/images/include/BitmapDatabase.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Types.hpp \
  ../../Middlewares/ST/touchgfx/framework/include/touchgfx/hal/Config.hpp \
