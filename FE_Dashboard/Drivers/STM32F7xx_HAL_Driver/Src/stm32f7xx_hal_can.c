@@ -281,7 +281,13 @@ HAL_StatusTypeDef HAL_CAN_Init(CAN_HandleTypeDef *hcan)
     return HAL_ERROR;
   }
 
-  /* Check the parameters */
+  /* Check the parameters:
+
+  Checks if each input placed in the hcan by the user/stm autogen config 
+  in the higher-level MX_CANX_INIT() function in main are all valid parameter names
+  Probably uses a lookup take for each IS_... function
+  */
+
   assert_param(IS_CAN_ALL_INSTANCE(hcan->Instance));
   assert_param(IS_FUNCTIONAL_STATE(hcan->Init.TimeTriggeredMode));
   assert_param(IS_FUNCTIONAL_STATE(hcan->Init.AutoBusOff));
@@ -564,7 +570,7 @@ HAL_StatusTypeDef HAL_CAN_RegisterCallback(CAN_HandleTypeDef *hcan, HAL_CAN_Call
     /* Update the error code */
     hcan->ErrorCode |= HAL_CAN_ERROR_INVALID_CALLBACK;
 
-    return HAL_ERROR;
+    return HAL_ERROR; //If you call it but don't provide valid
   }
 
   if (hcan->State == HAL_CAN_STATE_READY)
