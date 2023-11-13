@@ -79,6 +79,14 @@ volatile TsDashboardAnswer      DashboardAnswer;
 volatile TsDashboardQuestion    DashboardQuestion;
 
 /*********************************************************
+*           GLOBAL CAN MESSAGE QUEUE DEFINTIONS
+*********************************************************/
+
+/* Definitions for canVehicleInfoQueue */
+const osMessageQueueAttr_t canVehicleInfoQueue_attributes = {
+    .name = "canVehicleInfoQueue"};
+
+/*********************************************************
  *                    HELPER FUNCTIONS
  *********************************************************/
 static uint64_t getDataWordFromByteArray(uint8_t* rawData) {
@@ -126,7 +134,7 @@ TeCanALRet Unmarshal_VehicleInfo(uint8_t *RxData) {
             VEHICLEINFO_MAXIMUMPOWERAVAILABLEPERCENTAGE_START,
             VEHICLEINFO_MAXIMUMPOWERAVAILABLEPERCENTAGE_LENGTH);
             
-        temp.SocPercentage = CANAL_GET_BITS(data,
+        temp.SocPercentage = CANAL_GET_BITS(data, 
             VEHICLEINFO_SOCPERCENTAGE_START,
             VEHICLEINFO_SOCPERCENTAGE_LENGTH);
             
@@ -165,6 +173,11 @@ TeCanALRet Unmarshal_VehicleInfo(uint8_t *RxData) {
             
 	//  Writing to global struct instance
 	VehicleInfo = temp;
+
+	if (osMessageQueueGetSpace(canVehicleInfoQueue) > 0) //What is the MAX size?
+  	{
+		osMessageQueuePut(canVehicleInfoQueue, &VehicleInfo, 0, 0);
+  	} 
 
 	return CANAL_OK;
 }
@@ -216,14 +229,17 @@ TeCanALRet Marshal_DashboardAnswer(uint8_t *TxData) {
 /*********************************************************
  *               FUNCTION POINTER TABLE
  *********************************************************/
+
+//For accessing the binary unmarshaller for received messages
 static const struct {
 	TeMessageID ID;
-	BinaryUnmarshaller *Unmarshal;
+	BinaryUnmarshaller *Unmarshal; //function ptr to binary
 } CANAL_RX_MESSAGE_TABLE[NUM_RX_MESSAGES] = {
 	{ VEHICLEINFO_CANAL_ID,          &Unmarshal_VehicleInfo },
 	{ DASHBOARDQUESTION_CANAL_ID,    &Unmarshal_DashboardQuestion },
 };
 
+//For accessing the transmitted messages
 static const struct {
 	TeMessageID ID;
 	BinaryMarshaller *Marshal;
@@ -232,6 +248,7 @@ static const struct {
 	{ DASHBOARDANSWER_CANAL_ID,      &Marshal_DashboardAnswer,      DASHBOARDANSWER_DATA_LENGTH },
 };
 
+//For printing
 static const struct {
 	TeMessageID ID;
 	CanALPrinter* printer;

@@ -23,6 +23,8 @@
 #include "app_touchgfx.h"
 #include "string.h"
 #include "globals.h"
+#include "canal_dcu_messages.h"
+#include "canal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -83,10 +85,7 @@ const osThreadAttr_t TouchGFXTask_attributes = {
     .stack_size = 8192 * 4,
     .priority = (osPriority_t)osPriorityNormal,
 };
-/* Definitions for canQueue */
-osMessageQueueId_t canQueueHandle;
-const osMessageQueueAttr_t canQueue_attributes = { //lmao what is this
-    .name = "canQueue"};
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -111,37 +110,21 @@ extern void TouchGFX_Task(void *argument);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-//to accurately test the callback functionality, this includes a ptr/arr name to a buffer to hold the data i.e. RxData that the core HAL function STM_HAL_GetRxMessage() places the raw data bits in
-// void testing_can_data_callback(uint8_t *RxData, uint16_t Size) //to test, the input is the buffer to CAN data is placed in + (2) the size of 
+// //Function rewrite - for the GetRxMessage integration (2023-08-28)
+// void testing_can_data_callback() //to test, the input is the buffer to CAN data is placed in + (2) the size of 
 // {
-//   RxData[Size] = '\0'; //placing termination character at the end so that the type casting of RxData into a char ptr will be read as a string due to term char
+
+//   printf('callback called');
+//   RxDataTest[8] = '\0'; //placing termination character at the end so that the type casting of RxData into a char ptr will be read as a string due to term char
+  
 //   if (osMessageQueueGetSpace(canQueueHandle) > 0)
 //   {
-//     // (1) put the data received in the CAN struct's data into the RxData main array via strncpy: simple ver of how RxGetMessage will place the CAN received bits into our buffer RxData[]
-//     strncpy(canData_q->Data, (char *)RxData, Size + 1);
-//     //TODO: How is canData even getting it's data without the proper callback void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)?
-//     // (2) change the size of the data member in the CAN struct
-//     canData_q->size = Size + 1;d
-//     // (3) put the struct as a new message into the os queue
-//     osMessageQueuePut(canQueueHandle, &canData_q, 0, 0);
+    
+//     HAL_CAN_GetRxMessage(&hcan1, 0, &RxHeaderTest, RxDataTest);
+//     //put 1 message. placing the pointer to the RxDataTest array, which is the size of the item it points to. therefore, uint8_t since it points to the first element in the array by default
+//     osMessageQueuePut(canQueueHandle, &RxDataTest, 0, 0);
 //   }
 // }
-
-//Function rewrite - for the GetRxMessage integration (2023-08-28)
-void testing_can_data_callback() //to test, the input is the buffer to CAN data is placed in + (2) the size of 
-{
-
-  printf('callback called');
-  RxDataTest[8] = '\0'; //placing termination character at the end so that the type casting of RxData into a char ptr will be read as a string due to term char
-  
-  if (osMessageQueueGetSpace(canQueueHandle) > 0)
-  {
-    
-    HAL_CAN_GetRxMessage(&hcan1, 0, &RxHeaderTest, RxDataTest);
-    //put 1 message. placing the pointer to the RxDataTest array, which is the size of the item it points to. therefore, uint8_t since it points to the first element in the array by default
-    osMessageQueuePut(canQueueHandle, &RxDataTest, 0, 0);
-  }
-}
 
 /* USER CODE END 0 */
 
@@ -211,10 +194,10 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of canQueue */
+  canVehicleInfoQueue = osMessageQueueNew(16, sizeof(uint8_t), &canVehicleInfoQueue_attributes); //creating a new  CAN queue for this program execution
     //max 16 messages in queue
     //1 message size has max 8 bit size
     //link to config queue attribute struct. ptr
-  canQueueHandle = osMessageQueueNew(16, sizeof(uint8_t), &canQueue_attributes); //creating a new  CAN queue for this program execution
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -360,7 +343,7 @@ static void MX_CAN1_Init(void)
 //HAL's low level callback function
 //this is the callback that will eventually dictate how we receive the data: Calling HAL_GetMessage
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) { //interrupt handler for receive - will be called when a message is sent, receives a LO on an idle line then it is called (i think)
-	TeCanALRet ret = CanAL_Receive(&pt1_can);
+	TeCanALRet ret = CanAL_Receive(&veh_can); //returns message of can status (TeCanALRet)
 	if (ret != CANAL_OK) {
 		CANAL_PRINT("Could not recognize message\n\r");
 	}

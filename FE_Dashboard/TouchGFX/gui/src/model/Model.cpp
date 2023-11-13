@@ -7,6 +7,7 @@
 
 #ifndef SIMULATOR //SIMULATOR indicates only will run following includes + extern if running in TouchGFX simulator
 
+#include "canal_dcu_messages.h" //needs this import to access the required CAN message queues for the different message structs
 #include "main.h" //needs main.h to import canData_t class definition
 #include "cmsis_os2.h" //needs this import to use os message queueing
 

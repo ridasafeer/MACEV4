@@ -14,10 +14,10 @@ public:
     }
 
     void tick();
-    char* getRData() {
+    uint8_t* getRData() {
         return RData;
     }
-    char RData[257];
+    uint8_t RData[257];
 
 protected:
     ModelListener *modelListener;

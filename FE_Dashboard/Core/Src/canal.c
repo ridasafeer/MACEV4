@@ -181,7 +181,8 @@ TeCanALRet CanAL_Receive(TsCanAL* can) {
 
 	if (can == NULL) return CANAL_NULL_REF;
 
-	// Get raw message
+	// Get raw message: Lowest-level HAL CAN function - for retrieving raw bits and placing 8*8 bits into RxData[] buffer
+		//returns status: HAL_OK
 	if (HAL_CAN_GetRxMessage(can->hcan, DEFAULT_RX_FIFO, &RxHeader, RxData) != HAL_OK) { //the fifo being used is defined as a macro
 		return CANAL_GET_RXMESSAGE_FAILED;
 	}
@@ -198,6 +199,8 @@ TeCanALRet CanAL_Receive(TsCanAL* can) {
 			return CANAL_UNKOWN_IDE;
 	}
 
+	//2) Now, access the correct binary unmarshaller for the raw data bits in RxData[8]
+		//via function ptr table
 	if ((ret = UnmarshalBinary(&ID, RxData)) != CANAL_OK) return ret;
 
 	return Print_Message(&ID);
