@@ -1,5 +1,0 @@
-ProgressWrapper.hpp:50:11:ProgressWrapper::~ProgressWrapper()	0	static
-ProgressWrapper.hpp:50:11:virtual ProgressWrapper::~ProgressWrapper()	8	static
-ProgressWrapper.cpp:20:1:ProgressWrapper::ProgressWrapper(touchgfx::BoxProgress*, progessConfig)	24	static
-ProgressWrapper.cpp:48:6:void ProgressWrapper::setValue(int)	24	static
-ProgressWrapper.cpp:80:5:int ProgressWrapper::computeColour(int, int, int)	8	static

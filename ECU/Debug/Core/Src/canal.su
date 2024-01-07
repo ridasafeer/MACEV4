@@ -1,8 +1,0 @@
-../Core/Src/canal.c:61:19:setInstance	16	static
-../Core/Src/canal.c:80:13:setDefaults	16	static
-../Core/Src/canal.c:90:19:setTimingParams	24	static
-../Core/Src/canal.c:111:19:setMode	16	static
-../Core/Src/canal.c:119:19:setFilters	64	static
-../Core/Src/canal.c:147:12:CanAL_Init	24	static
-../Core/Src/canal.c:176:12:CanAL_Receive	64	static
-../Core/Src/canal.c:206:12:CanAL_Transmit	64	static

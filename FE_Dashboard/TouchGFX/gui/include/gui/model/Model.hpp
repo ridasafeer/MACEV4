@@ -8,19 +8,22 @@ class Model
 public:
     Model();
 
+    //CAN data buffer for the current, received struct
+    uint8_t dataBuffer[257];
+
     void bind(ModelListener *listener)
     {
         modelListener = listener;
     }
 
     void tick();
-    uint8_t* getRData() {
-        return RData;
-    }
-    uint8_t RData[257];
-
+    
+    //function to return the correct buffer struct to use on the GUI side
+    void* getDataBuffer(TeMessageID canMessageId);
+    void* getScreenUnmarshaller(TeMessageID canMessageId);
+    
 protected:
-    ModelListener *modelListener;
+    ModelListener *modelListener; //iniitalizes modelListener object
 };
 
 #endif // MODEL_HPP

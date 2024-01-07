@@ -74,17 +74,30 @@
 /*********************************************************
 *                 GLOBAL STRUCT DEFINITIONS
 *********************************************************/
+
+//using the defined message struct types, inits the global structs of these typedefs to store messages in
 volatile TsVehicleInfo          VehicleInfo;
 volatile TsDashboardAnswer      DashboardAnswer;
 volatile TsDashboardQuestion    DashboardQuestion;
+
+//CAN dash message struct GLOBAL INSTANCE: 1 struct, populated differently dep on current CAN message being provided
+volatile S_DashMessage			DashMessage;
+	//Global instance therefore acts as the global dash message being provided
 
 /*********************************************************
 *           GLOBAL CAN MESSAGE QUEUE DEFINTIONS
 *********************************************************/
 
 /* Definitions for canVehicleInfoQueue */
+
 const osMessageQueueAttr_t canVehicleInfoQueue_attributes = {
     .name = "canVehicleInfoQueue"};
+
+canVehicleInfoQueue = osMessageQueueNew(16, sizeof(S_DashMessage), &canVehicleInfoQueue_attributes); //creating a new CAN queue for this program execution
+//max 16 messages in queue
+//1 message size is equal to the size of the standard DASHMESSAGE being provided to GUI
+//link to config queue attribute struct via the struct's ptr that corresponds to this q
+//not restricted by type
 
 /*********************************************************
  *                    HELPER FUNCTIONS
@@ -125,7 +138,9 @@ static uint64_t shift_endianness(uint64_t val, uint8_t num_bits) {
  *********************************************************/
 TeCanALRet Unmarshal_VehicleInfo(uint8_t *RxData) {
 	uint64_t data;
-	TsVehicleInfo temp;
+	TsVehicleInfo temp; //defines a temporary struct of type TsVehicleInfo
+	//given that this unmarshal function was called, the ID of the current CAN message is: 
+	canMessageId = VEHICLEINFO_CANAL_ID;
 
 	data = getDataWordFromByteArray(RxData);
     
@@ -173,17 +188,27 @@ TeCanALRet Unmarshal_VehicleInfo(uint8_t *RxData) {
             
 	//  Writing to global struct instance
 	VehicleInfo = temp;
+	
+	//Current Approach: Do this within the unmarshaller of the corresponding function
+		//OR use a table using the CANID enum. Given the value of the ENUM, 
+	//DashMessage struct: Writing both VehicleInfo and canId to the higher-level dash struct for transmission to GUI
+	DashMessage.VehicleInfo = temp;
+	DashMessage.canMessageId = canMessageId;
 
-	if (osMessageQueueGetSpace(canVehicleInfoQueue) > 0) //What is the MAX size?
+	// Lastly, place the received message unmarshalled into VehicleInfo struct into the canQ
+	if (osMessageQueueGetSpace(canVehicleInfoQueue) > 0)
   	{
-		osMessageQueuePut(canVehicleInfoQueue, &VehicleInfo, 0, 0);
-  	} 
+		osMessageQueuePut(canVehicleInfoQueue, DashMessage, 0, 0);
+  	} 	
 
 	return CANAL_OK;
 }
+
+
 TeCanALRet Unmarshal_DashboardQuestion(uint8_t *RxData) {
 	uint64_t data;
 	TsDashboardQuestion temp;
+	canMessageId = DASHBOARDQUESTION_CANAL_ID;
 
 	data = getDataWordFromByteArray(RxData);
     
@@ -233,7 +258,7 @@ TeCanALRet Marshal_DashboardAnswer(uint8_t *TxData) {
 //For accessing the binary unmarshaller for received messages
 static const struct {
 	TeMessageID ID;
-	BinaryUnmarshaller *Unmarshal; //function ptr to binary
+	BinaryUnmarshaller *Unmarshal; //function ptr to unmarshal function
 } CANAL_RX_MESSAGE_TABLE[NUM_RX_MESSAGES] = {
 	{ VEHICLEINFO_CANAL_ID,          &Unmarshal_VehicleInfo },
 	{ DASHBOARDQUESTION_CANAL_ID,    &Unmarshal_DashboardQuestion },
@@ -265,6 +290,8 @@ static TeCanALRet getBinaryUnmarshaller(uint32_t *ID, BinaryUnmarshaller **pUnma
 	for (int i = 0; i < NUM_RX_MESSAGES; i++) {
 		if ((*ID) == CANAL_RX_MESSAGE_TABLE[i].ID) {
 			*pUnmarshal = CANAL_RX_MESSAGE_TABLE[i].Unmarshal;
+			//manually checking each message ID (CANAL_RX_MESSAGE_TABLE[i].ID) 
+			//in table against the passed in ID of the current CAN message
 
 			return CANAL_OK;
 		}

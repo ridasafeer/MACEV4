@@ -18,5 +18,8 @@ void Screen1Presenter::deactivate()
 void Screen1Presenter::can_Data(char* data)
 {
     view.canTest_Data(data);
+    
+    
+    //
     touchgfx_printf("Calling view \n");
 }

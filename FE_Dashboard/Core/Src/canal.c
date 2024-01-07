@@ -190,7 +190,7 @@ TeCanALRet CanAL_Receive(TsCanAL* can) {
 	// Message ID can either be standard or extended
 	switch (RxHeader.IDE) {
 		case CAN_ID_STD:
-			ID = RxHeader.StdId;
+			ID = RxHeader.StdId; //the ID of the received message
 			break;
 		case CAN_ID_EXT:
 			ID = RxHeader.ExtId;
@@ -199,8 +199,10 @@ TeCanALRet CanAL_Receive(TsCanAL* can) {
 			return CANAL_UNKOWN_IDE;
 	}
 
-	//2) Now, access the correct binary unmarshaller for the raw data bits in RxData[8]
+	//2) Now, unmarshal: access the correct binary unmarshaller for the raw data bits in RxData[8]
 		//via function ptr table
+
+	//UnmarshalBinary > getBinaryUnmarshaller
 	if ((ret = UnmarshalBinary(&ID, RxData)) != CANAL_OK) return ret;
 
 	return Print_Message(&ID);
@@ -233,6 +235,7 @@ TeCanALRet CanAL_Transmit(TsCanAL* can, TeMessageID ID) {
 	TxHeader.RTR = CAN_RTR_DATA;
 	TxHeader.TransmitGlobalTime = DISABLE;
 
+	//MarshalBinary > getBinaryUnmarshaller function ptr table 	
 	MarshalBinary(&ID, TxBuffer);
 
 	HAL_CAN_AddTxMessage(can->hcan, &TxHeader, TxBuffer, &TxMailbox);

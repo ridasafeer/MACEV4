@@ -46,8 +46,9 @@
 *********************************************************/
 
 typedef enum {
-    UNKNOWN_CANAL_ID =                  ((uint32_t) 0x000),
-    VEHICLEINFO_CANAL_ID =              ((uint32_t) 0x503),
+    UNKNOWN_CANAL_ID =                  ((uint32_t) 0x000), 
+    VEHICLEINFO_CANAL_ID =              ((uint32_t) 0x503), 
+    //i.e. instead of correspond to 2, the enum value DASHANSWER will correspond to the integer 0x55 specifically
     DASHBOARDANSWER_CANAL_ID =          ((uint32_t) 0x55),
     DASHBOARDQUESTION_CANAL_ID =        ((uint32_t) 0x54),
 } TeMessageID;
@@ -57,6 +58,18 @@ typedef enum {
 *********************************************************/
 
 osMessageQueueId_t canVehicleInfoQueue;
+TeMessageID canMessageId;
+
+//DashMessage struct definition
+typedef struct DashMessage {
+
+    TsVehicleInfo VehicleInfo;
+    TsDashboardAnswer DashboardAnswer;
+    TsDashboardQuestion DashboardQuestion;
+    TeMessageID canMessageId; //will indicate which struct is populated, therefore which struct to read from DashMessage on the receiving end
+
+}S_DashMessage;
+
 
 /*********************************************************
 *                     MESSAGE STRUCTS
@@ -113,6 +126,7 @@ typedef struct DashboardQuestion {
 #define NUM_TX_MESSAGES    (1)
 #define TOTAL_MESSAGES     (3)
 
+//in bytes
 #define VEHICLEINFO_DATA_LENGTH              (5)
 #define DASHBOARDANSWER_DATA_LENGTH          (1)
 #define DASHBOARDQUESTION_DATA_LENGTH        (1)

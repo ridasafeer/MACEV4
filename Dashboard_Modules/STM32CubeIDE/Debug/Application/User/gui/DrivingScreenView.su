@@ -1,8 +1,0 @@
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:143:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
-../../TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp:11:13:DrivingScreenView::~DrivingScreenView()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/drivingscreen_screen/DrivingScreenView.cpp:13:6:virtual void DrivingScreenView::tearDownScreen()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/drivingscreen_screen/DrivingScreenView.cpp:8:6:virtual void DrivingScreenView::setupScreen()	0	static
-../../TouchGFX/gui/include/gui/drivingscreen_screen/DrivingScreenView.hpp:11:13:virtual DrivingScreenView::~DrivingScreenView()	8	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/drivingscreen_screen/DrivingScreenView.cpp:3:1:DrivingScreenView::DrivingScreenView()	8	static

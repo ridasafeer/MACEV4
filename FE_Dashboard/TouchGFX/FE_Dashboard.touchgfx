@@ -89,61 +89,14 @@
           }
         ],
         "Interactions": [],
-        "Name": "Screen1",
+        "Name": "VehicleInfo",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       },
       {
-        "Components": [
-          {
-            "Type": "TextArea",
-            "TextId": "SingleUseId5",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 255,
-              "Green": 255,
-              "Blue": 255
-            },
-            "Alpha": 255,
-            "AutoSize": true,
-            "LineSpacing": 0,
-            "Wildcard1": {
-              "UseBuffer": false,
-              "BufferSize": 0
-            },
-            "Name": "textArea2",
-            "X": 200,
-            "Y": 124,
-            "Width": 57,
-            "Height": 25,
-            "Visible": true,
-            "LockPosition": false,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          },
-          {
-            "Type": "Button",
-            "Pressed": "__designer\\Blue_Buttons_Round_Edge_small_pressed.png",
-            "Released": "__designer\\Blue_Buttons_Round_Edge_small.png",
-            "Alpha": 255,
-            "Style": "Style4",
-            "Name": "button1",
-            "X": 188,
-            "Y": 37,
-            "Width": 170,
-            "Height": 60,
-            "Visible": true,
-            "LockPosition": false,
-            "Draggable": false,
-            "Clickable": false,
-            "Fadeable": false,
-            "Moveable": false
-          }
-        ],
+        "Components": [],
         "Interactions": [],
-        "Name": "Screen2",
+        "Name": "DashboardAnswer",
         "OverrideDefaultBufferSize": false,
         "CanvasBufferSize": 0
       }
@@ -153,10 +106,6 @@
       {
         "TextEntryId": "SingleUseId3",
         "IsResource": false
-      },
-      {
-        "TextEntryId": "SingleUseId5",
-        "IsResource": false
       }
     ],
     "Name": "FE_Dashboard",
@@ -165,7 +114,7 @@
       "Height": 272
     },
     "SelectedColorDepth": 16,
-    "StartupScreenName": "Screen1",
+    "StartupScreenName": "VehicleInfo",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",

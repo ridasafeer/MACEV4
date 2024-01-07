@@ -1,7 +1,0 @@
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:22:18:virtual void ModelListener::dataRxed()	0	static
-../../TouchGFX/gui/include/gui/model/ModelListener.hpp:34:18:virtual void ModelListener::batteryTempUpdated(int)	0	static
-../../TouchGFX/gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:28:13:BootScreenPresenter::~BootScreenPresenter()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/bootscreen_screen/BootScreenPresenter.cpp:10:6:virtual void BootScreenPresenter::activate()	0	static
-../../TouchGFX/gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:28:13:virtual BootScreenPresenter::~BootScreenPresenter()	8	static
-../../TouchGFX/gui/include/gui/bootscreen_screen/BootScreenPresenter.hpp:28:13:virtual void* BootScreenPresenter::_ZThn4_N19BootScreenPresenterD1Ev()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/bootscreen_screen/BootScreenPresenter.cpp:4:1:BootScreenPresenter::BootScreenPresenter(BootScreenView&)	8	static

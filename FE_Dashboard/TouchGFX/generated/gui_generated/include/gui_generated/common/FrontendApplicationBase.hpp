@@ -15,16 +15,16 @@ public:
     FrontendApplicationBase(Model& m, FrontendHeap& heap);
     virtual ~FrontendApplicationBase() { }
 
-    // Screen1
-    void gotoScreen1ScreenNoTransition();
+    // VehicleInfo
+    void gotoVehicleInfoScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
     Model& model;
 
-    // Screen1
-    void gotoScreen1ScreenNoTransitionImpl();
+    // VehicleInfo
+    void gotoVehicleInfoScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

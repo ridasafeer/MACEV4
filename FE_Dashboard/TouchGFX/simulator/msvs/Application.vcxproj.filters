@@ -160,29 +160,35 @@
     <Filter Include="Source Files\gui\common">
       <UniqueIdentifier>C9609874-666C-A172-8D17-5FCD7A3EF6D4</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>6AE17B02-89DA-AAE9-D769-195E36362248</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\generated\gui_generated\screen1_screen">
-      <UniqueIdentifier>ECA221A4-6CE1-E09E-690F-6AF9A8A10E1E</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\generated\gui_generated\common">
       <UniqueIdentifier>B7A5BC71-A716-66CC-246A-469B6ABDDB13</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\generated\gui_generated\common">
       <UniqueIdentifier>ADE61080-DD71-9203-62CD-D71CD13116CE</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\gui\screen2_screen">
-      <UniqueIdentifier>B61C9108-1697-FA4A-08B1-51C25954C475</UniqueIdentifier>
+    <Filter Include="Source Files\gui\vehicleinfo_screen">
+      <UniqueIdentifier>4796DFFD-5C8C-CEA3-7208-C01CFAE7AE4A</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gui\screen2_screen">
-      <UniqueIdentifier>2377609E-8E56-BA89-B48E-27895C56AF68</UniqueIdentifier>
+    <Filter Include="Header Files\gui\vehicleinfo_screen">
+      <UniqueIdentifier>C8196062-4C48-57C2-7A92-C3CADF40EB67</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\generated\gui_generated\screen2_screen">
-      <UniqueIdentifier>6AE31154-6659-572F-4A25-A161611DE8B4</UniqueIdentifier>
+    <Filter Include="Source Files\generated\gui_generated\vehicleinfo_screen">
+      <UniqueIdentifier>EF977CF8-F63E-3AB5-DB2F-E689D4BFE102</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\generated\gui_generated\screen2_screen">
-      <UniqueIdentifier>6C6D2AF0-E5B0-61F9-A1EB-EF19524C019B</UniqueIdentifier>
+    <Filter Include="Header Files\generated\gui_generated\vehicleinfo_screen">
+      <UniqueIdentifier>8869BF91-41AE-A81A-6106-76451219AE03</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\dashboardanswer_screen">
+      <UniqueIdentifier>0DE9CDCB-500E-229D-3586-875C5E14DF71</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\dashboardanswer_screen">
+      <UniqueIdentifier>C19ECA13-4CD2-FE04-2A21-159566CEBDBF</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\dashboardanswer_screen">
+      <UniqueIdentifier>238A41E5-0A52-B86A-8521-A23AAD1EC389</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\dashboardanswer_screen">
+      <UniqueIdentifier>CAADDD77-A11B-F355-C8F1-22BD40709C68</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,17 +225,23 @@
     <ClCompile Include="..\..\gui\src\screen1_screen\Screen1View.cpp">
       <Filter>Source Files\gui\screen1_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\screen1_screen\Screen1ViewBase.cpp">
-      <Filter>Source Files\generated\gui_generated\screen1_screen</Filter>
+    <ClCompile Include="..\..\gui\src\vehicleinfo_screen\VehicleInfoPresenter.cpp">
+      <Filter>Source Files\gui\vehicleinfo_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\screen2_screen\Screen2Presenter.cpp">
-      <Filter>Source Files\gui\screen2_screen</Filter>
+    <ClCompile Include="..\..\gui\src\vehicleinfo_screen\VehicleInfoView.cpp">
+      <Filter>Source Files\gui\vehicleinfo_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gui\src\screen2_screen\Screen2View.cpp">
-      <Filter>Source Files\gui\screen2_screen</Filter>
+    <ClCompile Include="..\..\generated\gui_generated\src\vehicleinfo_screen\VehicleInfoViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\vehicleinfo_screen</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\generated\gui_generated\src\screen2_screen\Screen2ViewBase.cpp">
-      <Filter>Source Files\generated\gui_generated\screen2_screen</Filter>
+    <ClCompile Include="..\..\gui\src\dashboardanswer_screen\DashboardAnswerPresenter.cpp">
+      <Filter>Source Files\gui\dashboardanswer_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\dashboardanswer_screen\DashboardAnswerView.cpp">
+      <Filter>Source Files\gui\dashboardanswer_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\dashboardanswer_screen\DashboardAnswerViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\dashboardanswer_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -667,20 +679,26 @@
     <ClInclude Include="..\..\gui\include\gui\screen1_screen\Screen1View.hpp">
       <Filter>Header Files\gui\screen1_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\screen1_screen\Screen1ViewBase.hpp">
-      <Filter>Header Files\generated\gui_generated\screen1_screen</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\common\SimConstants.hpp">
       <Filter>Header Files\generated\gui_generated\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\screen2_screen\Screen2Presenter.hpp">
-      <Filter>Header Files\gui\screen2_screen</Filter>
+    <ClInclude Include="..\..\gui\include\gui\vehicleinfo_screen\VehicleInfoPresenter.hpp">
+      <Filter>Header Files\gui\vehicleinfo_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\gui\include\gui\screen2_screen\Screen2View.hpp">
-      <Filter>Header Files\gui\screen2_screen</Filter>
+    <ClInclude Include="..\..\gui\include\gui\vehicleinfo_screen\VehicleInfoView.hpp">
+      <Filter>Header Files\gui\vehicleinfo_screen</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\screen2_screen\Screen2ViewBase.hpp">
-      <Filter>Header Files\generated\gui_generated\screen2_screen</Filter>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\vehicleinfo_screen\VehicleInfoViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\vehicleinfo_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dashboardanswer_screen\DashboardAnswerPresenter.hpp">
+      <Filter>Header Files\gui\dashboardanswer_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\dashboardanswer_screen\DashboardAnswerView.hpp">
+      <Filter>Header Files\gui\dashboardanswer_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\dashboardanswer_screen\DashboardAnswerViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\dashboardanswer_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

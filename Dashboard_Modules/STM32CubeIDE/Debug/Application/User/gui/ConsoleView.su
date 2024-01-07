@@ -1,9 +1,0 @@
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:143:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
-../../TouchGFX/gui/include/gui/console_screen/ConsoleView.hpp:11:13:ConsoleView::~ConsoleView()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/console_screen/ConsoleView.cpp:14:6:virtual void ConsoleView::tearDownScreen()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/console_screen/ConsoleView.cpp:9:6:virtual void ConsoleView::setupScreen()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/console_screen/ConsoleView.cpp:19:6:virtual void ConsoleView::updateTerminal()	0	static
-../../TouchGFX/gui/include/gui/console_screen/ConsoleView.hpp:11:13:virtual ConsoleView::~ConsoleView()	8	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/console_screen/ConsoleView.cpp:5:1:ConsoleView::ConsoleView()	8	static

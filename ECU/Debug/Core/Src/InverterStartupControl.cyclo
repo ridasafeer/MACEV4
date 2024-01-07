@@ -1,5 +1,0 @@
-InverterStartupControl.c:72:6:InverterStartup_LEFT_MOTOR_Init	1
-InverterStartupControl.c:92:6:InverterStartupContr_LEFT_MOTOR	43
-InverterStartupControl.c:439:6:InverterStartupControl_step	19
-InverterStartupControl.c:692:6:InverterStartupControl_initialize	2
-InverterStartupControl.c:745:6:InverterStartupControl_terminate	1

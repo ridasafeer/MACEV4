@@ -1,8 +1,0 @@
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:103:18:virtual void touchgfx::Screen::afterTransition()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:143:18:virtual void touchgfx::Screen::handleTickEvent()	0	static
-../../Middlewares/ST/touchgfx/framework/include/touchgfx/Screen.hpp:153:18:virtual void touchgfx::Screen::handleKeyEvent(uint8_t)	0	static
-../../TouchGFX/gui/include/gui/bootscreen_screen/BootScreenView.hpp:11:13:BootScreenView::~BootScreenView()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/bootscreen_screen/BootScreenView.cpp:13:6:virtual void BootScreenView::tearDownScreen()	0	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/bootscreen_screen/BootScreenView.cpp:8:6:virtual void BootScreenView::setupScreen()	0	static
-../../TouchGFX/gui/include/gui/bootscreen_screen/BootScreenView.hpp:11:13:virtual BootScreenView::~BootScreenView()	8	static
-D:/ProgramFiles/STM32_workspace/stm32-mcu/Dashboard_Modules/TouchGFX/gui/src/bootscreen_screen/BootScreenView.cpp:3:1:BootScreenView::BootScreenView()	8	static

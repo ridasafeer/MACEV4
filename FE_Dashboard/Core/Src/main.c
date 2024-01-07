@@ -59,7 +59,7 @@ uint8_t RxDataTest[9]; // = 8 uint8_t therefore 8*8 bits
 canData_t *canData_q;
 //global function ptr for our CAN callback. Used to register the testing_can_data_callback as the function ptr
   //to be referenced instead of the weak default CAN_Receive method
-void* CANfunc_ptr = testing_can_data_callback; //what the fuck is this
+void* CANfunc_ptr = testing_can_data_callback;
 
 CRC_HandleTypeDef hcrc;
 
@@ -171,6 +171,8 @@ int main(void)
   MX_LTDC_Init();
   MX_USART1_UART_Init();
   //MX_CAN1_Init(); //the channel we are using - CAN1 
+
+  //M2 - integration to canAL layer
   CanAL_Init(&veh_can); //Vehicle CAN struct
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
@@ -193,12 +195,6 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* Create the queue(s) */
-  /* creation of canQueue */
-  canVehicleInfoQueue = osMessageQueueNew(16, sizeof(uint8_t), &canVehicleInfoQueue_attributes); //creating a new  CAN queue for this program execution
-    //max 16 messages in queue
-    //1 message size has max 8 bit size
-    //link to config queue attribute struct. ptr
-
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
